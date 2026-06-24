@@ -1,0 +1,14 @@
+{
+  "name": "Baviera 2026",
+  "short_name": "Baviera",
+  "description": "Planificador de viatge Baviera 10–21 agost 2026",
+  "start_url": "/baviera2026/",
+  "scope": "/baviera2026/",
+  "display": "standalone",
+  "background_color": "#F7F2EC",
+  "theme_color": "#C85200",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
