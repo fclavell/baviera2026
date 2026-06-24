@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Baviera 2026">
+<meta name="theme-color" content="#C85200">
+<title>Baviera 2026</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.svg">
+<style>
+/* ── DESIGN TOKENS ──────────────────────────────── */
+:root {
+  --c-bg:       #F7F2EC;
+  --c-surface:  #FFFFFF;
+  --c-primary:  #C85200;
+  --c-primary2: #E8720A;
+  --c-dark:     #1A0D00;
+  --c-mid:      #5C3D26;
+  --c-muted:    #9C7860;
+  --c-border:   #E4D0B8;
+  --c-beige:    #F0E8DC;
+  --c-ok:       #1E6E38;
+  --c-ok-bg:    #E8F5EE;
+  --c-warn:     #B05C00;
+  --c-warn-bg:  #FFF3E0;
+  --c-err:      #B01C1C;
+  --c-err-bg:   #FDE8E8;
+  --c-blue:     #1565C0;
+  --c-blue-bg:  #E3F0FC;
+  --c-nav:      #1A0D00;
+  --c-nav-t:    #C8A070;
+  --c-nav-a:    #F5A04A;
+  --sh-card:    0 2px 14px rgba(26,13,0,.09);
+  --sh-btn:     0 2px 8px rgba(0,0,0,.18);
+  --r-card:     16px;
+  --r-btn:      12px;
+  --r-pill:     24px;
+  --nt: env(safe-area-inset-top, 0px);
+  --nb: env(safe-area-inset-bottom, 0px);
+}
+
+/* ── RESET ──────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  background: var(--c-bg);
+  color: var(--c-dark);
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TYPOGRAPHY ─────────────────────────────────── */
+.t-hero    { font-size: 1.4rem; font-weight: 800; line-height: 1.2; }
+.t-title   { font-size: 1.15rem; font-weight: 700; }
+.t-section { font-size: 1rem; font-weight: 700; }
+.t-body    { font-size: .92rem; line-height: 1.55; }
+.t-small   { font-size: .78rem; line-height: 1.4; }
+.t-label   { font-size: .66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.t-muted   { color: var(--c-muted); }
+.t-mid     { color: var(--c-mid); }
+.t-primary { color: var(--c-primary); }
+.t-ok      { color: var(--c-ok); }
+.t-warn    { color: var(--c-warn); }
+
+/* ── APP HEADER ─────────────────────────────────── */
+#hdr {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: linear-gradient(135deg, #C85200 0%, #E8720A 100%);
+  color: white;
+  padding: calc(var(--nt) + 11px) 16px 11px;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 2px 16px rgba(200,82,0,.4);
+}
+#hdr h1 { font-size: 1.05rem; font-weight: 700; flex: 1; letter-spacing: -.01em; }
+#hdr-sub { font-size: .72rem; opacity: .85; white-space: nowrap; }
+#back-btn {
+  display: none; background: rgba(255,255,255,.2); border: none; color: white;
+  font-size: 1.1rem; font-weight: 700; cursor: pointer; padding: 5px 9px;
+  border-radius: 8px; line-height: 1;
+}
+
+/* ── MAIN ───────────────────────────────────────── */
+#main {
+  padding-top: calc(var(--nt) + 52px);
+  padding-bottom: calc(64px + var(--nb) + 8px);
+  min-height: 100dvh;
+}
+.tab { display: none; padding: 16px 14px; }
+.tab.on { display: block; }
+.page-head { margin-bottom: 18px; }
+.page-head .title { font-size: 1.4rem; font-weight: 800; }
+.page-head .sub { font-size: .82rem; color: var(--c-muted); margin-top: 2px; }
+
+/* ── BOTTOM NAV ─────────────────────────────────── */
+#nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  background: var(--c-nav);
+  display: flex;
+  height: calc(64px + var(--nb));
+  padding-bottom: var(--nb);
+  box-shadow: 0 -1px 0 rgba(255,255,255,.06), 0 -4px 20px rgba(0,0,0,.35);
+}
+.nb {
+  flex: 1; background: none; border: none; color: var(--c-nav-t);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px; cursor: pointer;
+  font-size: .58rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
+  padding: 6px 2px 2px; transition: color .15s;
+}
+.nb .ic { font-size: 1.3rem; line-height: 1; }
+.nb.on { color: var(--c-nav-a); }
+.nb.on .ic { filter: drop-shadow(0 0 4px rgba(245,160,74,.5)); }
+
+/* ── CARDS ──────────────────────────────────────── */
+.card {
+  background: var(--c-surface);
+  border-radius: var(--r-card);
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  box-shadow: var(--sh-card);
+  border: 1px solid rgba(228,208,184,.5);
+}
+.card-tight { padding: 12px 16px; }
+
+/* ── SECTION DIVIDER ─────────────────────────────── */
+.sec-div {
+  display: flex; align-items: center; gap: 8px;
+  margin: 20px 0 10px; color: var(--c-mid);
+}
+.sec-div .sec-icon {
+  width: 28px; height: 28px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .9rem; flex-shrink: 0;
+}
+.sec-div .sec-title { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
+.sec-div::after { content: ''; flex: 1; height: 1px; background: var(--c-border); }
+
+/* ── PROGRESS BAR ───────────────────────────────── */
+.pbar {
+  background: var(--c-border); border-radius: 6px; height: 5px;
+  margin-bottom: 20px; overflow: hidden;
+}
+.pfill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--c-primary) 0%, var(--c-primary2) 100%);
+  border-radius: 6px; transition: width .6s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── DAY CARDS ──────────────────────────────────── */
+.di {
+  background: var(--c-surface);
+  border-radius: var(--r-card);
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 14px;
+  box-shadow: var(--sh-card);
+  border: 1px solid rgba(228,208,184,.5);
+  cursor: pointer; overflow: hidden;
+  transition: transform .12s, box-shadow .12s;
+  -webkit-user-select: none;
+  position: relative;
+}
+.di:active { transform: scale(.98); box-shadow: 0 1px 6px rgba(26,13,0,.08); }
+.di .di-stripe {
+  width: 5px; height: 100%; min-height: 72px; flex-shrink: 0;
+  background: var(--c-border);
+}
+.di.today .di-stripe { background: linear-gradient(180deg, var(--c-primary) 0%, var(--c-primary2) 100%); }
+.di.past .di-stripe { background: var(--c-border); }
+.di.future .di-stripe { background: linear-gradient(180deg, #2D5B8E 0%, #3A7ACC 100%); }
+.di.home .di-stripe { background: linear-gradient(180deg, #1E6E38 0%, #2E9E50 100%); }
+.di-num {
+  min-width: 38px; height: 38px; border-radius: 12px;
+  background: var(--c-beige); color: var(--c-mid);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .9rem; font-weight: 800; flex-shrink: 0;
+}
+.di.today .di-num { background: var(--c-primary); color: white; box-shadow: 0 2px 8px rgba(200,82,0,.4); }
+.di-info { flex: 1; min-width: 0; padding: 14px 0; }
+.di-date { font-size: .7rem; color: var(--c-muted); margin-bottom: 1px; }
+.di-zone { font-size: 1.02rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.di-hotel { font-size: .76rem; color: var(--c-muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.di-right { flex-shrink: 0; text-align: right; padding: 14px 16px 14px 0; }
+.di-drive { font-size: .76rem; color: var(--c-muted); }
+.di-arrow { color: var(--c-border); font-size: 1rem; margin-top: 2px; }
+.di.past { opacity: .55; }
+.di.today { border-color: rgba(200,82,0,.25); }
+
+/* ── DAY DETAIL ─────────────────────────────────── */
+#det {
+  position: fixed; inset: 0; z-index: 200;
+  background: var(--c-bg); overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform .28s cubic-bezier(.4,0,.2,1);
+}
+#det.open { transform: translateX(0); }
+#det-hdr {
+  background: linear-gradient(135deg, #C85200 0%, #E8720A 60%, #F5A04A 100%);
+  color: white;
+  padding: calc(var(--nt) + 12px) 16px 22px;
+}
+#det-hdr-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+#det-back {
+  background: rgba(255,255,255,.2); border: none; color: white;
+  font-size: 1rem; font-weight: 700; cursor: pointer; padding: 6px 10px;
+  border-radius: 9px; line-height: 1; flex-shrink: 0;
+}
+#det-meta { flex: 1; }
+#det-meta .det-day-lbl { font-size: .75rem; opacity: .85; font-weight: 600; }
+#det-meta .det-zone { font-size: 1.3rem; font-weight: 800; letter-spacing: -.02em; }
+#det-drive-chip {
+  background: rgba(255,255,255,.25); border-radius: 20px;
+  padding: 5px 10px; font-size: .76rem; font-weight: 600;
+  flex-shrink: 0; white-space: nowrap;
+}
+.det-hotel-mini {
+  background: rgba(255,255,255,.15); border-radius: 12px; padding: 10px 14px;
+  display: flex; align-items: center; gap: 10px; backdrop-filter: blur(4px);
+}
+.det-hotel-mini .dh-icon { font-size: 1.2rem; }
+.det-hotel-mini .dh-name { font-size: .88rem; font-weight: 600; }
+.det-hotel-mini .dh-price { font-size: .78rem; opacity: .85; margin-top: 1px; }
+#det-body { padding: 16px 14px; padding-bottom: calc(var(--nb) + 40px); }
+
+/* ── NAV BRAND BUTTONS ──────────────────────────── */
+.navbtns { display: flex; gap: 8px; margin-bottom: 4px; }
+.navbtn {
+  flex: 1; padding: 11px 6px 9px; border-radius: var(--r-btn); border: none;
+  cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px;
+  text-decoration: none; color: white; box-shadow: var(--sh-btn);
+  font-size: .68rem; font-weight: 700; text-align: center; letter-spacing: .02em;
+  -webkit-user-select: none;
+}
+.navbtn img, .navbtn svg { width: 22px; height: 22px; display: block; }
+.nb-apple { background: #1C1C1E; }
+.nb-google { background: white; color: #444; border: 1.5px solid #e0e0e0; }
+.nb-abrp { background: #00B140; }
+
+/* ── BADGES / CHIPS ─────────────────────────────── */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.chip {
+  font-size: .71rem; font-weight: 600; padding: 4px 10px;
+  border-radius: var(--r-pill); border: 1.5px solid;
+  white-space: nowrap;
+}
+.chip-ok   { color: var(--c-ok);   border-color: var(--c-ok);   background: var(--c-ok-bg); }
+.chip-warn { color: var(--c-warn); border-color: var(--c-warn); background: var(--c-warn-bg); }
+.chip-err  { color: var(--c-err);  border-color: var(--c-err);  background: var(--c-err-bg); }
+.chip-n    { color: var(--c-muted);border-color: var(--c-border);background: var(--c-beige); }
+
+/* ── HOTEL CARD ─────────────────────────────────── */
+.h-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 3px; }
+.h-addr { font-size: .82rem; color: var(--c-muted); margin-bottom: 12px; display: flex; gap: 5px; align-items: flex-start; }
+.h-meta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
+.h-meta-item .lbl { font-size: .65rem; font-weight: 700; color: var(--c-muted); text-transform: uppercase; letter-spacing: .05em; display: block; margin-bottom: 1px; }
+.h-meta-item .val { font-size: .9rem; font-weight: 600; }
+.h-edit-block { margin-bottom: 14px; }
+.h-edit-block .lbl { font-size: .65rem; font-weight: 700; color: var(--c-muted); text-transform: uppercase; letter-spacing: .05em; display: block; margin-bottom: 3px; }
+.h-edit-input {
+  width: 100%; border: none; border-bottom: 1.5px dashed var(--c-border);
+  background: transparent; font-family: inherit; font-size: .9rem; color: var(--c-dark);
+  padding: 4px 2px; outline: none; display: block;
+}
+.h-edit-input:focus { border-bottom-color: var(--c-primary); }
+.h-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.h-btn {
+  flex: 1; min-width: 130px; padding: 11px 10px; border-radius: var(--r-btn);
+  border: 2px solid; font-size: .8rem; font-weight: 700; cursor: pointer;
+  text-align: center; text-decoration: none; display: flex;
+  align-items: center; justify-content: center; gap: 6px;
+}
+.h-btn-call { color: var(--c-ok); border-color: var(--c-ok); background: var(--c-ok-bg); }
+.h-btn-bk   { color: var(--c-primary); border-color: var(--c-primary); background: #FEF3EB; }
+
+/* ── LAKE CARD (DAY DETAIL) ─────────────────────── */
+.lake-day-card {
+  background: linear-gradient(135deg, #1A4E7E 0%, #1565C0 50%, #1976D2 100%);
+  border-radius: var(--r-card); padding: 16px; margin-bottom: 12px; color: white;
+}
+.ldc-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
+.ldc-name { font-size: 1.05rem; font-weight: 700; }
+.ldc-zone { font-size: .76rem; opacity: .8; margin-top: 1px; }
+.ldc-temp { font-size: 1.1rem; font-weight: 800; background: rgba(255,255,255,.2); padding: 5px 10px; border-radius: 20px; }
+.ldc-dog { font-size: .82rem; background: rgba(255,255,255,.2); border-radius: 8px; padding: 5px 10px; margin-bottom: 10px; }
+.ldc-txt { font-size: .82rem; opacity: .9; line-height: 1.55; margin-bottom: 12px; }
+.ldc-btns { display: flex; gap: 8px; }
+.ldc-btn {
+  flex: 1; padding: 9px; border-radius: 9px; border: 1.5px solid rgba(255,255,255,.4);
+  font-size: .72rem; font-weight: 700; text-align: center; text-decoration: none;
+  color: white; display: block; background: rgba(255,255,255,.15);
+}
+
+/* ── ACTIVITY / LEIA LISTS ──────────────────────── */
+.alist { list-style: none; }
+.alist li {
+  padding: 8px 0; border-bottom: 1px solid var(--c-border);
+  font-size: .9rem; display: flex; gap: 10px; align-items: flex-start; line-height: 1.5;
+}
+.alist li:last-child { border-bottom: none; }
+.alist li::before { content: '•'; color: var(--c-primary); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.leia-list li { color: var(--c-mid); }
+.leia-list li::before { content: '🐾'; font-size: .78rem; margin-top: 2px; }
+.food-list li::before { content: '🍽'; font-size: .78rem; margin-top: 2px; }
+
+/* ── NOTES ──────────────────────────────────────── */
+.ntarea {
+  width: 100%; min-height: 100px; padding: 12px;
+  border: 1.5px solid var(--c-border); border-radius: 12px;
+  font-family: inherit; font-size: .9rem; resize: vertical;
+  background: var(--c-surface); color: var(--c-dark); outline: none; line-height: 1.5;
+}
+.ntarea:focus { border-color: var(--c-primary); }
+
+/* ── FORMS ──────────────────────────────────────── */
+.fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fg { display: flex; flex-direction: column; gap: 5px; }
+.fg label { font-size: .66rem; font-weight: 700; color: var(--c-muted); text-transform: uppercase; letter-spacing: .06em; }
+.fg input, .fg select {
+  padding: 11px 12px; border: 1.5px solid var(--c-border); border-radius: 10px;
+  font-family: inherit; font-size: 1rem; background: var(--c-surface); color: var(--c-dark); outline: none;
+}
+.fg input:focus, .fg select:focus { border-color: var(--c-primary); }
+.ff { grid-column: span 2; }
+.btnp {
+  width: 100%; padding: 13px; border-radius: var(--r-btn); border: none;
+  background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary2) 100%);
+  color: white; font-size: .95rem; font-weight: 700; cursor: pointer;
+  box-shadow: 0 3px 10px rgba(200,82,0,.35); margin-top: 4px; letter-spacing: .01em;
+}
+.btnp:active { opacity: .9; }
+.btng {
+  background: linear-gradient(135deg, #1E6E38 0%, #2E9E50 100%);
+  box-shadow: 0 3px 10px rgba(30,110,56,.35);
+}
+
+/* ── SUMMARY TABLE ──────────────────────────────── */
+.stbl { width: 100%; border-collapse: collapse; font-size: .85rem; }
+.stbl th {
+  text-align: left; font-size: .66rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--c-muted); padding: 5px 8px 6px;
+  border-bottom: 2px solid var(--c-border);
+}
+.stbl td { padding: 8px 8px; border-bottom: 1px solid var(--c-border); }
+.stbl tr.ttl td { border-top: 2px solid var(--c-border); border-bottom: none; font-weight: 700; }
+.nr { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ── LOG ITEMS ──────────────────────────────────── */
+.logitem {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid var(--c-border);
+}
+.logitem:last-child { border-bottom: none; }
+.loginfo { flex: 1; min-width: 0; }
+.loginfo .lgtit { font-size: .9rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.loginfo .lgmeta { font-size: .74rem; color: var(--c-muted); margin-top: 1px; }
+.logamt { font-size: .9rem; font-weight: 700; color: var(--c-primary); white-space: nowrap; }
+.logdel { background: none; border: none; color: var(--c-border); cursor: pointer; font-size: 1rem; padding: 0 2px; flex-shrink: 0; }
+.logdel:active { color: var(--c-err); }
+
+/* ── LAKE CARDS (tab) ───────────────────────────── */
+.lkcard {
+  background: var(--c-surface);
+  border-radius: var(--r-card); margin-bottom: 12px;
+  box-shadow: var(--sh-card); border: 1px solid rgba(228,208,184,.5);
+  overflow: hidden;
+}
+.lkcard-head {
+  background: linear-gradient(135deg, #0D3B6E 0%, #1565C0 100%);
+  padding: 14px 16px; display: flex; align-items: center; gap: 12px; color: white;
+}
+.lk-dog-circle {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,.2); display: flex; align-items: center;
+  justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+}
+.lk-dog-circle.ok   { background: rgba(255,255,255,.25); }
+.lk-dog-circle.warn { background: rgba(255,165,0,.35); }
+.lk-dog-circle.no   { background: rgba(255,80,80,.35); }
+.lkcard-name { font-size: 1.02rem; font-weight: 700; }
+.lkcard-zone { font-size: .75rem; opacity: .8; }
+.lkcard-temp {
+  margin-left: auto; background: rgba(255,255,255,.2);
+  border-radius: 20px; padding: 4px 10px; font-size: .8rem; font-weight: 700; white-space: nowrap;
+}
+.lkcard-body { padding: 12px 16px; }
+.lkcard-day { font-size: .74rem; font-weight: 700; color: var(--c-blue); margin-bottom: 5px; }
+.lkcard-dog { font-size: .8rem; color: var(--c-mid); margin-bottom: 7px; }
+.lkcard-txt { font-size: .83rem; line-height: 1.55; color: var(--c-mid); margin-bottom: 12px; }
+.lkcard-btns { display: flex; gap: 8px; }
+.lkcard-btn {
+  flex: 1; padding: 9px 8px; border-radius: 9px; border: none;
+  font-size: .72rem; font-weight: 700; text-align: center; text-decoration: none;
+  color: white; display: flex; align-items: center; justify-content: center; gap: 5px;
+  box-shadow: var(--sh-btn);
+}
+.lkbtn-apple { background: #1C1C1E; }
+.lkbtn-google { background: white; color: #333; border: 1.5px solid #ddd; box-shadow: none; }
+
+/* ── BUDGET ─────────────────────────────────────── */
+.b-hero {
+  text-align: center; padding: 24px 16px 18px;
+  background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary2) 100%);
+  border-radius: var(--r-card); margin-bottom: 12px; color: white;
+  box-shadow: 0 4px 16px rgba(200,82,0,.3);
+}
+.b-hero .b-lbl { font-size: .78rem; opacity: .85; font-weight: 600; margin-bottom: 4px; }
+.b-hero .b-num { font-size: 2.4rem; font-weight: 800; letter-spacing: -.02em; }
+.brow {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 11px 0; border-bottom: 1px solid var(--c-border); font-size: .9rem; gap: 8px;
+}
+.brow:last-child { border-bottom: none; }
+.brow .blbl { display: flex; align-items: center; gap: 7px; }
+.brow .bamt { font-weight: 700; color: var(--c-dark); white-space: nowrap; }
+.inl-inp {
+  width: 72px; border: none; border-bottom: 1.5px dashed var(--c-border);
+  text-align: right; font-family: inherit; font-size: .9rem; outline: none; background: transparent; color: var(--c-dark);
+}
+.inl-inp:focus { border-bottom-color: var(--c-primary); }
+.b-sub-lbl { font-size: .75rem; color: var(--c-muted); }
+
+/* ── CHECKLIST ──────────────────────────────────── */
+.chk {
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px 14px; background: var(--c-surface);
+  border-radius: var(--r-btn); margin-bottom: 8px;
+  border: 1.5px solid var(--c-border); cursor: pointer; -webkit-user-select: none;
+  transition: all .15s;
+}
+.chk.done { border-color: var(--c-ok); background: var(--c-ok-bg); }
+.chk-circle {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 2px solid var(--c-border); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: .85rem;
+  transition: all .15s;
+}
+.chk.done .chk-circle { border-color: var(--c-ok); background: var(--c-ok); color: white; }
+.chk-lbl { font-size: .9rem; font-weight: 500; }
+.chk.done .chk-lbl { text-decoration: line-through; color: var(--c-muted); }
+.btn-reset {
+  width: 100%; padding: 11px; border-radius: var(--r-btn); border: 1.5px solid var(--c-border);
+  background: none; font-size: .82rem; color: var(--c-muted); cursor: pointer; margin-top: 6px;
+  font-family: inherit;
+}
+
+/* ── EMPTY STATE ─────────────────────────────────── */
+.empty { text-align: center; padding: 32px 16px; color: var(--c-muted); }
+.empty .ei { font-size: 2.5rem; margin-bottom: 8px; }
+.empty p { font-size: .85rem; }
+
+/* ── KM TOTAL CARD ───────────────────────────────── */
+.km-total-card {
+  background: linear-gradient(135deg, #1E6E38 0%, #2E9E50 100%);
+  border-radius: var(--r-card); padding: 14px 18px; color: white;
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 12px; box-shadow: 0 3px 12px rgba(30,110,56,.3);
+}
+.km-total-lbl { font-size: .82rem; opacity: .85; font-weight: 600; }
+.km-total-num { font-size: 1.5rem; font-weight: 800; }
+
+/* ── UTILS ───────────────────────────────────────── */
+.mb6  { margin-bottom: 6px; }
+.mb12 { margin-bottom: 12px; }
+.mb18 { margin-bottom: 18px; }
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <button id="back-btn" onclick="closeDetail()">‹ Enrere</button>
+  <h1 id="hdr-title">Baviera 2026 🏔</h1>
+  <div id="hdr-sub"></div>
+</header>
+
+<main id="main">
+
+  <!-- ── ITINERARI ─────────────────────────── -->
+  <div id="tab-itinerari" class="tab on">
+    <div class="page-head">
+      <div class="title">🗺 Itinerari</div>
+      <div class="sub">10 – 21 agost 2026 · 11 dies · La Garriga → Baviera</div>
+    </div>
+    <div class="pbar"><div class="pfill" id="pfill" style="width:0%"></div></div>
+    <div id="day-list"></div>
+  </div>
+
+  <!-- ── RECÀRREGUES ───────────────────────── -->
+  <div id="tab-recarregues" class="tab">
+    <div class="page-head">
+      <div class="title">⚡ Recàrregues & Km</div>
+      <div class="sub">Registre de càrregues i quilometres</div>
+    </div>
+
+    <div class="sec-div">
+      <div class="sec-icon" style="background:#FFF3E0">⚡</div>
+      <span class="sec-title">Nova recàrrega</span>
+    </div>
+    <div class="card">
+      <div class="fgrid mb12">
+        <div class="fg"><label>Dia</label><select id="r-dia"></select></div>
+        <div class="fg"><label>Xarxa</label>
+          <select id="r-xarxa">
+            <option value="Casa">🏠 Casa</option>
+            <option value="Tesla" selected>⚡ Tesla</option>
+            <option value="Ionity">⚡ Ionity</option>
+            <option value="Altres">🔌 Altres</option>
+          </select>
+        </div>
+        <div class="fg ff"><label>Lloc</label><input type="text" id="r-lloc" placeholder="ex: Lió Nord Supercharger"></div>
+        <div class="fg"><label>kWh</label><input type="number" id="r-kwh" step="0.1" min="0" placeholder="0.0"></div>
+        <div class="fg"><label>Preu total €</label><input type="number" id="r-preu" step="0.01" min="0" placeholder="0.00"></div>
+      </div>
+      <button class="btnp" onclick="addRecarrega()">+ Afegir recàrrega</button>
+    </div>
+
+    <div class="sec-div"><div class="sec-icon" style="background:#E3F0FC">📊</div><span class="sec-title">Resum per xarxa</span></div>
+    <div class="card card-tight">
+      <table class="stbl"><thead><tr><th>Xarxa</th><th class="nr">kWh</th><th class="nr">Total €</th><th class="nr">€/kWh</th></tr></thead>
+        <tbody id="rec-summary"></tbody>
+      </table>
+    </div>
+
+    <div class="sec-div"><div class="sec-icon" style="background:#FEF3EB">📋</div><span class="sec-title">Historial</span></div>
+    <div class="card"><div id="rec-list"><div class="empty"><div class="ei">⚡</div><p>Sense recàrregues registrades.</p></div></div></div>
+
+    <div class="sec-div"><div class="sec-icon" style="background:#E8F5EE">🚗</div><span class="sec-title">Km diaris</span></div>
+    <div class="card">
+      <div class="fgrid mb12">
+        <div class="fg"><label>Dia</label><select id="km-dia"></select></div>
+        <div class="fg"><label>Km fets</label><input type="number" id="km-val" min="0" placeholder="0"></div>
+      </div>
+      <button class="btnp btng" onclick="addKm()">+ Afegir km</button>
+    </div>
+    <div id="km-total-wrap" style="display:none" class="km-total-card">
+      <div><div class="km-total-lbl">Total km del viatge</div></div>
+      <div class="km-total-num" id="km-total-num">0 km</div>
+    </div>
+    <div class="card"><div id="km-list"><div class="empty"><div class="ei">🚗</div><p>Sense km registrats.</p></div></div></div>
+  </div>
+
+  <!-- ── LLACS ─────────────────────────────── -->
+  <div id="tab-llacs" class="tab">
+    <div class="page-head">
+      <div class="title">🏊 Llacs per banyar-se</div>
+      <div class="sub">Zones aptes per a la Leia 🐾 · Semàfor de gossos</div>
+    </div>
+    <div id="lake-cards"></div>
+  </div>
+
+  <!-- ── PRESSUPOST ────────────────────────── -->
+  <div id="tab-pressupost" class="tab">
+    <div class="page-head"><div class="title">💰 Pressupost</div></div>
+    <div class="b-hero">
+      <div class="b-lbl">TOTAL ESTIMAT DEL VIATGE</div>
+      <div class="b-num" id="b-total">— €</div>
+    </div>
+    <div class="sec-div"><div class="sec-icon" style="background:#FEF3EB">📝</div><span class="sec-title">Detall de despeses</span></div>
+    <div class="card">
+      <div class="brow"><span class="blbl">🏨 Allotjament (fix Excel)</span><span class="bamt">1.434,67 €</span></div>
+      <div class="brow"><span class="blbl">⚡ Recàrregues</span><span class="bamt" id="b-rec">0,00 €</span></div>
+      <div class="brow"><span class="blbl">🛣 Autopistes / Pàrquing</span><span class="bamt"><input class="inl-inp" type="number" id="b-tolls" placeholder="0" oninput="saveBudget();updateBudget()"> €</span></div>
+      <div class="brow"><span class="blbl">🍽 Menjar</span><span class="bamt"><input class="inl-inp" type="number" id="b-food" placeholder="0" oninput="saveBudget();updateBudget()"> €</span></div>
+      <div class="brow"><span class="blbl">🎫 Entrades / Activitats</span><span class="bamt"><input class="inl-inp" type="number" id="b-acts" placeholder="0" oninput="saveBudget();updateBudget()"> €</span></div>
+      <div class="brow"><span class="blbl">🐾 Leia (entrades, etc.)</span><span class="bamt"><input class="inl-inp" type="number" id="b-leia" placeholder="0" oninput="saveBudget();updateBudget()"> €</span></div>
+      <div class="brow"><span class="blbl">📦 Altres</span><span class="bamt"><input class="inl-inp" type="number" id="b-altres" placeholder="0" oninput="saveBudget();updateBudget()"> €</span></div>
+    </div>
+    <div class="sec-div"><div class="sec-icon" style="background:#E8F5EE">⚡</div><span class="sec-title">Subscripcions recàrrega</span></div>
+    <div class="card">
+      <div class="brow"><span class="blbl">Tesla Supercharger</span><span class="bamt">11,99 €/mes</span></div>
+      <div class="brow"><span class="blbl">Ionity Passport Power</span><span class="bamt">11,99 €/mes</span></div>
+      <div class="brow"><span class="blbl b-sub-lbl">Tesla França (amb sub.)</span><span style="font-size:.78rem;color:var(--c-muted)">0,40 €/kWh</span></div>
+      <div class="brow"><span class="blbl b-sub-lbl">Ionity França (amb sub.)</span><span style="font-size:.78rem;color:var(--c-muted)">0,37 €/kWh</span></div>
+    </div>
+  </div>
+
+  <!-- ── MÉS ───────────────────────────────── -->
+  <div id="tab-mes" class="tab">
+    <div class="page-head"><div class="title">☑️ Checklist & Notes</div></div>
+
+    <div class="sec-div"><div class="sec-icon" style="background:#E8F5EE">☑️</div><span class="sec-title">Checklist de sortida</span></div>
+    <p class="t-small t-muted mb12">Es reinicia cada dia automàticament.</p>
+    <div id="chk-items"></div>
+    <button class="btn-reset" onclick="resetChecklist()">↺ Reiniciar checklist</button>
+
+    <div class="sec-div" style="margin-top:24px"><div class="sec-icon" style="background:#FEF3EB">📝</div><span class="sec-title">Notes del viatge</span></div>
+    <div class="fg mb12"><label>Dia</label><select id="notes-dia" onchange="loadNote()"></select></div>
+    <textarea class="ntarea" id="notes-txt" placeholder="Notes lliures del dia..." oninput="saveNote()"></textarea>
+
+    <div class="sec-div" style="margin-top:24px"><div class="sec-icon" style="background:#E3F0FC">📤</div><span class="sec-title">Exportar dades</span></div>
+    <div class="card">
+      <p class="t-small t-muted mb12">Descarrega les recàrregues en JSON per sincronitzar amb l'Excel via <strong>sync_excel.py</strong>.</p>
+      <button class="btnp btng" onclick="exportJSON()">⬇ Descarregar recarregues.json</button>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── DAY DETAIL OVERLAY ─────────────────────── -->
+<div id="det">
+  <div id="det-hdr">
+    <div id="det-hdr-top">
+      <button id="det-back" onclick="closeDetail()">‹ Enrere</button>
+      <div id="det-meta">
+        <div class="det-day-lbl" id="det-lbl"></div>
+        <div class="det-zone" id="det-zone"></div>
+      </div>
+      <div id="det-drive-chip"></div>
+    </div>
+    <div class="det-hotel-mini" id="det-hotel-mini" style="display:none">
+      <div class="dh-icon">🏨</div>
+      <div>
+        <div class="dh-name" id="det-hotel-name"></div>
+        <div class="dh-price" id="det-hotel-price"></div>
+      </div>
+    </div>
+  </div>
+  <div id="det-body"></div>
+</div>
+
+<!-- ── BOTTOM NAV ───────────────────────────────── -->
+<nav id="nav">
+  <button class="nb on" data-tab="itinerari"   onclick="showTab('itinerari')"><span class="ic">🗓</span>Itinerari</button>
+  <button class="nb"    data-tab="recarregues" onclick="showTab('recarregues')"><span class="ic">⚡</span>Recàrregues</button>
+  <button class="nb"    data-tab="llacs"       onclick="showTab('llacs')"><span class="ic">🏊</span>Llacs</button>
+  <button class="nb"    data-tab="pressupost"  onclick="showTab('pressupost')"><span class="ic">💰</span>Pressupost</button>
+  <button class="nb"    data-tab="mes"         onclick="showTab('mes')"><span class="ic">☑️</span>Més</button>
+</nav>
+
+<script>
+// ── BRAND ICON SVGs ─────────────────────────────
+const ICON_APPLE = `<svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="7" fill="#1C1C1E"/>
+  <rect x="4" y="14" width="24" height="14" rx="0 0 4 4" fill="#2E7D32" opacity="0.9"/>
+  <rect x="4" y="4" width="24" height="12" fill="#1565C0" opacity="0.9"/>
+  <rect x="13" y="4" width="6" height="24" fill="#FAFAFA" opacity="0.9" rx="2"/>
+  <circle cx="16" cy="11" r="3.5" fill="#EA4335"/>
+  <circle cx="16" cy="11" r="1.8" fill="white"/>
+</svg>`;
+
+const ICON_GOOGLE = `<svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="7" fill="#FFFFFF"/>
+  <path d="M16 5C11.58 5 8 8.58 8 13c0 6.56 8 14 8 14s8-7.44 8-14c0-4.42-3.58-8-8-8z" fill="#EA4335"/>
+  <path d="M23.1 7.9C21.3 6.1 18.8 5 16 5c2.8 0 5.3 1.1 7.1 2.9z" fill="#FBBC04"/>
+  <path d="M8.9 7.9C10.7 6.1 13.2 5 16 5c-2.8 0-5.3 1.1-7.1 2.9z" fill="#4285F4"/>
+  <circle cx="16" cy="13" r="3.5" fill="white"/>
+</svg>`;
+
+const ICON_ABRP = `<svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="7" fill="#00B140"/>
+  <path d="M20 4L13 16h6l-3 12 12-14h-7z" fill="white"/>
+</svg>`;
+
+function svgBtn(svg, label, cls, href) {
+  return `<a class="navbtn ${cls}" href="${href}"${href.startsWith('http')?'target="_blank"':''}>
+    ${svg}<span>${label}</span></a>`;
+}
+
+// ── DATA ────────────────────────────────────────
+const DAYS = [
+  {n:1,from:'2026-08-10',to:'2026-08-11',zone:'Lió',flag:'🇫🇷',drive:'~6 h',
+   hotel:{name:'Spark by Hilton Lyon Eurexpo',addr:'Avenue Louis Braille, 69680 Chassieu, Lyon',
+     lat:45.7338,lng:4.9278,platform:'Booking',platformUrl:'https://secure.booking.com/myreservations.html',
+     price:94.74,checkin:'15:00',checkout:'11:00',dog:null,ev:'ok',parking:'11 €',
+     resNum:'5451566097',pin:'3865'},
+   activities:['🚗 Trajecte llarg des de La Garriga (~6 h)','Vieux Lyon (UNESCO) i traboules','Funicular a Notre-Dame de Fourvière (vistes)','Place Bellecour / Presqu\'île al capvespre'],
+   food:['Sopar en un bouchon lyonnais','Quenelles, salade lyonnaise, andouillette'],
+   leia:['Lió és molt dog-friendly','Traboules i Vieux Lyon OK amb gos','Funicular: morrió o a coll','Parc de la Tête d\'Or per estirar les potes'],
+   lake:null},
+  {n:2,from:'2026-08-11',to:'2026-08-12',zone:'Selva Negra',flag:'🇩🇪',drive:'~5 h',
+   hotel:{name:'Hotel Restaurant Schwörer',addr:'Oberprechtal, 77830 Bühlertal',
+     lat:48.218,lng:8.073,platform:'Booking',platformUrl:'https://secure.booking.com/myreservations.html',
+     price:133.84,checkin:'15:00–22:00',checkout:null,dog:'5 €/nit',ev:'ok',parking:'0 €',pendent:'12',
+     resNum:'6382462824',pin:'9321'},
+   activities:['🚗 Trajecte (~5 h) cap a la Selva Negra','Parada a Triberg: cascades + cucuts','Vogtsbauernhof (Gutach) si hi ha temps','Arribada al Schwörer al vespre'],
+   food:['Schwarzwälder Kirschtorte (pastís de la Selva Negra)','Pernil fumat de la zona'],
+   leia:['Cascades de Triberg OK amb corretja (entrada de pagament)','Vogtsbauernhof OK amb corretja','Boscos i rutes de la zona ideals'],
+   lake:null},
+  {n:3,from:'2026-08-12',to:'2026-08-13',zone:'Selva Negra',flag:'🇩🇪',drive:'~1-2 h',
+   hotel:{name:'Hotel Restaurant Schwörer',addr:'Oberprechtal, 77830 Bühlertal',
+     lat:48.218,lng:8.073,platform:'Booking',platformUrl:'https://secure.booking.com/myreservations.html',
+     price:133.84,checkin:null,checkout:'11:00',dog:'5 €/nit',ev:'ok',parking:'0 €',
+     resNum:'6382462824',pin:'9321'},
+   activities:['Dia complet a la Selva Negra','🏊 Llac Titisee (passeig i bany)','Pujada al Feldberg (cim, vistes als Alps)','Sankt Märgen o museu del rellotge (Furtwangen)','Schwarzwaldhochstrasse panoràmica'],
+   food:['Dinar en una Gasthaus rural','Maultaschen, Spätzle o truita de riu'],
+   leia:['Titisee: bany OK a la ribera sud','Càmping Weiherhof OK per gossos','Vaixells de passatgers admeten gossos','Feldberg amb corretja'],
+   lake:'Titisee'},
+  {n:4,from:'2026-08-13',to:'2026-08-14',zone:'Ettal',flag:'🇩🇪',drive:'~4-5 h',
+   hotel:{name:'Klosterhotel Ludwig der Bayer',addr:'Kaiser-Ludwig-Platz 10, 82488 Ettal',
+     lat:47.5691,lng:11.0953,platform:'Hoteles.com',platformUrl:'https://www.hoteles.com/trips/',
+     price:184.30,checkin:'16:00',checkout:null,dog:null,ev:null,parking:'0 €',platformRef:'72075299073973'},
+   activities:['🚗 Trajecte cap a Baviera (~4-5 h)','Parada a Lindau (illa al llac de Constança)','O Wieskirche (rococó, UNESCO)','Vespre: monestir d\'Ettal — basílica + tast de licors i formatges'],
+   food:['Sopar a la Klosterbrauerei Ettal','Cervesa pròpia + Schweinebraten'],
+   leia:['Lindau port OK amb gos','Wieskirche: només exterior','Ettal: jardins/exterior OK; basílica NO','Biergarten d\'Ettal acostuma a admetre gossos'],
+   lake:null},
+  {n:5,from:'2026-08-14',to:'2026-08-15',zone:'Ettal — Castells',flag:'🇩🇪',drive:'~2 h',
+   hotel:{name:'Klosterhotel Ludwig der Bayer',addr:'Kaiser-Ludwig-Platz 10, 82488 Ettal',
+     lat:47.5691,lng:11.0953,platform:'Hoteles.com',platformUrl:'https://www.hoteles.com/trips/',
+     price:184.30,checkin:null,checkout:null,dog:null,ev:null,parking:'0 €',platformRef:'72075299073973'},
+   activities:['Dia dels castells de Lluís II','Matí: Neuschwanstein + Hohenschwangau ⚠️ entrades 1-2 mesos abans!','Vistes des del pont Marienbrücke','Tarda: castell de Linderhof + gruta de Venus'],
+   food:['Pícnic o restaurant prop dels castells','Kaiserschmarrn de postres'],
+   leia:['⚠️ Castells NO admeten gossos a l\'interior','Torns: un visita, l\'altre passeja la Leia','Pont Marienbrücke exterior i jardins de Linderhof OK','Boscos al voltant ideals per passejar'],
+   lake:null},
+  {n:6,from:'2026-08-15',to:'2026-08-16',zone:'Ettal — Alps',flag:'🇩🇪',drive:'~1-2 h',
+   hotel:{name:'Klosterhotel Ludwig der Bayer',addr:'Kaiser-Ludwig-Platz 10, 82488 Ettal',
+     lat:47.5691,lng:11.0953,platform:'Hoteles.com',platformUrl:'https://www.hoteles.com/trips/',
+     price:184.30,checkin:null,checkout:'11:00',dog:null,ev:null,parking:'0 €',platformRef:'72075299073973'},
+   activities:['Dia de muntanya a Garmisch','Pujada al Zugspitze (cremallera + telefèric)','🏊 Llac Eibsee al peu de la muntanya','Alternativa: gorja Partnachklamm','Tarda: Oberammergau (frescos Lüftlmalerei)'],
+   food:['Käsespätzle a una hütte de muntanya','Weisswurst amb mostassa dolça + bretzel'],
+   leia:['Zugspitze: morrió + corretja curta (confirma al moment)','Partnachklamm: estret i sorollos, atenció','Eibsee: bany a cales lliures, corretja obligatòria','Oberammergau passeig OK'],
+   lake:'Eibsee'},
+  {n:7,from:'2026-08-16',to:'2026-08-17',zone:'Allgäu',flag:'🇩🇪',drive:'~1,5-2 h',
+   hotel:{name:'Panoramahotel Kühbergalp',addr:'Im Kühboden, 87459 Pfronten, Allgäu',
+     lat:47.5797,lng:10.5302,platform:'Booking',platformUrl:'https://secure.booking.com/myreservations.html',
+     price:128.27,checkin:'15:00–21:00',checkout:null,dog:'✅ Benvinguts',ev:'? Dubte',parking:'0 €',
+     resNum:'5310506010',pin:'3131'},
+   activities:['🚗 Trajecte curt cap a l\'Allgäu (~1,5-2 h)','Parada a Füssen (centre, Hohes Schloss)','Arribada al Panoramahotel: vistes als Alps','Passeig per Pfronten o Nesselwang'],
+   food:['Sopar a l\'hotel amb vistes al capvespre'],
+   leia:['Füssen centre i Hohes Schloss exterior: OK amb corretja','✅ Panoramahotel confirmat: gossos sempre benvinguts!','Passejos per Pfronten i Nesselwang molt aptes'],
+   lake:null},
+  {n:8,from:'2026-08-17',to:'2026-08-18',zone:'Allgäu',flag:'🇩🇪',drive:'~1-2 h',
+   hotel:{name:'Panoramahotel Kühbergalp',addr:'Im Kühboden, 87459 Pfronten, Allgäu',
+     lat:47.5797,lng:10.5302,platform:'Booking',platformUrl:'https://secure.booking.com/myreservations.html',
+     price:128.27,checkin:null,checkout:null,dog:'✅ Benvinguts',ev:'? Dubte',parking:'0 €',
+     resNum:'5310506010',pin:'3131'},
+   activities:['Dia complet a l\'Allgäu','Telefèric a Breitenberg o Tegelberg','🏊⭐ Llac Hopfensee (el més càlid, vistes a Neuschwanstein)','Alternativa: Weissensee (més tranquil)','Tarda: spa de l\'hotel'],
+   food:['Allgäuer Bergkäse','Kaiserschmarrn de postres'],
+   leia:['Telefèrics: morrió (confirma al moment)','Hopfensee: gossos OK fora del Strandbad','Weissensee: ribera del bosc OK','Spa de l\'hotel: la Leia no hi pot entrar — torns'],
+   lake:'Hopfensee'},
+  {n:9,from:'2026-08-18',to:'2026-08-19',zone:'Allgäu',flag:'🇩🇪',drive:'~2-3 h',
+   hotel:{name:'Panoramahotel Kühbergalp',addr:'Im Kühboden, 87459 Pfronten, Allgäu',
+     lat:47.5797,lng:10.5302,platform:'Booking',platformUrl:'https://secure.booking.com/myreservations.html',
+     price:128.27,checkin:null,checkout:'10:30',dog:'✅ Benvinguts',ev:'? Dubte',parking:'0 €',
+     resNum:'5310506010',pin:'3131'},
+   activities:['Últim dia als Alps','🏊 Forggensee + barca (la Leia per 3€)','🏊 Großer Alpsee a Immenstadt','Poble de Bad Hindelang o Oberstdorf','Compres: records, cervesa, formatge'],
+   food:['Comprar formatge, cervesa artesana i licors d\'herbes per emportar'],
+   leia:['Forggensee: gossos als vaixells per 3€ (1 jun – 15 oct)','Großer Alpsee: Liegewiese i restaurant Seepromenade OK','Oberstdorf i Bad Hindelang molt dog-friendly'],
+   lake:'Forggensee'},
+  {n:10,from:'2026-08-19',to:'2026-08-20',zone:'Chalon-sur-Saône',flag:'🇫🇷',drive:'~7-8 h',
+   hotel:{name:'ibis Styles Chalon sur Saône',addr:'Avenue de l\'Europe, 71100 Chalon-sur-Saône',
+     lat:46.7833,lng:4.850,platform:'Booking',platformUrl:'https://secure.booking.com/myreservations.html',
+     price:134.55,checkin:'15:00',checkout:'11:00',dog:null,ev:null,parking:'0 €',
+     phone:'+33 3 85 46 51 89',resNum:'5341526508',pin:'7251'},
+   activities:['🚗 Etapa llarga cap a Borgonya (~7-8 h)','Parada a Beaune (Hospices, ruta del vi) o Dijon','Vespre: Chalon-sur-Saône, passeig pel moll del Saône'],
+   food:['Sopar borgonyó: boeuf bourguignon, escargots','Formatges Époisses + copa de Pinot Noir'],
+   leia:['Beaune i Dijon: cascs antics OK amb corretja','Hospices interior: gossos NO','Moll del Saône ideal al capvespre'],
+   lake:null},
+  {n:11,from:'2026-08-20',to:'2026-08-21',zone:'La Garriga — Casa',flag:'🏠',drive:'~9 h',
+   hotel:null,
+   activities:['🚗 Etapa molt llarga cap a casa (~9 h)','Planifica bé les càrregues del Tesla','Possible parada gastronòmica a Lyon o Nîmes','Arribada a casa al vespre 🎉'],
+   food:['Última parada llarga per dinar bé','Fi del viatge 🎉'],
+   leia:['Parades cada 2-3 h perquè la Leia estiri les potes','Àrees de servei franceses solen tenir zones de gespa'],
+   lake:null}
+];
+
+const LAKES = [
+  {name:'Titisee',zone:'Selva Negra',temp:'~20°C',dog:'✅',dogDetail:'Ribera sud + càmping Weiherhof',dogStatus:'ok',
+   detail:'La zona oficial (nord) NO admet gossos. Al sud i al càmping Weiherhof (Bruderhalde 25, Hinterzarten) sí. Vaixells admeten gossos. Volta de 6 km.',
+   day:'Dia 2 o 3',lat:47.8986,lng:8.1535},
+  {name:'Hopfensee',zone:'Allgäu (prop Füssen)',temp:'fins ~25°C ⭐',dog:'✅',dogDetail:'Zones nord/NE (no Strandbad)',dogStatus:'ok',
+   detail:'EL MÉS CÀLID dels prealpins. Vistes a Neuschwanstein. Gossos permèsos a totes les zones excepte el Strandbad oficial. Volta plana de ~7 km, ideal amb gos.',
+   day:'Dia 7, 8 o 9',lat:47.6333,lng:10.7167},
+  {name:'Forggensee',zone:'Allgäu (Füssen)',temp:'~20°C',dog:'✅',dogDetail:'Trams nord (Waltenhofen)',dogStatus:'ok',
+   detail:'Banys lliures als trams nord prop del Panoramaweg. Barca des de Füssen: la Leia hi puja per 3€ (1 jun – 15 oct).',
+   day:'Dia 7, 8 o 9',lat:47.6167,lng:10.700},
+  {name:'Weissensee',zone:'Allgäu (prop Füssen)',temp:'~19-20°C',dog:'✅',dogDetail:'Ribera del bosc (Waldseite)',dogStatus:'ok',
+   detail:'Llac petit i tranquil (2,3 km). La platja oficial NO admet gossos, però la Waldseite sí, camí a peu. Aigua molt clara.',
+   day:'Dia 7, 8 o 9',lat:47.620,lng:10.740},
+  {name:'Eibsee',zone:'Garmisch / Zugspitze',temp:'~17-21°C',dog:'✅',dogDetail:'Fora Strandbad, cales lliures',dogStatus:'ok',
+   detail:'Aigües turqueses sota la Zugspitze. Banyables a les cales lliures del perímetre. Corretja obligatòria. Més fred que els prealpins.',
+   day:'Dia 6',lat:47.4556,lng:10.9842},
+  {name:'Alatsee',zone:'Allgäu (prop Füssen)',temp:'fred',dog:'⚠️',dogDetail:'No recomanat per banyar',dogStatus:'warn',
+   detail:'Llac foto-genènic però aigües fredes amb capa anaeròbia baixa (símptomes en gossos registrats). Millor per fer la volta a peu que per banyar-s\'hi.',
+   day:'(opcional)',lat:47.5833,lng:10.6833},
+  {name:'Großer Alpsee',zone:'Allgäu (Immenstadt)',temp:'~20°C',dog:'✅',dogDetail:'Liegewiese + restaurant Seepromenade',dogStatus:'ok',
+   detail:'El llac natural MÉS GRAN de l\'Allgäu (2,4 km², 22 m de fondo). Gossos a la Liegewiese, l\'aigua i al restaurant Seepromenade. Volta de 11 km.',
+   day:'Dia 9',lat:47.5517,lng:10.2139}
+];
+
+const CHECKLIST_ITEMS = [
+  {id:'car',  label:'Cotxe carregat ⚡'},
+  {id:'water',label:'Aigua per la Leia 💧'},
+  {id:'food', label:'Menjar de la Leia 🦴'},
+  {id:'abrp', label:'Ruta ABRP configurada 🗺'},
+  {id:'hotel',label:'Hotel següent confirmat 🏨'},
+  {id:'keys', label:'Claus de cotxe 🔑'},
+  {id:'phone',label:'Telèfon carregat 📱'},
+  {id:'docs', label:'Documents (DNI/passaport, assegurança) 📄'},
+];
+
+// ── STATE ────────────────────────────────────────
+function ls(k){try{return JSON.parse(localStorage.getItem(k))}catch{return null}}
+function ss(k,v){localStorage.setItem(k,JSON.stringify(v))}
+let recarregues = ls('rec')||[];
+let kmLog       = ls('km')||[];
+let notes       = ls('notes')||{};
+let budgetExtra = ls('budgetExtra')||{};
+let hotelExtra  = ls('hotelExtra')||{};
+let checklist   = ls('checklist')||{};
+
+// ── UTILS ────────────────────────────────────────
+function today(){ return new Date().toISOString().slice(0,10) }
+function tripDay(){ const t=new Date(today()),s=new Date('2026-08-10'),e=new Date('2026-08-20'); if(t<s||t>e)return null; return Math.floor((t-s)/86400000)+1; }
+function tripPct(){ const t=new Date(today()),s=new Date('2026-08-10'),e=new Date('2026-08-21'); if(t<=s)return 0; if(t>=e)return 100; return Math.min(100,((t-s)/(e-s))*100); }
+function fmtEur(v){ return v.toLocaleString('ca-ES',{minimumFractionDigits:2,maximumFractionDigits:2})+' €' }
+function fmtDate(iso){ return new Date(iso+'T12:00:00').toLocaleDateString('ca-ES',{day:'numeric',month:'long'}) }
+function mapsApple(lat,lng)  { return `maps://maps.apple.com/?daddr=${lat},${lng}&dirflg=d` }
+function mapsGoogle(addr)    { return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(addr)}&travelmode=driving` }
+function mapsABRP(lat,lng)   { return `https://abetterrouteplanner.com/?vehicle_id=kia-eniro-2020-64&dest_lat=${lat}&dest_lng=${lng}` }
+
+// ── TABS ─────────────────────────────────────────
+function showTab(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('tab-'+id).classList.add('on');
+  document.querySelector(`[data-tab="${id}"]`).classList.add('on');
+  if(id==='recarregues') renderRecarregues();
+  if(id==='llacs')       renderLakes();
+  if(id==='pressupost')  renderBudget();
+  if(id==='mes')         renderMes();
+}
+
+// ── ITINERARI ────────────────────────────────────
+function renderItinerari(){
+  const td = tripDay();
+  document.getElementById('pfill').style.width = tripPct()+'%';
+  document.getElementById('hdr-sub').textContent = td ? `Dia ${td} de 11` : '10–21 ag 2026';
+  document.getElementById('day-list').innerHTML = DAYS.map(d=>{
+    const past    = today() > d.from;
+    const isToday = today() >= d.from && today() < d.to;
+    const isHome  = d.n === 11;
+    const cls     = isHome ? 'home' : isToday ? 'today' : past ? 'past' : 'future';
+    const hname   = d.hotel ? d.hotel.name : '🏠 Tornada a casa';
+    return `<div class="di ${cls}" onclick="openDetail(${d.n-1})">
+      <div class="di-stripe"></div>
+      <div class="di-num">${d.n}</div>
+      <div class="di-info">
+        <div class="di-date">${fmtDate(d.from)} ${d.flag}</div>
+        <div class="di-zone">${d.zone}</div>
+        <div class="di-hotel">${hname}</div>
+      </div>
+      <div class="di-right">
+        <div class="di-drive">${d.drive}</div>
+        <div class="di-arrow">›</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── DAY DETAIL ───────────────────────────────────
+function openDetail(i){
+  const d = DAYS[i];
+  const hk = `hotel_${d.n}`;
+  const hx = hotelExtra[hk]||{};
+  const lake = d.lake ? LAKES.find(l=>l.name===d.lake) : null;
+
+  // Header
+  document.getElementById('det-lbl').textContent  = `Dia ${d.n} · ${fmtDate(d.from)} – ${fmtDate(d.to)}`;
+  document.getElementById('det-zone').textContent = `${d.flag} ${d.zone}`;
+  document.getElementById('det-drive-chip').textContent = `🚗 ${d.drive}`;
+  const mini = document.getElementById('det-hotel-mini');
+  if(d.hotel){
+    mini.style.display = 'flex';
+    document.getElementById('det-hotel-name').textContent  = d.hotel.name;
+    document.getElementById('det-hotel-price').textContent = fmtEur(d.hotel.price)+'/nit · '+d.hotel.platform;
+  } else { mini.style.display = 'none'; }
+
+  let html = '';
+
+  // NAV BUTTONS
+  if(d.hotel){
+    const {lat,lng,addr} = d.hotel;
+    html += `<div class="sec-div"><div class="sec-icon" style="background:#F3F4F6">🧭</div><span class="sec-title">Navegació</span></div>
+    <div class="navbtns">
+      ${svgBtn(ICON_APPLE,'Apple Maps','nb-apple',mapsApple(lat,lng))}
+      ${svgBtn(ICON_GOOGLE,'Google Maps','nb-google',mapsGoogle(addr))}
+      ${svgBtn(ICON_ABRP,'ABRP','nb-abrp',mapsABRP(lat,lng))}
+    </div>`;
+  }
+
+  // HOTEL
+  if(d.hotel){
+    const h = d.hotel;
+    const dogChip = !h.dog ? `<span class="chip chip-n">🐾 Gos: no informat</span>`
+      : h.dog.includes('Dubte') ? `<span class="chip chip-warn">🐾 Confirmar gossos</span>`
+      : `<span class="chip chip-ok">🐾 ${h.dog}</span>`;
+    const evChip = h.ev==='ok' ? `<span class="chip chip-ok">⚡ Càrrega EV</span>`
+      : h.ev?.includes('Dubte') ? `<span class="chip chip-warn">⚡ EV: confirmar</span>`
+      : `<span class="chip chip-n">⚡ EV: no informat</span>`;
+    html += `<div class="sec-div" style="margin-top:0"><div class="sec-icon" style="background:#FFF3E0">🏨</div><span class="sec-title">Hotel</span></div>
+    <div class="card">
+      <div class="h-name">${h.name}</div>
+      <div class="h-addr">📍 <span>${h.addr}</span></div>
+      <div class="chips">
+        ${dogChip}${evChip}
+        <span class="chip chip-n">🅿️ ${h.parking}</span>
+        ${h.checkin?`<span class="chip chip-n">🔑 Check-in ${h.checkin}</span>`:''}
+        ${h.checkout?`<span class="chip chip-n">🚪 Check-out ${h.checkout}</span>`:''}
+        ${h.pendent?`<span class="chip chip-warn">💳 Pendent: ${h.pendent}</span>`:''}
+      </div>
+      <div class="h-meta-row">
+        <div class="h-meta-item"><span class="lbl">Plataforma</span><span class="val">${h.platform}</span></div>
+        <div class="h-meta-item"><span class="lbl">Preu/nit</span><span class="val t-primary">${fmtEur(h.price)}</span></div>
+      </div>
+      <div class="h-edit-block">
+        <label class="lbl">Telèfon hotel</label>
+        <input class="h-edit-input" type="tel" placeholder="+ Afegir telèfon" value="${hx.phone||h.phone||''}" oninput="saveHX(${d.n},'phone',this.value)">
+      </div>
+      <div class="h-edit-block">
+        <label class="lbl">Número de reserva</label>
+        <input class="h-edit-input" type="text" placeholder="+ Afegir nº reserva" value="${hx.resNum||h.resNum||''}" oninput="saveHX(${d.n},'resNum',this.value)">
+      </div>
+      <div class="h-edit-block">
+        <label class="lbl">PIN / codi d'accés</label>
+        <input class="h-edit-input" type="text" placeholder="+ Afegir PIN" value="${hx.pin||h.pin||''}" oninput="saveHX(${d.n},'pin',this.value)">
+      </div>
+      ${h.platformRef?`<div class="h-edit-block"><label class="lbl">Núm. itinerari (${h.platform})</label><input class="h-edit-input" type="text" readonly value="${h.platformRef}"></div>`:''}
+      <div class="h-btns">
+        ${(hx.phone||h.phone)?`<a class="h-btn h-btn-call" href="tel:${hx.phone||h.phone}">📞 Trucar</a>`:''}
+        <a class="h-btn h-btn-bk" href="${h.platformUrl}" target="_blank">🔗 Gestió reserva (${h.platform})</a>
+      </div>
+    </div>`;
+  } else {
+    html += `<div class="card" style="text-align:center;padding:24px"><div style="font-size:2rem">🏠</div><div style="font-size:1rem;font-weight:700;margin-top:8px">Tornada a La Garriga</div><div class="t-small t-muted">Etapa molt llarga · ~9 h de conducció</div></div>`;
+  }
+
+  // LLAC DEL DIA
+  if(lake){
+    html += `<div class="sec-div"><div class="sec-icon" style="background:${lake.dogStatus==='ok'?'#E3F0FC':'#FFF3E0'}">🏊</div><span class="sec-title">Llac del dia</span></div>
+    <div class="lake-day-card">
+      <div class="ldc-header">
+        <div><div class="ldc-name">${lake.name}</div><div class="ldc-zone">${lake.zone}</div></div>
+        <div class="ldc-temp">${lake.temp}</div>
+      </div>
+      <div class="ldc-dog">🐾 ${lake.dog} ${lake.dogDetail}</div>
+      <div class="ldc-txt">${lake.detail}</div>
+      <div class="ldc-btns">
+        <a class="ldc-btn" href="${mapsApple(lake.lat,lake.lng)}">🍎 Apple Maps</a>
+        <a class="ldc-btn" href="${mapsGoogle(lake.name+', '+lake.zone)}" target="_blank">🗺 Google Maps</a>
+      </div>
+    </div>`;
+  }
+
+  // ACTIVITATS
+  html += `<div class="sec-div"><div class="sec-icon" style="background:#FFF3E0">🎯</div><span class="sec-title">Activitats del dia</span></div>
+  <div class="card"><ul class="alist">${d.activities.map(a=>`<li>${a}</li>`).join('')}</ul></div>`;
+
+  // MENJAR
+  html += `<div class="sec-div"><div class="sec-icon" style="background:#FFF3E0">🍽</div><span class="sec-title">Gastronomia</span></div>
+  <div class="card"><ul class="alist food-list">${d.food.map(f=>`<li>${f}</li>`).join('')}</ul></div>`;
+
+  // LEIA
+  html += `<div class="sec-div"><div class="sec-icon" style="background:#F0F9F4">🐾</div><span class="sec-title">Amb la Leia</span></div>
+  <div class="card"><ul class="alist leia-list">${d.leia.map(l=>`<li>${l}</li>`).join('')}</ul></div>`;
+
+  // NOTES
+  const nv = notes[`day_${d.n}`]||'';
+  html += `<div class="sec-div"><div class="sec-icon" style="background:#E3F0FC">📝</div><span class="sec-title">Notes del dia</span></div>
+  <textarea class="ntarea" placeholder="Notes lliures per al dia ${d.n}..." oninput="saveNoteDay(${d.n},this.value)">${nv}</textarea>`;
+
+  document.getElementById('det-body').innerHTML = html;
+  document.getElementById('det').classList.add('open');
+  document.getElementById('back-btn').style.display = 'block';
+  document.getElementById('hdr-title').textContent = `Dia ${d.n} — ${d.zone}`;
+  document.getElementById('det').scrollTop = 0;
+}
+
+function closeDetail(){
+  document.getElementById('det').classList.remove('open');
+  document.getElementById('back-btn').style.display = 'none';
+  document.getElementById('hdr-title').textContent = 'Baviera 2026 🏔';
+}
+
+function saveHX(dn,f,v){ const k=`hotel_${dn}`; if(!hotelExtra[k])hotelExtra[k]={}; hotelExtra[k][f]=v; ss('hotelExtra',hotelExtra); }
+function saveNoteDay(dn,v){ notes[`day_${dn}`]=v; ss('notes',notes); }
+
+// ── RECÀRREGUES ──────────────────────────────────
+function fillSelects(){
+  const opts = DAYS.map(d=>`<option value="${d.n}">Dia ${d.n} — ${fmtDate(d.from)}</option>`).join('');
+  ['r-dia','km-dia','notes-dia'].forEach(id=>{ const el=document.getElementById(id); if(el)el.innerHTML=opts; });
+}
+
+function addRecarrega(){
+  const dia=+document.getElementById('r-dia').value;
+  const xarxa=document.getElementById('r-xarxa').value;
+  const lloc=document.getElementById('r-lloc').value.trim();
+  const kwh=parseFloat(document.getElementById('r-kwh').value)||0;
+  const preu=parseFloat(document.getElementById('r-preu').value)||0;
+  recarregues.push({id:Date.now(),dia,data:DAYS[dia-1].from,lloc,xarxa,kwh,preu,eurkwh:kwh?preu/kwh:0});
+  ss('rec',recarregues);
+  document.getElementById('r-lloc').value='';
+  document.getElementById('r-kwh').value='';
+  document.getElementById('r-preu').value='';
+  renderRecarregues();
+}
+
+function delRec(id){ recarregues=recarregues.filter(r=>r.id!==id); ss('rec',recarregues); renderRecarregues(); }
+
+function renderRecarregues(){
+  const xarxes=['Casa','Tesla','Ionity','Altres'];
+  const t={}; xarxes.forEach(x=>t[x]={kwh:0,preu:0});
+  recarregues.forEach(r=>{ const x=t[r.xarxa]||t['Altres']; x.kwh+=r.kwh; x.preu+=r.preu; });
+  const ak=Object.values(t).reduce((a,b)=>a+b.kwh,0);
+  const ap=Object.values(t).reduce((a,b)=>a+b.preu,0);
+  document.getElementById('rec-summary').innerHTML =
+    xarxes.map(x=>`<tr><td>${x}</td><td class="nr">${t[x].kwh.toFixed(1)}</td>
+      <td class="nr">${fmtEur(t[x].preu)}</td>
+      <td class="nr">${t[x].kwh>0?(t[x].preu/t[x].kwh).toFixed(3):'—'}</td></tr>`).join('')+
+    `<tr class="ttl"><td>Total</td><td class="nr">${ak.toFixed(1)}</td>
+      <td class="nr">${fmtEur(ap)}</td>
+      <td class="nr">${ak>0?(ap/ak).toFixed(3):'—'}</td></tr>`;
+  const el=document.getElementById('rec-list');
+  el.innerHTML=!recarregues.length?`<div class="empty"><div class="ei">⚡</div><p>Sense recàrregues registrades.</p></div>`:
+    [...recarregues].reverse().map(r=>`<div class="logitem">
+      <div class="loginfo">
+        <div class="lgtit">${r.xarxa}${r.lloc?' · '+r.lloc:''}</div>
+        <div class="lgmeta">Dia ${r.dia} · ${r.kwh.toFixed(1)} kWh · ${r.eurkwh.toFixed(3)} €/kWh</div>
+      </div>
+      <span class="logamt">${fmtEur(r.preu)}</span>
+      <button class="logdel" onclick="delRec(${r.id})">✕</button>
+    </div>`).join('');
+  const bRec=document.getElementById('b-rec');
+  if(bRec) bRec.textContent=fmtEur(ap);
+}
+
+// ── KM ───────────────────────────────────────────
+function addKm(){
+  const dia=+document.getElementById('km-dia').value;
+  const val=+document.getElementById('km-val').value;
+  if(!val)return;
+  const ex=kmLog.findIndex(k=>k.dia===dia);
+  if(ex>=0)kmLog[ex].km=val; else kmLog.push({dia,km:val,data:DAYS[dia-1].from});
+  kmLog.sort((a,b)=>a.dia-b.dia);
+  ss('km',kmLog); document.getElementById('km-val').value='';
+  renderKm();
+}
+function delKm(dia){ kmLog=kmLog.filter(k=>k.dia!==dia); ss('km',kmLog); renderKm(); }
+function renderKm(){
+  const el=document.getElementById('km-list'), tw=document.getElementById('km-total-wrap');
+  if(!kmLog.length){ el.innerHTML=`<div class="empty"><div class="ei">🚗</div><p>Sense km registrats.</p></div>`; tw.style.display='none'; return; }
+  const total=kmLog.reduce((a,b)=>a+b.km,0);
+  document.getElementById('km-total-num').textContent=total+' km'; tw.style.display='flex';
+  el.innerHTML=kmLog.map(k=>`<div class="logitem">
+    <div class="loginfo"><div class="lgtit">Dia ${k.dia} — ${DAYS[k.dia-1].zone}</div><div class="lgmeta">${k.data}</div></div>
+    <span class="logamt">${k.km} km</span>
+    <button class="logdel" onclick="delKm(${k.dia})">✕</button>
+  </div>`).join('');
+}
+
+// ── LLACS ────────────────────────────────────────
+function renderLakes(){
+  document.getElementById('lake-cards').innerHTML=LAKES.map(l=>{
+    const cls=l.dogStatus==='ok'?'ok':l.dogStatus==='warn'?'warn':'no';
+    return `<div class="lkcard">
+      <div class="lkcard-head">
+        <div class="lk-dog-circle ${cls}">${l.dog}</div>
+        <div><div class="lkcard-name">${l.name}</div><div class="lkcard-zone">${l.zone}</div></div>
+        <div class="lkcard-temp">${l.temp}</div>
+      </div>
+      <div class="lkcard-body">
+        <div class="lkcard-day">🗓 ${l.day}</div>
+        <div class="lkcard-dog">🐾 ${l.dogDetail}</div>
+        <div class="lkcard-txt">${l.detail}</div>
+        <div class="lkcard-btns">
+          <a class="lkcard-btn lkbtn-apple" href="${mapsApple(l.lat,l.lng)}">
+            <svg width="16" height="16" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#1C1C1E"/><rect x="4" y="14" width="24" height="14" fill="#2E7D32" rx="0 0 3 3"/><rect x="4" y="4" width="24" height="12" fill="#1565C0"/><rect x="13" y="4" width="6" height="24" fill="#FFF" rx="2"/><circle cx="16" cy="11" r="3.5" fill="#EA4335"/><circle cx="16" cy="11" r="1.8" fill="white"/></svg>
+            Apple Maps
+          </a>
+          <a class="lkcard-btn lkbtn-google" href="${mapsGoogle(l.name+', '+l.zone)}" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#FFF"/><path d="M16 5C11.58 5 8 8.58 8 13c0 6.56 8 14 8 14s8-7.44 8-14c0-4.42-3.58-8-8-8z" fill="#EA4335"/><circle cx="16" cy="13" r="3.5" fill="white"/></svg>
+            Google Maps
+          </a>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── PRESSUPOST ───────────────────────────────────
+function saveBudget(){ ['tolls','food','acts','leia','altres'].forEach(k=>{ const e=document.getElementById('b-'+k); if(e)budgetExtra[k]=e.value; }); ss('budgetExtra',budgetExtra); }
+function updateBudget(){
+  const rp=recarregues.reduce((a,b)=>a+b.preu,0);
+  const ex=['tolls','food','acts','leia','altres'].reduce((a,k)=>a+(parseFloat(document.getElementById('b-'+k)?.value)||0),0);
+  document.getElementById('b-total').textContent=fmtEur(1434.67+rp+ex);
+  const br=document.getElementById('b-rec'); if(br)br.textContent=fmtEur(rp);
+}
+function renderBudget(){
+  ['tolls','food','acts','leia','altres'].forEach(k=>{ const e=document.getElementById('b-'+k); if(e&&budgetExtra[k])e.value=budgetExtra[k]; });
+  updateBudget();
+}
+
+// ── CHECKLIST ────────────────────────────────────
+function getChk(){ const k=today(); if(!checklist[k])checklist[k]={}; return checklist[k]; }
+function toggleCheck(id){ const c=getChk(); c[id]=!c[id]; ss('checklist',checklist); renderChecklist(); }
+function resetChecklist(){ checklist[today()]={}; ss('checklist',checklist); renderChecklist(); }
+function renderChecklist(){
+  const c=getChk();
+  document.getElementById('chk-items').innerHTML=CHECKLIST_ITEMS.map(item=>{
+    const done=!!c[item.id];
+    return `<div class="chk ${done?'done':''}" onclick="toggleCheck('${item.id}')">
+      <div class="chk-circle">${done?'✓':''}</div>
+      <span class="chk-lbl">${item.label}</span>
+    </div>`;
+  }).join('');
+}
+
+// ── NOTES ────────────────────────────────────────
+function loadNote(){ const dia=document.getElementById('notes-dia').value; document.getElementById('notes-txt').value=notes[`day_${dia}`]||''; }
+function saveNote(){ const dia=document.getElementById('notes-dia').value; notes[`day_${dia}`]=document.getElementById('notes-txt').value; ss('notes',notes); }
+function renderMes(){ renderChecklist(); loadNote(); }
+
+// ── EXPORT ───────────────────────────────────────
+function exportJSON(){
+  const data={exported:new Date().toISOString(),recarregues,km:kmLog};
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
+  a.download='recarregues.json'; a.click();
+}
+
+// ── INIT ─────────────────────────────────────────
+function init(){
+  fillSelects();
+  renderItinerari();
+  renderKm();
+  renderRecarregues();
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+init();
+</script>
+</body>
+</html>
