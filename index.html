@@ -114,7 +114,8 @@ body {
   font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
   padding: 6px 2px 2px; transition: color .15s;
 }
-.nb .ic { font-size: 1.5rem; line-height: 1; }
+.nb .ic { width: 26px; height: 26px; display: block; }
+.nb .ic svg { width: 26px; height: 26px; }
 .nb.on { color: var(--c-nav-a); }
 .nb.on .ic { filter: drop-shadow(0 0 6px rgba(245,160,64,.55)); }
 
@@ -484,6 +485,57 @@ body {
 .km-total-lbl { font-size: .875rem; opacity: .88; font-weight: 600; }
 .km-total-num { font-size: 1.65rem; font-weight: 800; letter-spacing: -.02em; }
 
+/* ── MAP CONTAINER ───────────────────────────────── */
+#avui-map {
+  height: 230px; border-radius: 16px; overflow: hidden;
+  margin-bottom: 14px; box-shadow: var(--sh-lift);
+  background: var(--c-blue-bg);
+  position: relative;
+}
+.map-offline {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 100%; color: var(--c-muted); gap: 8px; font-size: .875rem;
+}
+
+/* ── AVUI CARDS ─────────────────────────────────── */
+.avui-hero {
+  background: linear-gradient(135deg, #A83E00 0%, #C85200 40%, #E8720A 100%);
+  border-radius: var(--r-card); padding: 18px 20px; color: white;
+  margin-bottom: 12px; box-shadow: var(--sh-lift);
+}
+.avui-hero-label { font-size: .72rem; opacity: .85; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 4px; }
+.avui-hero-dest { font-size: 1.5rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: 2px; }
+.avui-hero-sub { font-size: .85rem; opacity: .85; }
+.avui-stat-row { display: flex; gap: 10px; margin-bottom: 12px; }
+.avui-stat {
+  flex: 1; background: var(--c-surface); border-radius: 14px; padding: 13px 14px;
+  box-shadow: var(--sh-card); border: 1px solid var(--c-border);
+}
+.avui-stat-lbl { font-size: .68rem; font-weight: 700; color: var(--c-muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+.avui-stat-val { font-size: 1.3rem; font-weight: 800; letter-spacing: -.02em; }
+.avui-stat-sub { font-size: .72rem; color: var(--c-muted); margin-top: 2px; }
+.avui-countdown {
+  text-align: center; padding: 32px 20px;
+  background: linear-gradient(135deg, #0A2E5A 0%, #1565C0 100%);
+  border-radius: var(--r-card); color: white; margin-bottom: 14px;
+  box-shadow: var(--sh-lift);
+}
+.avui-countdown-num { font-size: 3.5rem; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+.avui-countdown-lbl { font-size: .9rem; opacity: .85; margin-top: 6px; }
+
+/* ── EDIT BUTTON ─────────────────────────────────── */
+.logedit { background: none; border: none; color: var(--c-muted); cursor: pointer; font-size: .85rem; padding: 0 4px; flex-shrink: 0; }
+.logedit:active { color: var(--c-blue); }
+.logdel { background: none; border: none; color: var(--c-border); cursor: pointer; font-size: .95rem; padding: 0 4px; flex-shrink: 0; }
+.logdel:active { color: var(--c-err); }
+.editing-banner {
+  background: var(--c-blue-bg); border: 1.5px solid var(--c-blue); border-radius: 11px;
+  padding: 10px 14px; margin-bottom: 10px; font-size: .82rem; color: var(--c-blue);
+  display: none; align-items: center; justify-content: space-between; gap: 8px;
+}
+.editing-banner.show { display: flex; }
+.editing-cancel { background: none; border: none; color: var(--c-blue); font-weight: 700; cursor: pointer; font-size: .82rem; }
+
 /* ── UTILS ───────────────────────────────────────── */
 .mb6  { margin-bottom: 6px; }
 .mb12 { margin-bottom: 12px; }
@@ -583,6 +635,10 @@ body {
       <div class="sec-icon" style="background:#FFF3E0">⚡</div>
       <span class="sec-title">Nova recàrrega</span>
     </div>
+    <div class="editing-banner" id="rec-edit-banner">
+      <span>✏️ Editant recàrrega — modifica els camps i desa</span>
+      <button class="editing-cancel" onclick="cancelEditRec()">✕ Cancelar</button>
+    </div>
     <div class="card">
       <div class="fgrid mb12">
         <div class="fg"><label>Dia</label><select id="r-dia"></select></div>
@@ -598,7 +654,7 @@ body {
         <div class="fg"><label>kWh</label><input type="number" id="r-kwh" step="0.1" min="0" placeholder="0.0"></div>
         <div class="fg"><label>Preu total €</label><input type="number" id="r-preu" step="0.01" min="0" placeholder="0.00"></div>
       </div>
-      <button class="btnp" onclick="addRecarrega()">+ Afegir recàrrega</button>
+      <button class="btnp" id="rec-save-btn" onclick="addRecarrega()">+ Afegir recàrrega</button>
     </div>
 
     <div class="sec-div"><div class="sec-icon" style="background:#E3F0FC">📊</div><span class="sec-title">Resum per xarxa</span></div>
@@ -612,12 +668,16 @@ body {
     <div class="card"><div id="rec-list"><div class="empty"><div class="ei">⚡</div><p>Sense recàrregues registrades.</p></div></div></div>
 
     <div class="sec-div"><div class="sec-icon" style="background:#E8F5EE">🚗</div><span class="sec-title">Km diaris</span></div>
+    <div class="editing-banner" id="km-edit-banner">
+      <span>✏️ Editant km del dia — modifica i desa</span>
+      <button class="editing-cancel" onclick="cancelEditKm()">✕ Cancelar</button>
+    </div>
     <div class="card">
       <div class="fgrid mb12">
         <div class="fg"><label>Dia</label><select id="km-dia"></select></div>
         <div class="fg"><label>Km fets</label><input type="number" id="km-val" min="0" placeholder="0"></div>
       </div>
-      <button class="btnp btng" onclick="addKm()">+ Afegir km</button>
+      <button class="btnp btng" id="km-save-btn" onclick="addKm()">+ Afegir km</button>
     </div>
     <div id="km-total-wrap" style="display:none" class="km-total-card">
       <div><div class="km-total-lbl">Total km del viatge</div></div>
@@ -626,13 +686,9 @@ body {
     <div class="card"><div id="km-list"><div class="empty"><div class="ei">🚗</div><p>Sense km registrats.</p></div></div></div>
   </div>
 
-  <!-- ── LLACS ─────────────────────────────── -->
-  <div id="tab-llacs" class="tab">
-    <div class="page-head">
-      <div class="title">🏊 Llacs per banyar-se</div>
-      <div class="sub">Zones aptes per a la Leia 🐾 · Semàfor de gossos</div>
-    </div>
-    <div id="lake-cards"></div>
+  <!-- ── AVUI ──────────────────────────────── -->
+  <div id="tab-avui" class="tab">
+    <div id="avui-body"></div>
   </div>
 
   <!-- ── PRESSUPOST ────────────────────────── -->
@@ -663,9 +719,12 @@ body {
 
   <!-- ── MÉS ───────────────────────────────── -->
   <div id="tab-mes" class="tab">
-    <div class="page-head"><div class="title">☑️ Checklist & Notes</div></div>
+    <div class="page-head"><div class="title">Més</div></div>
 
-    <div class="sec-div"><div class="sec-icon" style="background:#E8F5EE">☑️</div><span class="sec-title">Checklist de sortida</span></div>
+    <div class="sec-div"><div class="sec-icon" style="background:#E0EDFC">🏊</div><span class="sec-title">Llacs i bany</span></div>
+    <div id="mes-lake-cards"></div>
+
+    <div class="sec-div" style="margin-top:24px"><div class="sec-icon" style="background:#E8F5EE">☑️</div><span class="sec-title">Checklist de sortida</span></div>
     <p class="t-small t-muted mb12">Es reinicia cada dia automàticament.</p>
     <div id="chk-items"></div>
     <button class="btn-reset" onclick="resetChecklist()">↺ Reiniciar checklist</button>
@@ -707,11 +766,11 @@ body {
 
 <!-- ── BOTTOM NAV ───────────────────────────────── -->
 <nav id="nav">
-  <button class="nb on" data-tab="itinerari"   onclick="showTab('itinerari')"><span class="ic">🗓</span>Itinerari</button>
-  <button class="nb"    data-tab="recarregues" onclick="showTab('recarregues')"><span class="ic">⚡</span>Recàrregues</button>
-  <button class="nb"    data-tab="llacs"       onclick="showTab('llacs')"><span class="ic">🏊</span>Llacs</button>
-  <button class="nb"    data-tab="pressupost"  onclick="showTab('pressupost')"><span class="ic">💰</span>Pressupost</button>
-  <button class="nb"    data-tab="mes"         onclick="showTab('mes')"><span class="ic">☑️</span>Més</button>
+  <button class="nb" data-tab="avui"        onclick="showTab('avui')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>Avui</button>
+  <button class="nb" data-tab="itinerari"   onclick="showTab('itinerari')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 3 20 10 16 17 20 21 16 21 4 17 8 10 4 3 6"/><line x1="10" y1="4" x2="10" y2="16"/><line x1="17" y1="8" x2="17" y2="20"/></svg></span>Viatge</button>
+  <button class="nb" data-tab="recarregues" onclick="showTab('recarregues')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>Cotxe</button>
+  <button class="nb" data-tab="pressupost"  onclick="showTab('pressupost')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg></span>Despeses</button>
+  <button class="nb" data-tab="mes"         onclick="showTab('mes')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></span>Més</button>
 </nav>
 
 <script>
@@ -901,10 +960,163 @@ function showTab(id){
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
   document.getElementById('tab-'+id).classList.add('on');
   document.querySelector(`[data-tab="${id}"]`).classList.add('on');
+  if(id==='avui')        renderAvui();
   if(id==='recarregues') renderRecarregues();
-  if(id==='llacs')       renderLakes();
   if(id==='pressupost')  renderBudget();
   if(id==='mes')         renderMes();
+}
+
+// ── AVUI ─────────────────────────────────────────
+const TRIP_START = new Date('2026-08-10');
+const TRIP_END   = new Date('2026-08-22');
+const HOME_LL    = [41.6833, 2.2167];
+
+// GPS coords per a cada dia (hotel destí)
+const DAY_COORDS = [
+  null,                    // placeholder idx 0
+  [45.7338, 4.9278],       // Dia 1 – Spark Lyon
+  [48.2180, 8.0730],       // Dia 2 – Schwörer
+  [48.2180, 8.0730],       // Dia 3 – Schwörer
+  [47.5691, 11.0953],      // Dia 4 – Ettal
+  [47.5691, 11.0953],      // Dia 5 – Ettal
+  [47.5691, 11.0953],      // Dia 6 – Ettal
+  [47.5797, 10.5302],      // Dia 7 – Kühbergalp
+  [47.5797, 10.5302],      // Dia 8 – Kühbergalp
+  [47.5797, 10.5302],      // Dia 9 – Kühbergalp
+  [46.7833, 4.8500],       // Dia 10 – ibis Chalon
+  [41.6833, 2.2167],       // Dia 11 – Casa
+];
+
+let leafletLoaded = false;
+function loadLeaflet(cb){
+  if(leafletLoaded){ cb(); return; }
+  const lnk = document.createElement('link');
+  lnk.rel='stylesheet'; lnk.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+  document.head.appendChild(lnk);
+  const s = document.createElement('script');
+  s.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  s.onload=()=>{ leafletLoaded=true; cb(); };
+  s.onerror=()=>cb(true);
+  document.head.appendChild(s);
+}
+
+let avuiMap = null;
+function renderAvui(){
+  const el = document.getElementById('avui-body');
+  const now = new Date();
+  now.setHours(0,0,0,0);
+  const tripStartDay = new Date(TRIP_START); tripStartDay.setHours(0,0,0,0);
+  const tripEndDay   = new Date(TRIP_END);   tripEndDay.setHours(0,0,0,0);
+
+  // Countdown if before trip
+  if(now < tripStartDay){
+    const days = Math.ceil((tripStartDay - now)/(1000*60*60*24));
+    el.innerHTML = `
+      <div class="avui-countdown">
+        <div style="font-size:.8rem;opacity:.7;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Sortida cap a Baviera</div>
+        <div class="avui-countdown-num">${days}</div>
+        <div class="avui-countdown-lbl">dies per a l'aventura</div>
+        <div style="margin-top:16px;font-size:.8rem;opacity:.7">10 d'agost · La Garriga → Bayern</div>
+      </div>
+      <div id="avui-map"></div>
+      <div class="avui-stat-row">
+        <div class="avui-stat"><div class="avui-stat-lbl">Durada</div><div class="avui-stat-val">11 dies</div><div class="avui-stat-sub">10–21 agost</div></div>
+        <div class="avui-stat"><div class="avui-stat-lbl">Km totals</div><div class="avui-stat-val">~2.800</div><div class="avui-stat-sub">anada i tornada</div></div>
+        <div class="avui-stat"><div class="avui-stat-lbl">Hotels</div><div class="avui-stat-val">5</div><div class="avui-stat-sub">4 destins</div></div>
+      </div>`;
+    renderOverviewMap();
+    return;
+  }
+
+  // After trip
+  if(now >= tripEndDay){
+    el.innerHTML = `<div class="avui-countdown" style="background:linear-gradient(135deg,#1B6535,#2E7D52)">
+      <div style="font-size:2rem;margin-bottom:8px">🏁</div>
+      <div style="font-size:1.4rem;font-weight:800">Viatge completat!</div>
+      <div style="opacity:.8;margin-top:8px;font-size:.9rem">10–21 d'agost de 2026</div>
+    </div>`;
+    return;
+  }
+
+  // During trip — find today's day
+  const td = DAYS.find(d => {
+    const f=new Date(d.from); f.setHours(0,0,0,0);
+    const t=new Date(d.to);   t.setHours(0,0,0,0);
+    return now >= f && now < t;
+  });
+  if(!td){ el.innerHTML='<div class="empty"><p>Dia no trobat</p></div>'; return; }
+
+  const n = td.n;
+  const startLL = n===1 ? HOME_LL : DAY_COORDS[n-1];
+  const endLL   = DAY_COORDS[n];
+  const isHome  = n===11;
+
+  el.innerHTML = `
+    <div class="avui-hero">
+      <div class="avui-hero-label">Dia ${n} de 11 · ${fmtDate(td.from)}</div>
+      <div class="avui-hero-dest">${td.flag} ${td.zone}</div>
+      <div class="avui-hero-sub">📍 ${td.hotel?.name||'—'} &nbsp;·&nbsp; ${td.drive}</div>
+    </div>
+    <div id="avui-map"></div>
+    <div class="avui-stat-row">
+      <div class="avui-stat">
+        <div class="avui-stat-lbl">Conducció</div>
+        <div class="avui-stat-val">${td.drive}</div>
+        <div class="avui-stat-sub">${isHome?'tornada a casa':'ruta del dia'}</div>
+      </div>
+      <div class="avui-stat">
+        <div class="avui-stat-lbl">Allotjament</div>
+        <div class="avui-stat-val" style="font-size:.95rem;line-height:1.2">${td.hotel?.name||'—'}</div>
+        <div class="avui-stat-sub">${td.hotel?.dog||''}</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:4px">
+      ${td.hotel?.addr?`<a class="h-btn h-btn-apple" href="maps://maps.apple.com/?q=${encodeURIComponent(td.hotel.addr)}" style="flex:1;justify-content:center">${ICON_APPLE} Apple Maps</a>`:''}
+      ${td.hotel?.addr?`<a class="h-btn h-btn-google" href="https://maps.google.com/?q=${encodeURIComponent(td.hotel.addr)}" style="flex:1;justify-content:center">${ICON_GOOGLE} Google Maps</a>`:''}
+    </div>`;
+
+  loadLeaflet(err => {
+    if(err || !window.L){ showMapOffline(); return; }
+    if(avuiMap){ avuiMap.remove(); avuiMap=null; }
+    const mapEl = document.getElementById('avui-map');
+    if(!mapEl) return;
+    const midLat = (startLL[0]+endLL[0])/2;
+    const midLng = (startLL[1]+endLL[1])/2;
+    avuiMap = L.map(mapEl, {zoomControl:true, scrollWheelZoom:false});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+      attribution:'© OpenStreetMap',maxZoom:18
+    }).addTo(avuiMap);
+    const mkStart = L.circleMarker(startLL, {radius:9, color:'#C85200', fillColor:'#E8720A', fillOpacity:1, weight:2});
+    const mkEnd   = L.circleMarker(endLL,   {radius:9, color:'#1B6535', fillColor:'#2E9E5C', fillOpacity:1, weight:2});
+    mkStart.addTo(avuiMap).bindPopup(n===1?'La Garriga':DAYS[n-2].zone);
+    mkEnd.addTo(avuiMap).bindPopup(td.zone);
+    L.polyline([startLL, endLL], {color:'#C85200', weight:3, dashArray:'8,5'}).addTo(avuiMap);
+    avuiMap.fitBounds([startLL, endLL], {padding:[30,30]});
+  });
+}
+
+function renderOverviewMap(){
+  loadLeaflet(err => {
+    if(err || !window.L){ showMapOffline(); return; }
+    if(avuiMap){ avuiMap.remove(); avuiMap=null; }
+    const mapEl = document.getElementById('avui-map');
+    if(!mapEl) return;
+    avuiMap = L.map(mapEl, {zoomControl:true, scrollWheelZoom:false});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+      attribution:'© OpenStreetMap',maxZoom:18
+    }).addTo(avuiMap);
+    const pts = [HOME_LL,...DAY_COORDS.slice(1)];
+    L.polyline(pts, {color:'#C85200', weight:3, dashArray:'8,5'}).addTo(avuiMap);
+    pts.forEach((p,i)=>{
+      L.circleMarker(p,{radius:6,color:'#C85200',fillColor:i===0||i===pts.length-1?'#C85200':'#F5A040',fillOpacity:1,weight:2}).addTo(avuiMap);
+    });
+    avuiMap.fitBounds(pts, {padding:[20,20]});
+  });
+}
+
+function showMapOffline(){
+  const el = document.getElementById('avui-map');
+  if(el) el.innerHTML='<div class="map-offline"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="3 6 3 20 10 16 17 20 21 16 21 4 17 8 10 4 3 6"/></svg><span>Mapa no disponible offline</span></div>';
 }
 
 // ── ITINERARI ────────────────────────────────────
@@ -1069,18 +1281,46 @@ function fillSelects(){
   ['r-dia','km-dia','notes-dia'].forEach(id=>{ const el=document.getElementById(id); if(el)el.innerHTML=opts; });
 }
 
+let editingRecId = null;
+
 function addRecarrega(){
   const dia=+document.getElementById('r-dia').value;
   const xarxa=document.getElementById('r-xarxa').value;
   const lloc=document.getElementById('r-lloc').value.trim();
   const kwh=parseFloat(document.getElementById('r-kwh').value)||0;
   const preu=parseFloat(document.getElementById('r-preu').value)||0;
-  recarregues.push({id:Date.now(),dia,data:DAYS[dia-1].from,lloc,xarxa,kwh,preu,eurkwh:kwh?preu/kwh:0});
+  if(editingRecId !== null){
+    const idx=recarregues.findIndex(r=>r.id===editingRecId);
+    if(idx>=0) recarregues[idx]={...recarregues[idx],dia,data:DAYS[dia-1].from,lloc,xarxa,kwh,preu,eurkwh:kwh?preu/kwh:0};
+    cancelEditRec();
+  } else {
+    recarregues.push({id:Date.now(),dia,data:DAYS[dia-1].from,lloc,xarxa,kwh,preu,eurkwh:kwh?preu/kwh:0});
+  }
   ss('rec',recarregues);
   document.getElementById('r-lloc').value='';
   document.getElementById('r-kwh').value='';
   document.getElementById('r-preu').value='';
   renderRecarregues();
+}
+
+function editRec(id){
+  const r=recarregues.find(x=>x.id===id); if(!r)return;
+  editingRecId=id;
+  document.getElementById('r-dia').value=r.dia;
+  document.getElementById('r-xarxa').value=r.xarxa;
+  document.getElementById('r-lloc').value=r.lloc||'';
+  document.getElementById('r-kwh').value=r.kwh||'';
+  document.getElementById('r-preu').value=r.preu||'';
+  document.getElementById('rec-edit-banner').classList.add('show');
+  document.getElementById('rec-save-btn').textContent='💾 Desar canvis';
+  document.getElementById('r-lloc').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function cancelEditRec(){
+  editingRecId=null;
+  document.getElementById('rec-edit-banner').classList.remove('show');
+  document.getElementById('rec-save-btn').textContent='+ Afegir recàrrega';
+  ['r-lloc','r-kwh','r-preu'].forEach(id=>{ document.getElementById(id).value=''; });
 }
 
 function delRec(id){ recarregues=recarregues.filter(r=>r.id!==id); ss('rec',recarregues); renderRecarregues(); }
@@ -1106,24 +1346,53 @@ function renderRecarregues(){
         <div class="lgmeta">Dia ${r.dia} · ${r.kwh.toFixed(1)} kWh · ${r.eurkwh.toFixed(3)} €/kWh</div>
       </div>
       <span class="logamt">${fmtEur(r.preu)}</span>
-      <button class="logdel" onclick="delRec(${r.id})">✕</button>
+      <button class="logedit" title="Editar" onclick="editRec(${r.id})"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+      <button class="logdel" title="Eliminar" onclick="delRec(${r.id})"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>
     </div>`).join('');
   const bRec=document.getElementById('b-rec');
   if(bRec) bRec.textContent=fmtEur(ap);
 }
 
 // ── KM ───────────────────────────────────────────
+let editingKmDia = null;
+
 function addKm(){
   const dia=+document.getElementById('km-dia').value;
   const val=+document.getElementById('km-val').value;
   if(!val)return;
-  const ex=kmLog.findIndex(k=>k.dia===dia);
-  if(ex>=0)kmLog[ex].km=val; else kmLog.push({dia,km:val,data:DAYS[dia-1].from});
+  if(editingKmDia !== null){
+    const idx=kmLog.findIndex(k=>k.dia===editingKmDia);
+    if(idx>=0) kmLog[idx]={...kmLog[idx],km:val};
+    cancelEditKm();
+  } else {
+    const ex=kmLog.findIndex(k=>k.dia===dia);
+    if(ex>=0)kmLog[ex].km=val; else kmLog.push({dia,km:val,data:DAYS[dia-1].from});
+  }
   kmLog.sort((a,b)=>a.dia-b.dia);
   ss('km',kmLog); document.getElementById('km-val').value='';
   renderKm();
 }
+
+function editKm(dia){
+  const k=kmLog.find(x=>x.dia===dia); if(!k)return;
+  editingKmDia=dia;
+  document.getElementById('km-dia').value=dia;
+  document.getElementById('km-val').value=k.km;
+  document.getElementById('km-edit-banner').classList.add('show');
+  document.getElementById('km-save-btn').textContent='💾 Desar canvis';
+  document.getElementById('km-val').scrollIntoView({behavior:'smooth',block:'center'});
+  document.getElementById('km-val').focus();
+}
+
+function cancelEditKm(){
+  editingKmDia=null;
+  document.getElementById('km-edit-banner').classList.remove('show');
+  document.getElementById('km-save-btn').textContent='+ Afegir km';
+  document.getElementById('km-val').value='';
+}
+
 function delKm(dia){ kmLog=kmLog.filter(k=>k.dia!==dia); ss('km',kmLog); renderKm(); }
+
 function renderKm(){
   const el=document.getElementById('km-list'), tw=document.getElementById('km-total-wrap');
   if(!kmLog.length){ el.innerHTML=`<div class="empty"><div class="ei">🚗</div><p>Sense km registrats.</p></div>`; tw.style.display='none'; return; }
@@ -1132,7 +1401,8 @@ function renderKm(){
   el.innerHTML=kmLog.map(k=>`<div class="logitem">
     <div class="loginfo"><div class="lgtit">Dia ${k.dia} — ${DAYS[k.dia-1].zone}</div><div class="lgmeta">${k.data}</div></div>
     <span class="logamt">${k.km} km</span>
-    <button class="logdel" onclick="delKm(${k.dia})">✕</button>
+    <button class="logedit" title="Editar" onclick="editKm(${k.dia})"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+    <button class="logdel" title="Eliminar" onclick="delKm(${k.dia})"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>
   </div>`).join('');
 }
 
@@ -1196,7 +1466,27 @@ function renderChecklist(){
 // ── NOTES ────────────────────────────────────────
 function loadNote(){ const dia=document.getElementById('notes-dia').value; document.getElementById('notes-txt').value=notes[`day_${dia}`]||''; }
 function saveNote(){ const dia=document.getElementById('notes-dia').value; notes[`day_${dia}`]=document.getElementById('notes-txt').value; ss('notes',notes); }
-function renderMes(){ renderChecklist(); loadNote(); }
+function renderMes(){
+  renderChecklist(); loadNote();
+  // render llacs inside Més if container exists
+  const lc=document.getElementById('mes-lake-cards');
+  if(lc) lc.innerHTML=LAKES.map(l=>{
+    const cls=l.dogStatus==='ok'?'ok':l.dogStatus==='warn'?'warn':'no';
+    return `<div class="lkcard">
+      <div class="lkcard-head">
+        <div class="lk-dog-circle ${cls}">${l.dog}</div>
+        <div><div class="lkcard-name">${l.name}</div><div class="lkcard-zone">${l.zone}</div></div>
+        <div style="margin-left:auto"><div class="chip chip-${cls}">${l.dogStatus==='ok'?'✅ Gossos OK':l.dogStatus==='warn'?'⚠️ Consultar':'❌ No admesos'}</div></div>
+      </div>
+      <div class="lkcard-body"><div class="lk-note">${l.note}</div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <a class="h-btn h-btn-apple" href="maps://maps.apple.com/?q=${encodeURIComponent(l.name)}">${ICON_APPLE}</a>
+          <a class="h-btn h-btn-google" href="https://maps.google.com/?q=${encodeURIComponent(l.name)}">${ICON_GOOGLE}</a>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
 
 // ── EXPORT ───────────────────────────────────────
 function exportJSON(){
@@ -1212,6 +1502,7 @@ function init(){
   renderItinerari();
   renderKm();
   renderRecarregues();
+  showTab('avui');
   if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
 }
 init();

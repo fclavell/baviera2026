@@ -13,31 +13,32 @@
 <style>
 /* ── DESIGN TOKENS ──────────────────────────────── */
 :root {
-  --c-bg:       #F7F2EC;
+  --c-bg:       #F2EDE6;
   --c-surface:  #FFFFFF;
   --c-primary:  #C85200;
   --c-primary2: #E8720A;
   --c-dark:     #1A0D00;
-  --c-mid:      #5C3D26;
-  --c-muted:    #9C7860;
-  --c-border:   #E4D0B8;
-  --c-beige:    #F0E8DC;
-  --c-ok:       #1E6E38;
-  --c-ok-bg:    #E8F5EE;
-  --c-warn:     #B05C00;
+  --c-mid:      #4A3020;
+  --c-muted:    #8A6E56;
+  --c-border:   #E0CDB8;
+  --c-beige:    #EDE4D8;
+  --c-ok:       #1B6535;
+  --c-ok-bg:    #E4F5EB;
+  --c-warn:     #995000;
   --c-warn-bg:  #FFF3E0;
   --c-err:      #B01C1C;
   --c-err-bg:   #FDE8E8;
-  --c-blue:     #1565C0;
-  --c-blue-bg:  #E3F0FC;
-  --c-nav:      #1A0D00;
-  --c-nav-t:    #C8A070;
-  --c-nav-a:    #F5A04A;
-  --sh-card:    0 2px 14px rgba(26,13,0,.09);
-  --sh-btn:     0 2px 8px rgba(0,0,0,.18);
-  --r-card:     16px;
-  --r-btn:      12px;
-  --r-pill:     24px;
+  --c-blue:     #1255A8;
+  --c-blue-bg:  #E0EDFC;
+  --c-nav:      #12090A;
+  --c-nav-t:    #B09070;
+  --c-nav-a:    #F5A040;
+  --sh-card:    0 2px 16px rgba(26,13,0,.10);
+  --sh-lift:    0 6px 24px rgba(26,13,0,.14);
+  --sh-btn:     0 3px 10px rgba(0,0,0,.22);
+  --r-card:     18px;
+  --r-btn:      13px;
+  --r-pill:     99px;
   --nt: env(safe-area-inset-top, 0px);
   --nb: env(safe-area-inset-bottom, 0px);
 }
@@ -52,15 +53,16 @@ body {
   min-height: 100dvh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  font-size: 16px;
 }
 
 /* ── TYPOGRAPHY ─────────────────────────────────── */
-.t-hero    { font-size: 1.4rem; font-weight: 800; line-height: 1.2; }
-.t-title   { font-size: 1.15rem; font-weight: 700; }
-.t-section { font-size: 1rem; font-weight: 700; }
-.t-body    { font-size: .92rem; line-height: 1.55; }
-.t-small   { font-size: .78rem; line-height: 1.4; }
-.t-label   { font-size: .66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.t-hero    { font-size: 1.55rem; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
+.t-title   { font-size: 1.2rem;  font-weight: 700; }
+.t-section { font-size: 1.05rem; font-weight: 700; }
+.t-body    { font-size: 1rem;    line-height: 1.6; }
+.t-small   { font-size: .875rem; line-height: 1.45; }
+.t-label   { font-size: .7rem;   font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
 .t-muted   { color: var(--c-muted); }
 .t-mid     { color: var(--c-mid); }
 .t-primary { color: var(--c-primary); }
@@ -70,79 +72,75 @@ body {
 /* ── APP HEADER ─────────────────────────────────── */
 #hdr {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: linear-gradient(135deg, #C85200 0%, #E8720A 100%);
+  background: linear-gradient(135deg, #A83E00 0%, #C85200 40%, #E8720A 100%);
   color: white;
-  padding: calc(var(--nt) + 11px) 16px 11px;
+  padding: calc(var(--nt) + 13px) 18px 13px;
   display: flex; align-items: center; gap: 10px;
-  box-shadow: 0 2px 16px rgba(200,82,0,.4);
+  box-shadow: 0 2px 20px rgba(168,62,0,.45);
 }
-#hdr h1 { font-size: 1.05rem; font-weight: 700; flex: 1; letter-spacing: -.01em; }
-#hdr-sub { font-size: .72rem; opacity: .85; white-space: nowrap; }
+#hdr h1 { font-size: 1.15rem; font-weight: 800; flex: 1; letter-spacing: -.02em; }
+#hdr-sub { font-size: .78rem; opacity: .9; white-space: nowrap; font-weight: 500; }
 #back-btn {
-  display: none; background: rgba(255,255,255,.2); border: none; color: white;
-  font-size: 1.1rem; font-weight: 700; cursor: pointer; padding: 5px 9px;
-  border-radius: 8px; line-height: 1;
+  display: none; background: rgba(255,255,255,.22); border: none; color: white;
+  font-size: 1rem; font-weight: 700; cursor: pointer; padding: 6px 11px;
+  border-radius: 9px; line-height: 1; letter-spacing: -.01em;
 }
 
 /* ── MAIN ───────────────────────────────────────── */
 #main {
-  padding-top: calc(var(--nt) + 52px);
-  padding-bottom: calc(64px + var(--nb) + 8px);
+  padding-top: calc(var(--nt) + 56px);
+  padding-bottom: calc(72px + var(--nb) + 8px);
   min-height: 100dvh;
 }
-.tab { display: none; padding: 16px 14px; }
+.tab { display: none; padding: 18px 15px; }
 .tab.on { display: block; }
-.page-head { margin-bottom: 18px; }
-.page-head .title { font-size: 1.4rem; font-weight: 800; }
-.page-head .sub { font-size: .82rem; color: var(--c-muted); margin-top: 2px; }
+.page-head { margin-bottom: 20px; }
+.page-head .title { font-size: 1.55rem; font-weight: 800; letter-spacing: -.02em; }
+.page-head .sub { font-size: .875rem; color: var(--c-muted); margin-top: 3px; }
 
 /* ── BOTTOM NAV ─────────────────────────────────── */
 #nav {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
   background: var(--c-nav);
   display: flex;
-  height: calc(64px + var(--nb));
+  height: calc(72px + var(--nb));
   padding-bottom: var(--nb);
-  box-shadow: 0 -1px 0 rgba(255,255,255,.06), 0 -4px 20px rgba(0,0,0,.35);
+  box-shadow: 0 -1px 0 rgba(255,255,255,.05), 0 -6px 24px rgba(0,0,0,.4);
 }
 .nb {
   flex: 1; background: none; border: none; color: var(--c-nav-t);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 3px; cursor: pointer;
-  font-size: .58rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
+  gap: 4px; cursor: pointer;
+  font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
   padding: 6px 2px 2px; transition: color .15s;
 }
-.nb .ic { font-size: 1.3rem; line-height: 1; }
+.nb .ic { width: 26px; height: 26px; display: block; }
+.nb .ic svg { width: 26px; height: 26px; }
 .nb.on { color: var(--c-nav-a); }
-.nb.on .ic { filter: drop-shadow(0 0 4px rgba(245,160,74,.5)); }
+.nb.on .ic { filter: drop-shadow(0 0 6px rgba(245,160,64,.55)); }
 
-/* ── CARDS ──────────────────────────────────────── */
-.card {
-  background: var(--c-surface);
+/* ── ROUTE HERO (itinerari tab) ─────────────────── */
+.route-hero {
   border-radius: var(--r-card);
+  overflow: hidden;
+  margin-bottom: 18px;
+  box-shadow: var(--sh-lift);
+  position: relative;
+}
+.route-hero svg { display: block; width: 100%; }
+.route-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(20,8,0,.75) 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
   padding: 16px 18px;
-  margin-bottom: 12px;
-  box-shadow: var(--sh-card);
-  border: 1px solid rgba(228,208,184,.5);
+  color: white;
 }
-.card-tight { padding: 12px 16px; }
-
-/* ── SECTION DIVIDER ─────────────────────────────── */
-.sec-div {
-  display: flex; align-items: center; gap: 8px;
-  margin: 20px 0 10px; color: var(--c-mid);
-}
-.sec-div .sec-icon {
-  width: 28px; height: 28px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: .9rem; flex-shrink: 0;
-}
-.sec-div .sec-title { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
-.sec-div::after { content: ''; flex: 1; height: 1px; background: var(--c-border); }
+.route-hero-title { font-size: 1.25rem; font-weight: 800; letter-spacing: -.02em; }
+.route-hero-sub { font-size: .82rem; opacity: .85; margin-top: 2px; }
 
 /* ── PROGRESS BAR ───────────────────────────────── */
 .pbar {
-  background: var(--c-border); border-radius: 6px; height: 5px;
+  background: var(--c-border); border-radius: 6px; height: 6px;
   margin-bottom: 20px; overflow: hidden;
 }
 .pfill {
@@ -151,99 +149,123 @@ body {
   border-radius: 6px; transition: width .6s cubic-bezier(.4,0,.2,1);
 }
 
+/* ── CARDS ──────────────────────────────────────── */
+.card {
+  background: var(--c-surface);
+  border-radius: var(--r-card);
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  box-shadow: var(--sh-card);
+  border: 1px solid rgba(224,205,184,.6);
+}
+.card-tight { padding: 13px 16px; }
+
+/* ── SECTION DIVIDER ─────────────────────────────── */
+.sec-div {
+  display: flex; align-items: center; gap: 9px;
+  margin: 22px 0 11px; color: var(--c-mid);
+}
+.sec-div .sec-icon {
+  width: 30px; height: 30px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .95rem; flex-shrink: 0;
+}
+.sec-div .sec-title { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+.sec-div::after { content: ''; flex: 1; height: 1px; background: var(--c-border); }
+
 /* ── DAY CARDS ──────────────────────────────────── */
 .di {
   background: var(--c-surface);
   border-radius: var(--r-card);
-  margin-bottom: 10px;
-  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 11px;
+  display: flex; align-items: stretch; gap: 0;
   box-shadow: var(--sh-card);
-  border: 1px solid rgba(228,208,184,.5);
+  border: 1px solid rgba(224,205,184,.6);
   cursor: pointer; overflow: hidden;
   transition: transform .12s, box-shadow .12s;
   -webkit-user-select: none;
-  position: relative;
 }
-.di:active { transform: scale(.98); box-shadow: 0 1px 6px rgba(26,13,0,.08); }
+.di:active { transform: scale(.985); box-shadow: 0 1px 6px rgba(26,13,0,.08); }
 .di .di-stripe {
-  width: 5px; height: 100%; min-height: 72px; flex-shrink: 0;
+  width: 6px; flex-shrink: 0;
   background: var(--c-border);
 }
 .di.today .di-stripe { background: linear-gradient(180deg, var(--c-primary) 0%, var(--c-primary2) 100%); }
-.di.past .di-stripe { background: var(--c-border); }
-.di.future .di-stripe { background: linear-gradient(180deg, #2D5B8E 0%, #3A7ACC 100%); }
-.di.home .di-stripe { background: linear-gradient(180deg, #1E6E38 0%, #2E9E50 100%); }
+.di.past  .di-stripe { background: #C8B8A0; }
+.di.future .di-stripe { background: linear-gradient(180deg, #1B5EA8 0%, #3080D0 100%); }
+.di.home  .di-stripe { background: linear-gradient(180deg, #1B6535 0%, #2E9A50 100%); }
+.di-inner { display: flex; align-items: center; gap: 14px; flex: 1; padding: 15px 0 15px 14px; }
 .di-num {
-  min-width: 38px; height: 38px; border-radius: 12px;
+  min-width: 42px; height: 42px; border-radius: 13px;
   background: var(--c-beige); color: var(--c-mid);
   display: flex; align-items: center; justify-content: center;
-  font-size: .9rem; font-weight: 800; flex-shrink: 0;
+  font-size: .95rem; font-weight: 800; flex-shrink: 0;
 }
-.di.today .di-num { background: var(--c-primary); color: white; box-shadow: 0 2px 8px rgba(200,82,0,.4); }
-.di-info { flex: 1; min-width: 0; padding: 14px 0; }
-.di-date { font-size: .7rem; color: var(--c-muted); margin-bottom: 1px; }
-.di-zone { font-size: 1.02rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.di-hotel { font-size: .76rem; color: var(--c-muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.di-right { flex-shrink: 0; text-align: right; padding: 14px 16px 14px 0; }
-.di-drive { font-size: .76rem; color: var(--c-muted); }
-.di-arrow { color: var(--c-border); font-size: 1rem; margin-top: 2px; }
-.di.past { opacity: .55; }
-.di.today { border-color: rgba(200,82,0,.25); }
+.di.today .di-num { background: var(--c-primary); color: white; box-shadow: 0 3px 10px rgba(200,82,0,.4); }
+.di-info { flex: 1; min-width: 0; }
+.di-date { font-size: .75rem; color: var(--c-muted); margin-bottom: 2px; font-weight: 500; }
+.di-zone { font-size: 1.1rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -.01em; }
+.di-hotel { font-size: .82rem; color: var(--c-muted); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.di-right { flex-shrink: 0; text-align: right; padding: 15px 16px 15px 0; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 4px; }
+.di-drive { font-size: .78rem; color: var(--c-muted); font-weight: 500; }
+.di-arrow { color: var(--c-border); font-size: 1.1rem; }
+.di.past { opacity: .52; }
+.di.today { border-color: rgba(200,82,0,.22); box-shadow: 0 3px 18px rgba(200,82,0,.12); }
 
 /* ── DAY DETAIL ─────────────────────────────────── */
 #det {
   position: fixed; inset: 0; z-index: 200;
   background: var(--c-bg); overflow-y: auto;
   transform: translateX(100%);
-  transition: transform .28s cubic-bezier(.4,0,.2,1);
+  transition: transform .3s cubic-bezier(.35,0,.2,1);
 }
 #det.open { transform: translateX(0); }
 #det-hdr {
-  background: linear-gradient(135deg, #C85200 0%, #E8720A 60%, #F5A04A 100%);
+  background: linear-gradient(135deg, #A83E00 0%, #C85200 40%, #E8720A 80%, #F5A040 100%);
   color: white;
-  padding: calc(var(--nt) + 12px) 16px 22px;
+  padding: calc(var(--nt) + 14px) 16px 24px;
 }
-#det-hdr-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+#det-hdr-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 #det-back {
-  background: rgba(255,255,255,.2); border: none; color: white;
-  font-size: 1rem; font-weight: 700; cursor: pointer; padding: 6px 10px;
-  border-radius: 9px; line-height: 1; flex-shrink: 0;
+  background: rgba(255,255,255,.22); border: none; color: white;
+  font-size: .95rem; font-weight: 700; cursor: pointer; padding: 7px 12px;
+  border-radius: 10px; line-height: 1; flex-shrink: 0;
 }
 #det-meta { flex: 1; }
-#det-meta .det-day-lbl { font-size: .75rem; opacity: .85; font-weight: 600; }
-#det-meta .det-zone { font-size: 1.3rem; font-weight: 800; letter-spacing: -.02em; }
+#det-meta .det-day-lbl { font-size: .8rem; opacity: .88; font-weight: 600; }
+#det-meta .det-zone { font-size: 1.45rem; font-weight: 800; letter-spacing: -.025em; }
 #det-drive-chip {
-  background: rgba(255,255,255,.25); border-radius: 20px;
-  padding: 5px 10px; font-size: .76rem; font-weight: 600;
+  background: rgba(255,255,255,.28); border-radius: var(--r-pill);
+  padding: 6px 12px; font-size: .8rem; font-weight: 700;
   flex-shrink: 0; white-space: nowrap;
 }
 .det-hotel-mini {
-  background: rgba(255,255,255,.15); border-radius: 12px; padding: 10px 14px;
-  display: flex; align-items: center; gap: 10px; backdrop-filter: blur(4px);
+  background: rgba(255,255,255,.17); border-radius: 14px; padding: 11px 15px;
+  display: flex; align-items: center; gap: 11px; backdrop-filter: blur(6px);
 }
-.det-hotel-mini .dh-icon { font-size: 1.2rem; }
-.det-hotel-mini .dh-name { font-size: .88rem; font-weight: 600; }
-.det-hotel-mini .dh-price { font-size: .78rem; opacity: .85; margin-top: 1px; }
-#det-body { padding: 16px 14px; padding-bottom: calc(var(--nb) + 40px); }
+.det-hotel-mini .dh-icon { font-size: 1.3rem; }
+.det-hotel-mini .dh-name { font-size: .95rem; font-weight: 700; }
+.det-hotel-mini .dh-price { font-size: .8rem; opacity: .85; margin-top: 1px; }
+#det-body { padding: 18px 15px; padding-bottom: calc(var(--nb) + 44px); }
 
 /* ── NAV BRAND BUTTONS ──────────────────────────── */
-.navbtns { display: flex; gap: 8px; margin-bottom: 4px; }
+.navbtns { display: flex; gap: 9px; margin-bottom: 4px; }
 .navbtn {
-  flex: 1; padding: 11px 6px 9px; border-radius: var(--r-btn); border: none;
-  cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px;
+  flex: 1; padding: 13px 6px 11px; border-radius: var(--r-btn); border: none;
+  cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px;
   text-decoration: none; color: white; box-shadow: var(--sh-btn);
-  font-size: .68rem; font-weight: 700; text-align: center; letter-spacing: .02em;
+  font-size: .72rem; font-weight: 700; text-align: center; letter-spacing: .02em;
   -webkit-user-select: none;
 }
-.navbtn img, .navbtn svg { width: 22px; height: 22px; display: block; }
-.nb-apple { background: #1C1C1E; }
-.nb-google { background: white; color: #444; border: 1.5px solid #e0e0e0; }
-.nb-abrp { background: #00B140; }
+.navbtn svg { width: 24px; height: 24px; display: block; }
+.nb-apple  { background: #1C1C1E; }
+.nb-google { background: white; color: #333; border: 1.5px solid #e0e0e0; }
+.nb-abrp   { background: #00B140; }
 
 /* ── BADGES / CHIPS ─────────────────────────────── */
-.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
 .chip {
-  font-size: .71rem; font-weight: 600; padding: 4px 10px;
+  font-size: .75rem; font-weight: 600; padding: 5px 12px;
   border-radius: var(--r-pill); border: 1.5px solid;
   white-space: nowrap;
 }
@@ -253,23 +275,23 @@ body {
 .chip-n    { color: var(--c-muted);border-color: var(--c-border);background: var(--c-beige); }
 
 /* ── HOTEL CARD ─────────────────────────────────── */
-.h-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 3px; }
-.h-addr { font-size: .82rem; color: var(--c-muted); margin-bottom: 12px; display: flex; gap: 5px; align-items: flex-start; }
-.h-meta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
-.h-meta-item .lbl { font-size: .65rem; font-weight: 700; color: var(--c-muted); text-transform: uppercase; letter-spacing: .05em; display: block; margin-bottom: 1px; }
-.h-meta-item .val { font-size: .9rem; font-weight: 600; }
-.h-edit-block { margin-bottom: 14px; }
-.h-edit-block .lbl { font-size: .65rem; font-weight: 700; color: var(--c-muted); text-transform: uppercase; letter-spacing: .05em; display: block; margin-bottom: 3px; }
+.h-name { font-size: 1.12rem; font-weight: 800; margin-bottom: 4px; letter-spacing: -.01em; }
+.h-addr { font-size: .875rem; color: var(--c-muted); margin-bottom: 14px; display: flex; gap: 5px; align-items: flex-start; }
+.h-meta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 16px; }
+.h-meta-item .lbl { font-size: .68rem; font-weight: 700; color: var(--c-muted); text-transform: uppercase; letter-spacing: .06em; display: block; margin-bottom: 2px; }
+.h-meta-item .val { font-size: .97rem; font-weight: 700; }
+.h-edit-block { margin-bottom: 15px; }
+.h-edit-block .lbl { font-size: .68rem; font-weight: 700; color: var(--c-muted); text-transform: uppercase; letter-spacing: .06em; display: block; margin-bottom: 4px; }
 .h-edit-input {
   width: 100%; border: none; border-bottom: 1.5px dashed var(--c-border);
-  background: transparent; font-family: inherit; font-size: .9rem; color: var(--c-dark);
-  padding: 4px 2px; outline: none; display: block;
+  background: transparent; font-family: inherit; font-size: .97rem; color: var(--c-dark);
+  padding: 5px 2px; outline: none; display: block;
 }
 .h-edit-input:focus { border-bottom-color: var(--c-primary); }
-.h-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.h-btns { display: flex; gap: 9px; flex-wrap: wrap; }
 .h-btn {
-  flex: 1; min-width: 130px; padding: 11px 10px; border-radius: var(--r-btn);
-  border: 2px solid; font-size: .8rem; font-weight: 700; cursor: pointer;
+  flex: 1; min-width: 130px; padding: 13px 10px; border-radius: var(--r-btn);
+  border: 2px solid; font-size: .85rem; font-weight: 700; cursor: pointer;
   text-align: center; text-decoration: none; display: flex;
   align-items: center; justify-content: center; gap: 6px;
 }
@@ -278,189 +300,241 @@ body {
 
 /* ── LAKE CARD (DAY DETAIL) ─────────────────────── */
 .lake-day-card {
-  background: linear-gradient(135deg, #1A4E7E 0%, #1565C0 50%, #1976D2 100%);
-  border-radius: var(--r-card); padding: 16px; margin-bottom: 12px; color: white;
+  background: linear-gradient(135deg, #0D3B6E 0%, #1565C0 55%, #1878D4 100%);
+  border-radius: var(--r-card); padding: 18px; margin-bottom: 12px; color: white;
+  box-shadow: var(--sh-lift);
 }
-.ldc-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
-.ldc-name { font-size: 1.05rem; font-weight: 700; }
-.ldc-zone { font-size: .76rem; opacity: .8; margin-top: 1px; }
-.ldc-temp { font-size: 1.1rem; font-weight: 800; background: rgba(255,255,255,.2); padding: 5px 10px; border-radius: 20px; }
-.ldc-dog { font-size: .82rem; background: rgba(255,255,255,.2); border-radius: 8px; padding: 5px 10px; margin-bottom: 10px; }
-.ldc-txt { font-size: .82rem; opacity: .9; line-height: 1.55; margin-bottom: 12px; }
-.ldc-btns { display: flex; gap: 8px; }
+.ldc-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+.ldc-name { font-size: 1.15rem; font-weight: 800; letter-spacing: -.01em; }
+.ldc-zone { font-size: .8rem; opacity: .8; margin-top: 2px; }
+.ldc-temp { font-size: 1.1rem; font-weight: 800; background: rgba(255,255,255,.22); padding: 6px 12px; border-radius: var(--r-pill); white-space: nowrap; }
+.ldc-dog { font-size: .875rem; background: rgba(255,255,255,.18); border-radius: 10px; padding: 7px 12px; margin-bottom: 12px; }
+.ldc-txt { font-size: .875rem; opacity: .92; line-height: 1.6; margin-bottom: 14px; }
+.ldc-btns { display: flex; gap: 9px; }
 .ldc-btn {
-  flex: 1; padding: 9px; border-radius: 9px; border: 1.5px solid rgba(255,255,255,.4);
-  font-size: .72rem; font-weight: 700; text-align: center; text-decoration: none;
+  flex: 1; padding: 11px; border-radius: 11px; border: 1.5px solid rgba(255,255,255,.38);
+  font-size: .78rem; font-weight: 700; text-align: center; text-decoration: none;
   color: white; display: block; background: rgba(255,255,255,.15);
 }
 
 /* ── ACTIVITY / LEIA LISTS ──────────────────────── */
 .alist { list-style: none; }
 .alist li {
-  padding: 8px 0; border-bottom: 1px solid var(--c-border);
-  font-size: .9rem; display: flex; gap: 10px; align-items: flex-start; line-height: 1.5;
+  padding: 9px 0; border-bottom: 1px solid var(--c-border);
+  font-size: .97rem; display: flex; gap: 11px; align-items: flex-start; line-height: 1.55;
 }
 .alist li:last-child { border-bottom: none; }
-.alist li::before { content: '•'; color: var(--c-primary); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.alist li::before { content: '•'; color: var(--c-primary); font-weight: 900; flex-shrink: 0; margin-top: 2px; }
 .leia-list li { color: var(--c-mid); }
-.leia-list li::before { content: '🐾'; font-size: .78rem; margin-top: 2px; }
-.food-list li::before { content: '🍽'; font-size: .78rem; margin-top: 2px; }
+.leia-list li::before { content: '🐾'; font-size: .82rem; margin-top: 3px; }
+.food-list li::before { content: '🍽'; font-size: .82rem; margin-top: 3px; }
 
 /* ── NOTES ──────────────────────────────────────── */
 .ntarea {
-  width: 100%; min-height: 100px; padding: 12px;
-  border: 1.5px solid var(--c-border); border-radius: 12px;
-  font-family: inherit; font-size: .9rem; resize: vertical;
-  background: var(--c-surface); color: var(--c-dark); outline: none; line-height: 1.5;
+  width: 100%; min-height: 110px; padding: 14px;
+  border: 1.5px solid var(--c-border); border-radius: 13px;
+  font-family: inherit; font-size: .97rem; resize: vertical;
+  background: var(--c-surface); color: var(--c-dark); outline: none; line-height: 1.6;
 }
 .ntarea:focus { border-color: var(--c-primary); }
 
 /* ── FORMS ──────────────────────────────────────── */
-.fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.fg { display: flex; flex-direction: column; gap: 5px; }
-.fg label { font-size: .66rem; font-weight: 700; color: var(--c-muted); text-transform: uppercase; letter-spacing: .06em; }
+.fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+.fg { display: flex; flex-direction: column; gap: 6px; }
+.fg label { font-size: .7rem; font-weight: 700; color: var(--c-muted); text-transform: uppercase; letter-spacing: .07em; }
 .fg input, .fg select {
-  padding: 11px 12px; border: 1.5px solid var(--c-border); border-radius: 10px;
+  padding: 13px 14px; border: 1.5px solid var(--c-border); border-radius: 11px;
   font-family: inherit; font-size: 1rem; background: var(--c-surface); color: var(--c-dark); outline: none;
 }
 .fg input:focus, .fg select:focus { border-color: var(--c-primary); }
 .ff { grid-column: span 2; }
 .btnp {
-  width: 100%; padding: 13px; border-radius: var(--r-btn); border: none;
+  width: 100%; padding: 15px; border-radius: var(--r-btn); border: none;
   background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary2) 100%);
-  color: white; font-size: .95rem; font-weight: 700; cursor: pointer;
-  box-shadow: 0 3px 10px rgba(200,82,0,.35); margin-top: 4px; letter-spacing: .01em;
+  color: white; font-size: 1rem; font-weight: 800; cursor: pointer;
+  box-shadow: 0 4px 12px rgba(200,82,0,.38); margin-top: 4px; letter-spacing: .01em;
 }
 .btnp:active { opacity: .9; }
 .btng {
-  background: linear-gradient(135deg, #1E6E38 0%, #2E9E50 100%);
-  box-shadow: 0 3px 10px rgba(30,110,56,.35);
+  background: linear-gradient(135deg, #1B6535 0%, #2E9A50 100%);
+  box-shadow: 0 4px 12px rgba(30,110,56,.38);
 }
 
 /* ── SUMMARY TABLE ──────────────────────────────── */
-.stbl { width: 100%; border-collapse: collapse; font-size: .85rem; }
+.stbl { width: 100%; border-collapse: collapse; font-size: .9rem; }
 .stbl th {
-  text-align: left; font-size: .66rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .06em; color: var(--c-muted); padding: 5px 8px 6px;
+  text-align: left; font-size: .7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .07em; color: var(--c-muted); padding: 6px 8px 7px;
   border-bottom: 2px solid var(--c-border);
 }
-.stbl td { padding: 8px 8px; border-bottom: 1px solid var(--c-border); }
+.stbl td { padding: 9px 8px; border-bottom: 1px solid var(--c-border); }
 .stbl tr.ttl td { border-top: 2px solid var(--c-border); border-bottom: none; font-weight: 700; }
 .nr { text-align: right; font-variant-numeric: tabular-nums; }
 
 /* ── LOG ITEMS ──────────────────────────────────── */
 .logitem {
-  display: flex; align-items: flex-start; gap: 10px;
-  padding: 10px 0; border-bottom: 1px solid var(--c-border);
+  display: flex; align-items: flex-start; gap: 11px;
+  padding: 11px 0; border-bottom: 1px solid var(--c-border);
 }
 .logitem:last-child { border-bottom: none; }
 .loginfo { flex: 1; min-width: 0; }
-.loginfo .lgtit { font-size: .9rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.loginfo .lgmeta { font-size: .74rem; color: var(--c-muted); margin-top: 1px; }
-.logamt { font-size: .9rem; font-weight: 700; color: var(--c-primary); white-space: nowrap; }
-.logdel { background: none; border: none; color: var(--c-border); cursor: pointer; font-size: 1rem; padding: 0 2px; flex-shrink: 0; }
+.loginfo .lgtit { font-size: .97rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.loginfo .lgmeta { font-size: .78rem; color: var(--c-muted); margin-top: 2px; }
+.logamt { font-size: .97rem; font-weight: 700; color: var(--c-primary); white-space: nowrap; }
+.logdel { background: none; border: none; color: var(--c-border); cursor: pointer; font-size: 1.1rem; padding: 0 2px; flex-shrink: 0; }
 .logdel:active { color: var(--c-err); }
 
 /* ── LAKE CARDS (tab) ───────────────────────────── */
 .lkcard {
-  background: var(--c-surface);
-  border-radius: var(--r-card); margin-bottom: 12px;
-  box-shadow: var(--sh-card); border: 1px solid rgba(228,208,184,.5);
+  border-radius: var(--r-card); margin-bottom: 14px;
+  box-shadow: var(--sh-lift);
   overflow: hidden;
 }
 .lkcard-head {
-  background: linear-gradient(135deg, #0D3B6E 0%, #1565C0 100%);
-  padding: 14px 16px; display: flex; align-items: center; gap: 12px; color: white;
+  background: linear-gradient(135deg, #0A2E5A 0%, #1255A8 55%, #1565C0 100%);
+  padding: 16px 18px; display: flex; align-items: center; gap: 14px; color: white;
+  min-height: 86px;
 }
 .lk-dog-circle {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: rgba(255,255,255,.2); display: flex; align-items: center;
-  justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: rgba(255,255,255,.18); display: flex; align-items: center;
+  justify-content: center; font-size: 1.25rem; flex-shrink: 0;
 }
-.lk-dog-circle.ok   { background: rgba(255,255,255,.25); }
-.lk-dog-circle.warn { background: rgba(255,165,0,.35); }
-.lk-dog-circle.no   { background: rgba(255,80,80,.35); }
-.lkcard-name { font-size: 1.02rem; font-weight: 700; }
-.lkcard-zone { font-size: .75rem; opacity: .8; }
+.lk-dog-circle.ok   { background: rgba(100,255,140,.25); }
+.lk-dog-circle.warn { background: rgba(255,180,0,.3); }
+.lk-dog-circle.no   { background: rgba(255,80,80,.3); }
+.lkcard-name { font-size: 1.12rem; font-weight: 800; letter-spacing: -.01em; }
+.lkcard-zone { font-size: .8rem; opacity: .8; margin-top: 2px; }
 .lkcard-temp {
-  margin-left: auto; background: rgba(255,255,255,.2);
-  border-radius: 20px; padding: 4px 10px; font-size: .8rem; font-weight: 700; white-space: nowrap;
+  margin-left: auto; background: rgba(255,255,255,.22);
+  border-radius: var(--r-pill); padding: 5px 12px; font-size: .85rem; font-weight: 700; white-space: nowrap;
 }
-.lkcard-body { padding: 12px 16px; }
-.lkcard-day { font-size: .74rem; font-weight: 700; color: var(--c-blue); margin-bottom: 5px; }
-.lkcard-dog { font-size: .8rem; color: var(--c-mid); margin-bottom: 7px; }
-.lkcard-txt { font-size: .83rem; line-height: 1.55; color: var(--c-mid); margin-bottom: 12px; }
-.lkcard-btns { display: flex; gap: 8px; }
+.lkcard-body { padding: 14px 18px; background: white; }
+.lkcard-day { font-size: .78rem; font-weight: 700; color: var(--c-blue); margin-bottom: 6px; }
+.lkcard-dog { font-size: .875rem; color: var(--c-mid); margin-bottom: 8px; }
+.lkcard-txt { font-size: .9rem; line-height: 1.6; color: var(--c-mid); margin-bottom: 14px; }
+.lkcard-btns { display: flex; gap: 9px; }
 .lkcard-btn {
-  flex: 1; padding: 9px 8px; border-radius: 9px; border: none;
-  font-size: .72rem; font-weight: 700; text-align: center; text-decoration: none;
-  color: white; display: flex; align-items: center; justify-content: center; gap: 5px;
+  flex: 1; padding: 11px 8px; border-radius: 11px; border: none;
+  font-size: .78rem; font-weight: 700; text-align: center; text-decoration: none;
+  color: white; display: flex; align-items: center; justify-content: center; gap: 6px;
   box-shadow: var(--sh-btn);
 }
-.lkbtn-apple { background: #1C1C1E; }
+.lkbtn-apple  { background: #1C1C1E; }
 .lkbtn-google { background: white; color: #333; border: 1.5px solid #ddd; box-shadow: none; }
 
 /* ── BUDGET ─────────────────────────────────────── */
 .b-hero {
-  text-align: center; padding: 24px 16px 18px;
-  background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary2) 100%);
-  border-radius: var(--r-card); margin-bottom: 12px; color: white;
-  box-shadow: 0 4px 16px rgba(200,82,0,.3);
+  text-align: center; padding: 28px 18px 22px;
+  background: linear-gradient(135deg, #A83E00 0%, #C85200 45%, #E8720A 100%);
+  border-radius: var(--r-card); margin-bottom: 14px; color: white;
+  box-shadow: var(--sh-lift);
 }
-.b-hero .b-lbl { font-size: .78rem; opacity: .85; font-weight: 600; margin-bottom: 4px; }
-.b-hero .b-num { font-size: 2.4rem; font-weight: 800; letter-spacing: -.02em; }
+.b-hero .b-lbl { font-size: .82rem; opacity: .88; font-weight: 600; margin-bottom: 5px; text-transform: uppercase; letter-spacing: .06em; }
+.b-hero .b-num { font-size: 2.7rem; font-weight: 800; letter-spacing: -.03em; }
 .brow {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 11px 0; border-bottom: 1px solid var(--c-border); font-size: .9rem; gap: 8px;
+  padding: 13px 0; border-bottom: 1px solid var(--c-border); font-size: .97rem; gap: 8px;
 }
 .brow:last-child { border-bottom: none; }
-.brow .blbl { display: flex; align-items: center; gap: 7px; }
+.brow .blbl { display: flex; align-items: center; gap: 8px; }
 .brow .bamt { font-weight: 700; color: var(--c-dark); white-space: nowrap; }
 .inl-inp {
-  width: 72px; border: none; border-bottom: 1.5px dashed var(--c-border);
-  text-align: right; font-family: inherit; font-size: .9rem; outline: none; background: transparent; color: var(--c-dark);
+  width: 80px; border: none; border-bottom: 1.5px dashed var(--c-border);
+  text-align: right; font-family: inherit; font-size: .97rem; outline: none; background: transparent; color: var(--c-dark);
 }
 .inl-inp:focus { border-bottom-color: var(--c-primary); }
-.b-sub-lbl { font-size: .75rem; color: var(--c-muted); }
+.b-sub-lbl { font-size: .8rem; color: var(--c-muted); }
 
 /* ── CHECKLIST ──────────────────────────────────── */
 .chk {
-  display: flex; align-items: center; gap: 14px;
-  padding: 13px 14px; background: var(--c-surface);
-  border-radius: var(--r-btn); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 15px;
+  padding: 15px 16px; background: var(--c-surface);
+  border-radius: 14px; margin-bottom: 9px;
   border: 1.5px solid var(--c-border); cursor: pointer; -webkit-user-select: none;
   transition: all .15s;
 }
 .chk.done { border-color: var(--c-ok); background: var(--c-ok-bg); }
 .chk-circle {
-  width: 26px; height: 26px; border-radius: 50%;
+  width: 28px; height: 28px; border-radius: 50%;
   border: 2px solid var(--c-border); flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center; font-size: .85rem;
+  display: flex; align-items: center; justify-content: center; font-size: .9rem;
   transition: all .15s;
 }
 .chk.done .chk-circle { border-color: var(--c-ok); background: var(--c-ok); color: white; }
-.chk-lbl { font-size: .9rem; font-weight: 500; }
+.chk-lbl { font-size: .97rem; font-weight: 500; }
 .chk.done .chk-lbl { text-decoration: line-through; color: var(--c-muted); }
 .btn-reset {
-  width: 100%; padding: 11px; border-radius: var(--r-btn); border: 1.5px solid var(--c-border);
-  background: none; font-size: .82rem; color: var(--c-muted); cursor: pointer; margin-top: 6px;
+  width: 100%; padding: 13px; border-radius: var(--r-btn); border: 1.5px solid var(--c-border);
+  background: none; font-size: .875rem; color: var(--c-muted); cursor: pointer; margin-top: 6px;
   font-family: inherit;
 }
 
 /* ── EMPTY STATE ─────────────────────────────────── */
-.empty { text-align: center; padding: 32px 16px; color: var(--c-muted); }
-.empty .ei { font-size: 2.5rem; margin-bottom: 8px; }
-.empty p { font-size: .85rem; }
+.empty { text-align: center; padding: 36px 18px; color: var(--c-muted); }
+.empty .ei { font-size: 2.8rem; margin-bottom: 10px; }
+.empty p { font-size: .9rem; }
 
 /* ── KM TOTAL CARD ───────────────────────────────── */
 .km-total-card {
-  background: linear-gradient(135deg, #1E6E38 0%, #2E9E50 100%);
-  border-radius: var(--r-card); padding: 14px 18px; color: white;
+  background: linear-gradient(135deg, #1B6535 0%, #2E9A50 100%);
+  border-radius: var(--r-card); padding: 16px 20px; color: white;
   display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 12px; box-shadow: 0 3px 12px rgba(30,110,56,.3);
+  margin-bottom: 12px; box-shadow: 0 4px 14px rgba(30,110,56,.32);
 }
-.km-total-lbl { font-size: .82rem; opacity: .85; font-weight: 600; }
-.km-total-num { font-size: 1.5rem; font-weight: 800; }
+.km-total-lbl { font-size: .875rem; opacity: .88; font-weight: 600; }
+.km-total-num { font-size: 1.65rem; font-weight: 800; letter-spacing: -.02em; }
+
+/* ── MAP CONTAINER ───────────────────────────────── */
+#avui-map {
+  height: 230px; border-radius: 16px; overflow: hidden;
+  margin-bottom: 14px; box-shadow: var(--sh-lift);
+  background: var(--c-blue-bg);
+  position: relative;
+}
+.map-offline {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 100%; color: var(--c-muted); gap: 8px; font-size: .875rem;
+}
+
+/* ── AVUI CARDS ─────────────────────────────────── */
+.avui-hero {
+  background: linear-gradient(135deg, #A83E00 0%, #C85200 40%, #E8720A 100%);
+  border-radius: var(--r-card); padding: 18px 20px; color: white;
+  margin-bottom: 12px; box-shadow: var(--sh-lift);
+}
+.avui-hero-label { font-size: .72rem; opacity: .85; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 4px; }
+.avui-hero-dest { font-size: 1.5rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: 2px; }
+.avui-hero-sub { font-size: .85rem; opacity: .85; }
+.avui-stat-row { display: flex; gap: 10px; margin-bottom: 12px; }
+.avui-stat {
+  flex: 1; background: var(--c-surface); border-radius: 14px; padding: 13px 14px;
+  box-shadow: var(--sh-card); border: 1px solid var(--c-border);
+}
+.avui-stat-lbl { font-size: .68rem; font-weight: 700; color: var(--c-muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+.avui-stat-val { font-size: 1.3rem; font-weight: 800; letter-spacing: -.02em; }
+.avui-stat-sub { font-size: .72rem; color: var(--c-muted); margin-top: 2px; }
+.avui-countdown {
+  text-align: center; padding: 32px 20px;
+  background: linear-gradient(135deg, #0A2E5A 0%, #1565C0 100%);
+  border-radius: var(--r-card); color: white; margin-bottom: 14px;
+  box-shadow: var(--sh-lift);
+}
+.avui-countdown-num { font-size: 3.5rem; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+.avui-countdown-lbl { font-size: .9rem; opacity: .85; margin-top: 6px; }
+
+/* ── EDIT BUTTON ─────────────────────────────────── */
+.logedit { background: none; border: none; color: var(--c-muted); cursor: pointer; font-size: .85rem; padding: 0 4px; flex-shrink: 0; }
+.logedit:active { color: var(--c-blue); }
+.logdel { background: none; border: none; color: var(--c-border); cursor: pointer; font-size: .95rem; padding: 0 4px; flex-shrink: 0; }
+.logdel:active { color: var(--c-err); }
+.editing-banner {
+  background: var(--c-blue-bg); border: 1.5px solid var(--c-blue); border-radius: 11px;
+  padding: 10px 14px; margin-bottom: 10px; font-size: .82rem; color: var(--c-blue);
+  display: none; align-items: center; justify-content: space-between; gap: 8px;
+}
+.editing-banner.show { display: flex; }
+.editing-cancel { background: none; border: none; color: var(--c-blue); font-weight: 700; cursor: pointer; font-size: .82rem; }
 
 /* ── UTILS ───────────────────────────────────────── */
 .mb6  { margin-bottom: 6px; }
@@ -480,9 +554,71 @@ body {
 
   <!-- ── ITINERARI ─────────────────────────── -->
   <div id="tab-itinerari" class="tab on">
-    <div class="page-head">
-      <div class="title">🗺 Itinerari</div>
-      <div class="sub">10 – 21 agost 2026 · 11 dies · La Garriga → Baviera</div>
+    <div class="route-hero">
+      <svg viewBox="0 0 390 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1A4E8C"/>
+            <stop offset="60%" stop-color="#2E6EB0"/>
+            <stop offset="100%" stop-color="#5090C8"/>
+          </linearGradient>
+          <linearGradient id="mtn1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#E8F0F8"/>
+            <stop offset="30%" stop-color="#B8C8DC"/>
+            <stop offset="100%" stop-color="#6080A0"/>
+          </linearGradient>
+          <linearGradient id="mtn2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#D0DCE8"/>
+            <stop offset="100%" stop-color="#4A6878"/>
+          </linearGradient>
+          <linearGradient id="mtn3" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3A5A70"/>
+            <stop offset="100%" stop-color="#1A2E3A"/>
+          </linearGradient>
+          <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#5BAAD8"/>
+            <stop offset="100%" stop-color="#3480B0"/>
+          </linearGradient>
+        </defs>
+        <!-- Sky -->
+        <rect width="390" height="160" fill="url(#sky)"/>
+        <!-- Stars/dots -->
+        <circle cx="40" cy="18" r="1" fill="white" opacity=".5"/>
+        <circle cx="120" cy="12" r="1.2" fill="white" opacity=".6"/>
+        <circle cx="250" cy="20" r="1" fill="white" opacity=".4"/>
+        <circle cx="340" cy="10" r="1.3" fill="white" opacity=".5"/>
+        <!-- Far mountains (snow) -->
+        <path d="M0,100 L30,55 L60,75 L90,40 L120,60 L150,30 L180,58 L210,25 L240,55 L270,35 L300,65 L330,42 L360,68 L390,50 L390,160 L0,160Z" fill="url(#mtn1)"/>
+        <!-- Snow caps -->
+        <path d="M90,40 L105,55 L75,55Z" fill="white" opacity=".85"/>
+        <path d="M150,30 L165,48 L135,48Z" fill="white" opacity=".9"/>
+        <path d="M210,25 L228,46 L192,46Z" fill="white" opacity=".88"/>
+        <path d="M270,35 L284,52 L256,52Z" fill="white" opacity=".8"/>
+        <path d="M330,42 L344,57 L316,57Z" fill="white" opacity=".75"/>
+        <!-- Mid mountains -->
+        <path d="M0,115 L50,80 L90,100 L130,72 L170,95 L210,68 L250,90 L290,75 L330,98 L370,78 L390,88 L390,160 L0,160Z" fill="url(#mtn2)"/>
+        <!-- Foreground mountains -->
+        <path d="M0,135 L60,105 L110,125 L160,100 L220,118 L280,105 L340,122 L390,108 L390,160 L0,160Z" fill="url(#mtn3)"/>
+        <!-- Lake -->
+        <ellipse cx="195" cy="148" rx="70" ry="10" fill="url(#lake)" opacity=".7"/>
+        <ellipse cx="195" cy="148" rx="68" ry="8" fill="#7BBEDD" opacity=".5"/>
+        <!-- Pine trees silhouette -->
+        <path d="M10,160 L10,138 L4,138 L10,128 L6,128 L13,116 L20,128 L16,128 L22,138 L16,138 L16,160Z" fill="#0A1A14" opacity=".8"/>
+        <path d="M360,160 L360,140 L354,140 L360,130 L356,130 L363,118 L370,130 L366,130 L372,140 L366,140 L366,160Z" fill="#0A1A14" opacity=".8"/>
+        <path d="M38,160 L38,144 L33,144 L38,136 L43,144 L38,144Z" fill="#0D2218" opacity=".7"/>
+        <path d="M345,160 L345,146 L340,146 L345,138 L350,146 L345,146Z" fill="#0D2218" opacity=".7"/>
+        <!-- Route line -->
+        <path d="M30,152 Q80,130 130,138 Q180,145 230,138 Q280,130 360,150" stroke="white" stroke-width="2.5" fill="none" stroke-dasharray="6,4" opacity=".7" stroke-linecap="round"/>
+        <!-- Route dots -->
+        <circle cx="30" cy="152" r="4" fill="#F5A040"/>
+        <circle cx="360" cy="150" r="4" fill="#F5A040"/>
+        <circle cx="130" cy="138" r="3" fill="white" opacity=".8"/>
+        <circle cx="230" cy="138" r="3" fill="white" opacity=".8"/>
+      </svg>
+      <div class="route-hero-overlay">
+        <div class="route-hero-title">La Garriga → Baviera 2026</div>
+        <div class="route-hero-sub">10 – 21 agost · 11 dies · ~3.500 km</div>
+      </div>
     </div>
     <div class="pbar"><div class="pfill" id="pfill" style="width:0%"></div></div>
     <div id="day-list"></div>
@@ -499,6 +635,10 @@ body {
       <div class="sec-icon" style="background:#FFF3E0">⚡</div>
       <span class="sec-title">Nova recàrrega</span>
     </div>
+    <div class="editing-banner" id="rec-edit-banner">
+      <span>✏️ Editant recàrrega — modifica els camps i desa</span>
+      <button class="editing-cancel" onclick="cancelEditRec()">✕ Cancelar</button>
+    </div>
     <div class="card">
       <div class="fgrid mb12">
         <div class="fg"><label>Dia</label><select id="r-dia"></select></div>
@@ -514,7 +654,7 @@ body {
         <div class="fg"><label>kWh</label><input type="number" id="r-kwh" step="0.1" min="0" placeholder="0.0"></div>
         <div class="fg"><label>Preu total €</label><input type="number" id="r-preu" step="0.01" min="0" placeholder="0.00"></div>
       </div>
-      <button class="btnp" onclick="addRecarrega()">+ Afegir recàrrega</button>
+      <button class="btnp" id="rec-save-btn" onclick="addRecarrega()">+ Afegir recàrrega</button>
     </div>
 
     <div class="sec-div"><div class="sec-icon" style="background:#E3F0FC">📊</div><span class="sec-title">Resum per xarxa</span></div>
@@ -528,12 +668,16 @@ body {
     <div class="card"><div id="rec-list"><div class="empty"><div class="ei">⚡</div><p>Sense recàrregues registrades.</p></div></div></div>
 
     <div class="sec-div"><div class="sec-icon" style="background:#E8F5EE">🚗</div><span class="sec-title">Km diaris</span></div>
+    <div class="editing-banner" id="km-edit-banner">
+      <span>✏️ Editant km del dia — modifica i desa</span>
+      <button class="editing-cancel" onclick="cancelEditKm()">✕ Cancelar</button>
+    </div>
     <div class="card">
       <div class="fgrid mb12">
         <div class="fg"><label>Dia</label><select id="km-dia"></select></div>
         <div class="fg"><label>Km fets</label><input type="number" id="km-val" min="0" placeholder="0"></div>
       </div>
-      <button class="btnp btng" onclick="addKm()">+ Afegir km</button>
+      <button class="btnp btng" id="km-save-btn" onclick="addKm()">+ Afegir km</button>
     </div>
     <div id="km-total-wrap" style="display:none" class="km-total-card">
       <div><div class="km-total-lbl">Total km del viatge</div></div>
@@ -542,13 +686,9 @@ body {
     <div class="card"><div id="km-list"><div class="empty"><div class="ei">🚗</div><p>Sense km registrats.</p></div></div></div>
   </div>
 
-  <!-- ── LLACS ─────────────────────────────── -->
-  <div id="tab-llacs" class="tab">
-    <div class="page-head">
-      <div class="title">🏊 Llacs per banyar-se</div>
-      <div class="sub">Zones aptes per a la Leia 🐾 · Semàfor de gossos</div>
-    </div>
-    <div id="lake-cards"></div>
+  <!-- ── AVUI ──────────────────────────────── -->
+  <div id="tab-avui" class="tab">
+    <div id="avui-body"></div>
   </div>
 
   <!-- ── PRESSUPOST ────────────────────────── -->
@@ -579,9 +719,12 @@ body {
 
   <!-- ── MÉS ───────────────────────────────── -->
   <div id="tab-mes" class="tab">
-    <div class="page-head"><div class="title">☑️ Checklist & Notes</div></div>
+    <div class="page-head"><div class="title">Més</div></div>
 
-    <div class="sec-div"><div class="sec-icon" style="background:#E8F5EE">☑️</div><span class="sec-title">Checklist de sortida</span></div>
+    <div class="sec-div"><div class="sec-icon" style="background:#E0EDFC">🏊</div><span class="sec-title">Llacs i bany</span></div>
+    <div id="mes-lake-cards"></div>
+
+    <div class="sec-div" style="margin-top:24px"><div class="sec-icon" style="background:#E8F5EE">☑️</div><span class="sec-title">Checklist de sortida</span></div>
     <p class="t-small t-muted mb12">Es reinicia cada dia automàticament.</p>
     <div id="chk-items"></div>
     <button class="btn-reset" onclick="resetChecklist()">↺ Reiniciar checklist</button>
@@ -623,11 +766,11 @@ body {
 
 <!-- ── BOTTOM NAV ───────────────────────────────── -->
 <nav id="nav">
-  <button class="nb on" data-tab="itinerari"   onclick="showTab('itinerari')"><span class="ic">🗓</span>Itinerari</button>
-  <button class="nb"    data-tab="recarregues" onclick="showTab('recarregues')"><span class="ic">⚡</span>Recàrregues</button>
-  <button class="nb"    data-tab="llacs"       onclick="showTab('llacs')"><span class="ic">🏊</span>Llacs</button>
-  <button class="nb"    data-tab="pressupost"  onclick="showTab('pressupost')"><span class="ic">💰</span>Pressupost</button>
-  <button class="nb"    data-tab="mes"         onclick="showTab('mes')"><span class="ic">☑️</span>Més</button>
+  <button class="nb" data-tab="avui"        onclick="showTab('avui')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>Avui</button>
+  <button class="nb" data-tab="itinerari"   onclick="showTab('itinerari')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 3 20 10 16 17 20 21 16 21 4 17 8 10 4 3 6"/><line x1="10" y1="4" x2="10" y2="16"/><line x1="17" y1="8" x2="17" y2="20"/></svg></span>Viatge</button>
+  <button class="nb" data-tab="recarregues" onclick="showTab('recarregues')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>Cotxe</button>
+  <button class="nb" data-tab="pressupost"  onclick="showTab('pressupost')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg></span>Despeses</button>
+  <button class="nb" data-tab="mes"         onclick="showTab('mes')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></span>Més</button>
 </nav>
 
 <script>
@@ -817,10 +960,163 @@ function showTab(id){
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
   document.getElementById('tab-'+id).classList.add('on');
   document.querySelector(`[data-tab="${id}"]`).classList.add('on');
+  if(id==='avui')        renderAvui();
   if(id==='recarregues') renderRecarregues();
-  if(id==='llacs')       renderLakes();
   if(id==='pressupost')  renderBudget();
   if(id==='mes')         renderMes();
+}
+
+// ── AVUI ─────────────────────────────────────────
+const TRIP_START = new Date('2026-08-10');
+const TRIP_END   = new Date('2026-08-22');
+const HOME_LL    = [41.6833, 2.2167];
+
+// GPS coords per a cada dia (hotel destí)
+const DAY_COORDS = [
+  null,                    // placeholder idx 0
+  [45.7338, 4.9278],       // Dia 1 – Spark Lyon
+  [48.2180, 8.0730],       // Dia 2 – Schwörer
+  [48.2180, 8.0730],       // Dia 3 – Schwörer
+  [47.5691, 11.0953],      // Dia 4 – Ettal
+  [47.5691, 11.0953],      // Dia 5 – Ettal
+  [47.5691, 11.0953],      // Dia 6 – Ettal
+  [47.5797, 10.5302],      // Dia 7 – Kühbergalp
+  [47.5797, 10.5302],      // Dia 8 – Kühbergalp
+  [47.5797, 10.5302],      // Dia 9 – Kühbergalp
+  [46.7833, 4.8500],       // Dia 10 – ibis Chalon
+  [41.6833, 2.2167],       // Dia 11 – Casa
+];
+
+let leafletLoaded = false;
+function loadLeaflet(cb){
+  if(leafletLoaded){ cb(); return; }
+  const lnk = document.createElement('link');
+  lnk.rel='stylesheet'; lnk.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+  document.head.appendChild(lnk);
+  const s = document.createElement('script');
+  s.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  s.onload=()=>{ leafletLoaded=true; cb(); };
+  s.onerror=()=>cb(true);
+  document.head.appendChild(s);
+}
+
+let avuiMap = null;
+function renderAvui(){
+  const el = document.getElementById('avui-body');
+  const now = new Date();
+  now.setHours(0,0,0,0);
+  const tripStartDay = new Date(TRIP_START); tripStartDay.setHours(0,0,0,0);
+  const tripEndDay   = new Date(TRIP_END);   tripEndDay.setHours(0,0,0,0);
+
+  // Countdown if before trip
+  if(now < tripStartDay){
+    const days = Math.ceil((tripStartDay - now)/(1000*60*60*24));
+    el.innerHTML = `
+      <div class="avui-countdown">
+        <div style="font-size:.8rem;opacity:.7;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Sortida cap a Baviera</div>
+        <div class="avui-countdown-num">${days}</div>
+        <div class="avui-countdown-lbl">dies per a l'aventura</div>
+        <div style="margin-top:16px;font-size:.8rem;opacity:.7">10 d'agost · La Garriga → Bayern</div>
+      </div>
+      <div id="avui-map"></div>
+      <div class="avui-stat-row">
+        <div class="avui-stat"><div class="avui-stat-lbl">Durada</div><div class="avui-stat-val">11 dies</div><div class="avui-stat-sub">10–21 agost</div></div>
+        <div class="avui-stat"><div class="avui-stat-lbl">Km totals</div><div class="avui-stat-val">~2.800</div><div class="avui-stat-sub">anada i tornada</div></div>
+        <div class="avui-stat"><div class="avui-stat-lbl">Hotels</div><div class="avui-stat-val">5</div><div class="avui-stat-sub">4 destins</div></div>
+      </div>`;
+    renderOverviewMap();
+    return;
+  }
+
+  // After trip
+  if(now >= tripEndDay){
+    el.innerHTML = `<div class="avui-countdown" style="background:linear-gradient(135deg,#1B6535,#2E7D52)">
+      <div style="font-size:2rem;margin-bottom:8px">🏁</div>
+      <div style="font-size:1.4rem;font-weight:800">Viatge completat!</div>
+      <div style="opacity:.8;margin-top:8px;font-size:.9rem">10–21 d'agost de 2026</div>
+    </div>`;
+    return;
+  }
+
+  // During trip — find today's day
+  const td = DAYS.find(d => {
+    const f=new Date(d.from); f.setHours(0,0,0,0);
+    const t=new Date(d.to);   t.setHours(0,0,0,0);
+    return now >= f && now < t;
+  });
+  if(!td){ el.innerHTML='<div class="empty"><p>Dia no trobat</p></div>'; return; }
+
+  const n = td.n;
+  const startLL = n===1 ? HOME_LL : DAY_COORDS[n-1];
+  const endLL   = DAY_COORDS[n];
+  const isHome  = n===11;
+
+  el.innerHTML = `
+    <div class="avui-hero">
+      <div class="avui-hero-label">Dia ${n} de 11 · ${fmtDate(td.from)}</div>
+      <div class="avui-hero-dest">${td.flag} ${td.zone}</div>
+      <div class="avui-hero-sub">📍 ${td.hotel?.name||'—'} &nbsp;·&nbsp; ${td.drive}</div>
+    </div>
+    <div id="avui-map"></div>
+    <div class="avui-stat-row">
+      <div class="avui-stat">
+        <div class="avui-stat-lbl">Conducció</div>
+        <div class="avui-stat-val">${td.drive}</div>
+        <div class="avui-stat-sub">${isHome?'tornada a casa':'ruta del dia'}</div>
+      </div>
+      <div class="avui-stat">
+        <div class="avui-stat-lbl">Allotjament</div>
+        <div class="avui-stat-val" style="font-size:.95rem;line-height:1.2">${td.hotel?.name||'—'}</div>
+        <div class="avui-stat-sub">${td.hotel?.dog||''}</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:4px">
+      ${td.hotel?.addr?`<a class="h-btn h-btn-apple" href="maps://maps.apple.com/?q=${encodeURIComponent(td.hotel.addr)}" style="flex:1;justify-content:center">${ICON_APPLE} Apple Maps</a>`:''}
+      ${td.hotel?.addr?`<a class="h-btn h-btn-google" href="https://maps.google.com/?q=${encodeURIComponent(td.hotel.addr)}" style="flex:1;justify-content:center">${ICON_GOOGLE} Google Maps</a>`:''}
+    </div>`;
+
+  loadLeaflet(err => {
+    if(err || !window.L){ showMapOffline(); return; }
+    if(avuiMap){ avuiMap.remove(); avuiMap=null; }
+    const mapEl = document.getElementById('avui-map');
+    if(!mapEl) return;
+    const midLat = (startLL[0]+endLL[0])/2;
+    const midLng = (startLL[1]+endLL[1])/2;
+    avuiMap = L.map(mapEl, {zoomControl:true, scrollWheelZoom:false});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+      attribution:'© OpenStreetMap',maxZoom:18
+    }).addTo(avuiMap);
+    const mkStart = L.circleMarker(startLL, {radius:9, color:'#C85200', fillColor:'#E8720A', fillOpacity:1, weight:2});
+    const mkEnd   = L.circleMarker(endLL,   {radius:9, color:'#1B6535', fillColor:'#2E9E5C', fillOpacity:1, weight:2});
+    mkStart.addTo(avuiMap).bindPopup(n===1?'La Garriga':DAYS[n-2].zone);
+    mkEnd.addTo(avuiMap).bindPopup(td.zone);
+    L.polyline([startLL, endLL], {color:'#C85200', weight:3, dashArray:'8,5'}).addTo(avuiMap);
+    avuiMap.fitBounds([startLL, endLL], {padding:[30,30]});
+  });
+}
+
+function renderOverviewMap(){
+  loadLeaflet(err => {
+    if(err || !window.L){ showMapOffline(); return; }
+    if(avuiMap){ avuiMap.remove(); avuiMap=null; }
+    const mapEl = document.getElementById('avui-map');
+    if(!mapEl) return;
+    avuiMap = L.map(mapEl, {zoomControl:true, scrollWheelZoom:false});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+      attribution:'© OpenStreetMap',maxZoom:18
+    }).addTo(avuiMap);
+    const pts = [HOME_LL,...DAY_COORDS.slice(1)];
+    L.polyline(pts, {color:'#C85200', weight:3, dashArray:'8,5'}).addTo(avuiMap);
+    pts.forEach((p,i)=>{
+      L.circleMarker(p,{radius:6,color:'#C85200',fillColor:i===0||i===pts.length-1?'#C85200':'#F5A040',fillOpacity:1,weight:2}).addTo(avuiMap);
+    });
+    avuiMap.fitBounds(pts, {padding:[20,20]});
+  });
+}
+
+function showMapOffline(){
+  const el = document.getElementById('avui-map');
+  if(el) el.innerHTML='<div class="map-offline"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="3 6 3 20 10 16 17 20 21 16 21 4 17 8 10 4 3 6"/></svg><span>Mapa no disponible offline</span></div>';
 }
 
 // ── ITINERARI ────────────────────────────────────
@@ -836,15 +1132,17 @@ function renderItinerari(){
     const hname   = d.hotel ? d.hotel.name : '🏠 Tornada a casa';
     return `<div class="di ${cls}" onclick="openDetail(${d.n-1})">
       <div class="di-stripe"></div>
-      <div class="di-num">${d.n}</div>
-      <div class="di-info">
-        <div class="di-date">${fmtDate(d.from)} ${d.flag}</div>
-        <div class="di-zone">${d.zone}</div>
-        <div class="di-hotel">${hname}</div>
-      </div>
-      <div class="di-right">
-        <div class="di-drive">${d.drive}</div>
-        <div class="di-arrow">›</div>
+      <div class="di-inner">
+        <div class="di-num">${d.n}</div>
+        <div class="di-info">
+          <div class="di-date">${fmtDate(d.from)} ${d.flag}</div>
+          <div class="di-zone">${d.zone}</div>
+          <div class="di-hotel">${hname}</div>
+        </div>
+        <div class="di-right">
+          <div class="di-drive">${d.drive}</div>
+          <div class="di-arrow">›</div>
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -983,18 +1281,46 @@ function fillSelects(){
   ['r-dia','km-dia','notes-dia'].forEach(id=>{ const el=document.getElementById(id); if(el)el.innerHTML=opts; });
 }
 
+let editingRecId = null;
+
 function addRecarrega(){
   const dia=+document.getElementById('r-dia').value;
   const xarxa=document.getElementById('r-xarxa').value;
   const lloc=document.getElementById('r-lloc').value.trim();
   const kwh=parseFloat(document.getElementById('r-kwh').value)||0;
   const preu=parseFloat(document.getElementById('r-preu').value)||0;
-  recarregues.push({id:Date.now(),dia,data:DAYS[dia-1].from,lloc,xarxa,kwh,preu,eurkwh:kwh?preu/kwh:0});
+  if(editingRecId !== null){
+    const idx=recarregues.findIndex(r=>r.id===editingRecId);
+    if(idx>=0) recarregues[idx]={...recarregues[idx],dia,data:DAYS[dia-1].from,lloc,xarxa,kwh,preu,eurkwh:kwh?preu/kwh:0};
+    cancelEditRec();
+  } else {
+    recarregues.push({id:Date.now(),dia,data:DAYS[dia-1].from,lloc,xarxa,kwh,preu,eurkwh:kwh?preu/kwh:0});
+  }
   ss('rec',recarregues);
   document.getElementById('r-lloc').value='';
   document.getElementById('r-kwh').value='';
   document.getElementById('r-preu').value='';
   renderRecarregues();
+}
+
+function editRec(id){
+  const r=recarregues.find(x=>x.id===id); if(!r)return;
+  editingRecId=id;
+  document.getElementById('r-dia').value=r.dia;
+  document.getElementById('r-xarxa').value=r.xarxa;
+  document.getElementById('r-lloc').value=r.lloc||'';
+  document.getElementById('r-kwh').value=r.kwh||'';
+  document.getElementById('r-preu').value=r.preu||'';
+  document.getElementById('rec-edit-banner').classList.add('show');
+  document.getElementById('rec-save-btn').textContent='💾 Desar canvis';
+  document.getElementById('r-lloc').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function cancelEditRec(){
+  editingRecId=null;
+  document.getElementById('rec-edit-banner').classList.remove('show');
+  document.getElementById('rec-save-btn').textContent='+ Afegir recàrrega';
+  ['r-lloc','r-kwh','r-preu'].forEach(id=>{ document.getElementById(id).value=''; });
 }
 
 function delRec(id){ recarregues=recarregues.filter(r=>r.id!==id); ss('rec',recarregues); renderRecarregues(); }
@@ -1020,24 +1346,53 @@ function renderRecarregues(){
         <div class="lgmeta">Dia ${r.dia} · ${r.kwh.toFixed(1)} kWh · ${r.eurkwh.toFixed(3)} €/kWh</div>
       </div>
       <span class="logamt">${fmtEur(r.preu)}</span>
-      <button class="logdel" onclick="delRec(${r.id})">✕</button>
+      <button class="logedit" title="Editar" onclick="editRec(${r.id})"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+      <button class="logdel" title="Eliminar" onclick="delRec(${r.id})"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>
     </div>`).join('');
   const bRec=document.getElementById('b-rec');
   if(bRec) bRec.textContent=fmtEur(ap);
 }
 
 // ── KM ───────────────────────────────────────────
+let editingKmDia = null;
+
 function addKm(){
   const dia=+document.getElementById('km-dia').value;
   const val=+document.getElementById('km-val').value;
   if(!val)return;
-  const ex=kmLog.findIndex(k=>k.dia===dia);
-  if(ex>=0)kmLog[ex].km=val; else kmLog.push({dia,km:val,data:DAYS[dia-1].from});
+  if(editingKmDia !== null){
+    const idx=kmLog.findIndex(k=>k.dia===editingKmDia);
+    if(idx>=0) kmLog[idx]={...kmLog[idx],km:val};
+    cancelEditKm();
+  } else {
+    const ex=kmLog.findIndex(k=>k.dia===dia);
+    if(ex>=0)kmLog[ex].km=val; else kmLog.push({dia,km:val,data:DAYS[dia-1].from});
+  }
   kmLog.sort((a,b)=>a.dia-b.dia);
   ss('km',kmLog); document.getElementById('km-val').value='';
   renderKm();
 }
+
+function editKm(dia){
+  const k=kmLog.find(x=>x.dia===dia); if(!k)return;
+  editingKmDia=dia;
+  document.getElementById('km-dia').value=dia;
+  document.getElementById('km-val').value=k.km;
+  document.getElementById('km-edit-banner').classList.add('show');
+  document.getElementById('km-save-btn').textContent='💾 Desar canvis';
+  document.getElementById('km-val').scrollIntoView({behavior:'smooth',block:'center'});
+  document.getElementById('km-val').focus();
+}
+
+function cancelEditKm(){
+  editingKmDia=null;
+  document.getElementById('km-edit-banner').classList.remove('show');
+  document.getElementById('km-save-btn').textContent='+ Afegir km';
+  document.getElementById('km-val').value='';
+}
+
 function delKm(dia){ kmLog=kmLog.filter(k=>k.dia!==dia); ss('km',kmLog); renderKm(); }
+
 function renderKm(){
   const el=document.getElementById('km-list'), tw=document.getElementById('km-total-wrap');
   if(!kmLog.length){ el.innerHTML=`<div class="empty"><div class="ei">🚗</div><p>Sense km registrats.</p></div>`; tw.style.display='none'; return; }
@@ -1046,7 +1401,8 @@ function renderKm(){
   el.innerHTML=kmLog.map(k=>`<div class="logitem">
     <div class="loginfo"><div class="lgtit">Dia ${k.dia} — ${DAYS[k.dia-1].zone}</div><div class="lgmeta">${k.data}</div></div>
     <span class="logamt">${k.km} km</span>
-    <button class="logdel" onclick="delKm(${k.dia})">✕</button>
+    <button class="logedit" title="Editar" onclick="editKm(${k.dia})"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+    <button class="logdel" title="Eliminar" onclick="delKm(${k.dia})"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>
   </div>`).join('');
 }
 
@@ -1110,7 +1466,27 @@ function renderChecklist(){
 // ── NOTES ────────────────────────────────────────
 function loadNote(){ const dia=document.getElementById('notes-dia').value; document.getElementById('notes-txt').value=notes[`day_${dia}`]||''; }
 function saveNote(){ const dia=document.getElementById('notes-dia').value; notes[`day_${dia}`]=document.getElementById('notes-txt').value; ss('notes',notes); }
-function renderMes(){ renderChecklist(); loadNote(); }
+function renderMes(){
+  renderChecklist(); loadNote();
+  // render llacs inside Més if container exists
+  const lc=document.getElementById('mes-lake-cards');
+  if(lc) lc.innerHTML=LAKES.map(l=>{
+    const cls=l.dogStatus==='ok'?'ok':l.dogStatus==='warn'?'warn':'no';
+    return `<div class="lkcard">
+      <div class="lkcard-head">
+        <div class="lk-dog-circle ${cls}">${l.dog}</div>
+        <div><div class="lkcard-name">${l.name}</div><div class="lkcard-zone">${l.zone}</div></div>
+        <div style="margin-left:auto"><div class="chip chip-${cls}">${l.dogStatus==='ok'?'✅ Gossos OK':l.dogStatus==='warn'?'⚠️ Consultar':'❌ No admesos'}</div></div>
+      </div>
+      <div class="lkcard-body"><div class="lk-note">${l.note}</div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <a class="h-btn h-btn-apple" href="maps://maps.apple.com/?q=${encodeURIComponent(l.name)}">${ICON_APPLE}</a>
+          <a class="h-btn h-btn-google" href="https://maps.google.com/?q=${encodeURIComponent(l.name)}">${ICON_GOOGLE}</a>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
 
 // ── EXPORT ───────────────────────────────────────
 function exportJSON(){
@@ -1126,6 +1502,7 @@ function init(){
   renderItinerari();
   renderKm();
   renderRecarregues();
+  showTab('avui');
   if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
 }
 init();
