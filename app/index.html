@@ -13,7 +13,7 @@
 <style>
 /* ── DESIGN TOKENS ──────────────────────────────── */
 :root {
-  --c-bg:       #F2EDE6;
+  --c-bg:       #F2F2F7;
   --c-surface:  #FFFFFF;
   --c-primary:  #C85200;
   --c-primary2: #E8720A;
@@ -33,11 +33,11 @@
   --c-nav:      #12090A;
   --c-nav-t:    #B09070;
   --c-nav-a:    #F5A040;
-  --sh-card:    0 2px 16px rgba(26,13,0,.10);
+  --sh-card:    0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
   --sh-lift:    0 6px 24px rgba(26,13,0,.14);
   --sh-btn:     0 3px 10px rgba(0,0,0,.22);
-  --r-card:     18px;
-  --r-btn:      13px;
+  --r-card:     16px;
+  --r-btn:      12px;
   --r-pill:     99px;
   --nt: env(safe-area-inset-top, 0px);
   --nb: env(safe-area-inset-bottom, 0px);
@@ -53,16 +53,16 @@ body {
   min-height: 100dvh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 /* ── TYPOGRAPHY ─────────────────────────────────── */
-.t-hero    { font-size: 1.55rem; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
-.t-title   { font-size: 1.2rem;  font-weight: 700; }
+.t-hero    { font-size: 1.75rem; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
+.t-title   { font-size: 1.3rem;  font-weight: 700; }
 .t-section { font-size: 1.05rem; font-weight: 700; }
-.t-body    { font-size: 1rem;    line-height: 1.6; }
-.t-small   { font-size: .875rem; line-height: 1.45; }
-.t-label   { font-size: .7rem;   font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
+.t-body    { font-size: 1.05rem; line-height: 1.6; }
+.t-small   { font-size: .938rem; line-height: 1.45; }
+.t-label   { font-size: .75rem;  font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
 .t-muted   { color: var(--c-muted); }
 .t-mid     { color: var(--c-mid); }
 .t-primary { color: var(--c-primary); }
@@ -95,7 +95,7 @@ body {
 .tab { display: none; padding: 18px 15px; }
 .tab.on { display: block; }
 .page-head { margin-bottom: 20px; }
-.page-head .title { font-size: 1.55rem; font-weight: 800; letter-spacing: -.02em; }
+.page-head .title { font-size: 1.75rem; font-weight: 800; letter-spacing: -.02em; }
 .page-head .sub { font-size: .875rem; color: var(--c-muted); margin-top: 3px; }
 
 /* ── BOTTOM NAV ─────────────────────────────────── */
@@ -111,11 +111,11 @@ body {
   flex: 1; background: none; border: none; color: var(--c-nav-t);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 4px; cursor: pointer;
-  font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
   padding: 6px 2px 2px; transition: color .15s;
 }
-.nb .ic { width: 26px; height: 26px; display: block; }
-.nb .ic svg { width: 26px; height: 26px; }
+.nb .ic { width: 28px; height: 28px; display: block; }
+.nb .ic svg { width: 28px; height: 28px; }
 .nb.on { color: var(--c-nav-a); }
 .nb.on .ic { filter: drop-shadow(0 0 6px rgba(245,160,64,.55)); }
 
@@ -170,7 +170,7 @@ body {
   display: flex; align-items: center; justify-content: center;
   font-size: .95rem; flex-shrink: 0;
 }
-.sec-div .sec-title { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+.sec-div .sec-title { font-size: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
 .sec-div::after { content: ''; flex: 1; height: 1px; background: var(--c-border); }
 
 /* ── DAY CARDS ──────────────────────────────────── */
@@ -199,13 +199,13 @@ body {
   min-width: 42px; height: 42px; border-radius: 13px;
   background: var(--c-beige); color: var(--c-mid);
   display: flex; align-items: center; justify-content: center;
-  font-size: .95rem; font-weight: 800; flex-shrink: 0;
+  font-size: 1rem; font-weight: 800; flex-shrink: 0;
 }
 .di.today .di-num { background: var(--c-primary); color: white; box-shadow: 0 3px 10px rgba(200,82,0,.4); }
 .di-info { flex: 1; min-width: 0; }
-.di-date { font-size: .75rem; color: var(--c-muted); margin-bottom: 2px; font-weight: 500; }
-.di-zone { font-size: 1.1rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -.01em; }
-.di-hotel { font-size: .82rem; color: var(--c-muted); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.di-date { font-size: .8rem; color: var(--c-muted); margin-bottom: 2px; font-weight: 500; }
+.di-zone { font-size: 1.15rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -.01em; }
+.di-hotel { font-size: .875rem; color: var(--c-muted); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .di-right { flex-shrink: 0; text-align: right; padding: 15px 16px 15px 0; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 4px; }
 .di-drive { font-size: .78rem; color: var(--c-muted); font-weight: 500; }
 .di-arrow { color: var(--c-border); font-size: 1.1rem; }
@@ -540,6 +540,107 @@ body {
 .mb6  { margin-bottom: 6px; }
 .mb12 { margin-bottom: 12px; }
 .mb18 { margin-bottom: 18px; }
+
+/* ── DAY DETAIL MAP ────────────────────────────── */
+#det-map {
+  height: 220px; border-radius: 14px; overflow: hidden;
+  margin: 0 0 16px; box-shadow: var(--sh-card);
+  background: #E8F0F8; position: relative;
+}
+.det-map-offline {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 100%; color: var(--c-muted); gap: 8px; font-size: .9rem;
+}
+
+/* ── POI CARDS (activitats) ─────────────────────── */
+.poi-grid { display: flex; flex-direction: column; gap: 0; }
+.poi-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 0; border-bottom: 1px solid var(--c-border);
+  cursor: pointer; -webkit-user-select: none;
+  transition: opacity .1s;
+}
+.poi-card:last-child { border-bottom: none; }
+.poi-card:active { opacity: .7; }
+.poi-icon-wrap {
+  width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 1.25rem;
+}
+.poi-info { flex: 1; min-width: 0; }
+.poi-name { font-size: 1rem; font-weight: 600; line-height: 1.3; }
+.poi-type-lbl { font-size: .73rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-top: 2px; }
+.poi-warn { font-size: .78rem; color: var(--c-warn); margin-top: 2px; font-weight: 600; }
+.poi-chevron { color: var(--c-border); font-size: 1.1rem; flex-shrink: 0; }
+.poi-type-drive    { background: #F2F2F7; } .poi-type-drive    .poi-type-lbl { color: #6E6E73; }
+.poi-type-castle   { background: #F0E6FF; } .poi-type-castle   .poi-type-lbl { color: #7B2D8B; }
+.poi-type-lake     { background: #E0EDFC; } .poi-type-lake     .poi-type-lbl { color: #1255A8; }
+.poi-type-mountain { background: #E4F5EB; } .poi-type-mountain .poi-type-lbl { color: #1B6535; }
+.poi-type-museum   { background: #FFF3E0; } .poi-type-museum   .poi-type-lbl { color: #8B4513; }
+.poi-type-village  { background: #FFF8E1; } .poi-type-village  .poi-type-lbl { color: #7B6000; }
+.poi-type-culture  { background: #FEE8E8; } .poi-type-culture  .poi-type-lbl { color: #A0001C; }
+.poi-type-food     { background: #FDE8D8; } .poi-type-food     .poi-type-lbl { color: #9B3000; }
+.poi-type-view     { background: #E8F5F8; } .poi-type-view     .poi-type-lbl { color: #005E7A; }
+
+/* ── POI MODAL ──────────────────────────────────── */
+#poi-modal {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(0,0,0,.5); backdrop-filter: blur(4px);
+  display: none; align-items: flex-end;
+}
+#poi-modal.open { display: flex; }
+#poi-sheet {
+  background: var(--c-surface); border-radius: 22px 22px 0 0;
+  width: 100%; max-height: 85dvh; overflow-y: auto;
+  padding-bottom: calc(var(--nb) + 24px);
+  animation: slideUp .28s cubic-bezier(.35,0,.2,1);
+}
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+#poi-sheet-handle {
+  width: 40px; height: 4px; border-radius: 2px; background: #C7C7CC;
+  margin: 12px auto 0;
+}
+#poi-sheet-img {
+  width: 100%; height: 190px; object-fit: cover; display: block;
+  background: var(--c-beige);
+}
+#poi-sheet-body { padding: 16px 20px 8px; }
+#poi-sheet-type { font-size: .73rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+#poi-sheet-name { font-size: 1.45rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: 12px; }
+#poi-sheet-desc { font-size: 1rem; line-height: 1.65; color: var(--c-mid); margin-bottom: 18px; }
+#poi-sheet-warn { background: var(--c-warn-bg); border: 1px solid var(--c-warn); border-radius: 10px; padding: 10px 14px; font-size: .9rem; color: var(--c-warn); font-weight: 600; margin-bottom: 14px; }
+.poi-sheet-btns { display: flex; gap: 10px; }
+#poi-sheet-close { margin-top: 10px; width: 100%; padding: 14px; border-radius: 13px; border: none; background: #F2F2F7; font-size: 1rem; font-weight: 700; cursor: pointer; font-family: inherit; }
+
+/* ── HOTEL BUTTON IMPROVEMENTS ──────────────────── */
+.h-btn-apple { background: #1C1C1E; color: white; border-color: #1C1C1E; }
+.h-btn-google { background: white; color: #1A73E8; border-color: #DADCE0; }
+.h-btn-abrp { background: #00B140; color: white; border-color: #00B140; }
+.h-btn-call { color: var(--c-ok); border-color: var(--c-ok); background: var(--c-ok-bg); }
+.h-btn-bk { color: var(--c-primary); border-color: var(--c-primary); background: #FEF3EB; }
+
+/* ── KIA E-NIRO BANNER ──────────────────────────── */
+.eniro-banner {
+  background: linear-gradient(135deg, #1C1C1E 0%, #2D2D30 100%);
+  border-radius: var(--r-card); padding: 20px; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 16px; color: white;
+  box-shadow: var(--sh-lift);
+}
+.eniro-info { flex: 1; }
+.eniro-model { font-size: 1.1rem; font-weight: 800; letter-spacing: -.01em; }
+.eniro-spec { font-size: .82rem; opacity: .7; margin-top: 3px; }
+
+/* ── LAKIA SECTION ICON ─────────────────────────── */
+.lk-dog-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 99px; font-size: .82rem; font-weight: 700; }
+.lk-dog-badge.ok   { background: var(--c-ok-bg); color: var(--c-ok); }
+.lk-dog-badge.warn { background: var(--c-warn-bg); color: var(--c-warn); }
+.lk-dog-badge.no   { background: var(--c-err-bg); color: var(--c-err); }
+
+/* ── FOOD LIST clean ────────────────────────────── */
+.food-list li::before { content: none; }
+.food-list li { padding-left: 0; }
+
+/* ── LEIA LIST clean ────────────────────────────── */
+.leia-list li::before { content: none; }
 </style>
 </head>
 <body>
@@ -631,6 +732,31 @@ body {
       <div class="sub">Registre de càrregues i quilometres</div>
     </div>
 
+    <div class="eniro-banner">
+      <svg width="80" height="48" viewBox="0 0 240 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20,70 L30,40 Q40,22 65,20 L170,20 Q195,20 210,35 L225,70 Z" fill="#2A2A30" opacity=".9"/>
+        <path d="M65,20 Q80,8 100,7 L155,7 Q175,7 185,20" fill="#3A3A40"/>
+        <ellipse cx="60" cy="72" rx="18" ry="18" fill="#222" stroke="#555" stroke-width="3"/>
+        <ellipse cx="60" cy="72" rx="10" ry="10" fill="#333" stroke="#777" stroke-width="2"/>
+        <ellipse cx="60" cy="72" rx="4" ry="4" fill="#888"/>
+        <ellipse cx="183" cy="72" rx="18" ry="18" fill="#222" stroke="#555" stroke-width="3"/>
+        <ellipse cx="183" cy="72" rx="10" ry="10" fill="#333" stroke="#777" stroke-width="2"/>
+        <ellipse cx="183" cy="72" rx="4" ry="4" fill="#888"/>
+        <path d="M68,22 L82,22 L78,40 L62,40 Z" fill="#5588AA" opacity=".7"/>
+        <path d="M85,22 L125,22 L122,40 L84,40 Z" fill="#5588AA" opacity=".7"/>
+        <path d="M128,22 L162,22 L160,40 L127,40 Z" fill="#5588AA" opacity=".7"/>
+        <path d="M210,35 L225,40 L223,50 L208,48 Z" fill="#FFEE88" opacity=".8"/>
+        <rect x="20" y="55" width="8" height="10" rx="2" fill="#FF4444" opacity=".7"/>
+        <rect x="130" y="55" width="40" height="14" rx="4" fill="#00B140"/>
+        <text x="150" y="65" text-anchor="middle" font-size="8" fill="white" font-family="-apple-system,sans-serif" font-weight="bold">e-Niro</text>
+      </svg>
+      <div class="eniro-info">
+        <div class="eniro-model">Kia e-Niro 2020</div>
+        <div class="eniro-spec">64 kWh · ~460 km WLTP</div>
+        <div class="eniro-spec" style="margin-top:4px;color:#00B140;font-weight:700">⚡ 100% elèctric</div>
+      </div>
+    </div>
+
     <div class="sec-div">
       <div class="sec-icon" style="background:#FFF3E0">⚡</div>
       <span class="sec-title">Nova recàrrega</span>
@@ -667,7 +793,9 @@ body {
     <div class="sec-div"><div class="sec-icon" style="background:#FEF3EB">📋</div><span class="sec-title">Historial</span></div>
     <div class="card"><div id="rec-list"><div class="empty"><div class="ei">⚡</div><p>Sense recàrregues registrades.</p></div></div></div>
 
-    <div class="sec-div"><div class="sec-icon" style="background:#E8F5EE">🚗</div><span class="sec-title">Km diaris</span></div>
+    <div class="sec-div"><div class="sec-icon" style="background:#E8F5EE">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11l5 9-5 9H5z"/><circle cx="18" cy="17" r="3"/><circle cx="7" cy="17" r="3"/></svg>
+</div><span class="sec-title">Km diaris</span></div>
     <div class="editing-banner" id="km-edit-banner">
       <span>✏️ Editant km del dia — modifica i desa</span>
       <button class="editing-cancel" onclick="cancelEditKm()">✕ Cancelar</button>
@@ -773,6 +901,22 @@ body {
   <button class="nb" data-tab="mes"         onclick="showTab('mes')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></span>Més</button>
 </nav>
 
+<!-- ── POI MODAL ──────────────────────────────── -->
+<div id="poi-modal" onclick="closePoi(event)">
+  <div id="poi-sheet">
+    <div id="poi-sheet-handle"></div>
+    <img id="poi-sheet-img" src="" alt="" style="display:none" onerror="this.style.display='none'">
+    <div id="poi-sheet-body">
+      <div id="poi-sheet-type"></div>
+      <div id="poi-sheet-name"></div>
+      <div id="poi-sheet-warn" style="display:none"></div>
+      <div id="poi-sheet-desc"></div>
+      <div class="poi-sheet-btns" id="poi-sheet-btns"></div>
+      <button id="poi-sheet-close" onclick="closePoi()">Tancar</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── BRAND ICON SVGs ─────────────────────────────
 const ICON_APPLE = `<svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -812,7 +956,13 @@ const DAYS = [
    activities:['🚗 Trajecte llarg des de La Garriga (~6 h)','Vieux Lyon (UNESCO) i traboules','Funicular a Notre-Dame de Fourvière (vistes)','Place Bellecour / Presqu\'île al capvespre'],
    food:['Sopar en un bouchon lyonnais','Quenelles, salade lyonnaise, andouillette'],
    leia:['Lió és molt dog-friendly','Traboules i Vieux Lyon OK amb gos','Funicular: morrió o a coll','Parc de la Tête d\'Or per estirar les potes'],
-   lake:null},
+   lake:null,
+   pois:[
+     {type:'drive',   name:'Trajecte des de La Garriga', desc:'~6 hores per la A7/AP-7 nord, entrant a França per La Jonquera, AP-7/A9/A7 fins a Lyon. Parades recomanades cada 2h. Supercharger a Perpignan i Nîmes.', lat:45.7338, lng:4.9278},
+     {type:'village', name:'Vieux Lyon (UNESCO)', desc:'Barri medieval i renaixentista (segles XV-XVII) inscrit al Patrimoni de la UNESCO el 1998. Famós per les "traboules": passatges coberts que travessen els edificis i connecten carrers. El barri renaixentista més ben conservat de França.', lat:45.7604, lng:4.8274, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Vieux_lyon2.jpg/280px-Vieux_lyon2.jpg'},
+     {type:'culture', name:'Notre-Dame de Fourvière', desc:'Basílica neobizantina (1872-1884) al cim del turó on els romans fundaren Lugdunum. El funicular connecta la city amb la basílica. Vistes panoràmiques sobre Lyon i els Alps en dies clars.', lat:45.7625, lng:4.8223, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Notre-Dame_de_Fourviere_Lyon_2.jpg/280px-Notre-Dame_de_Fourviere_Lyon_2.jpg'},
+     {type:'view',    name:'Place Bellecour', desc:'Una de les places més grans d\'Europa (310 × 200 m). Centre neuràlgic de la Presqu\'île, l\'estret de terra entre el Roine i el Saona. Perfecta per passejades al capvespre amb la Leia.', lat:45.7578, lng:4.8320},
+   ]},
   {n:2,from:'2026-08-11',to:'2026-08-12',zone:'Selva Negra',flag:'🇩🇪',drive:'~5 h',
    hotel:{name:'Hotel Restaurant Schwörer',addr:'Oberprechtal, 77830 Bühlertal',
      lat:48.218,lng:8.073,platform:'Booking',platformUrl:'https://secure.booking.com/myreservations.html',
@@ -821,7 +971,12 @@ const DAYS = [
    activities:['🚗 Trajecte (~5 h) cap a la Selva Negra','Parada a Triberg: cascades + cucuts','Vogtsbauernhof (Gutach) si hi ha temps','Arribada al Schwörer al vespre'],
    food:['Schwarzwälder Kirschtorte (pastís de la Selva Negra)','Pernil fumat de la zona'],
    leia:['Cascades de Triberg OK amb corretja (entrada de pagament)','Vogtsbauernhof OK amb corretja','Boscos i rutes de la zona ideals'],
-   lake:null},
+   lake:null,
+   pois:[
+     {type:'drive',   name:'Trajecte La Garriga → Selva Negra', desc:'~5 hores. A7/AP-7 fins Perpignan, A9 Narbona, A61/A62 Tolosa, A20/A71 cap al nord, creuant a Suïssa i Alemanya per Basilea. B31 pels boscos de la Selva Negra.', lat:47.6, lng:7.6},
+     {type:'view',    name:'Cascades de Triberg', desc:'Les cascades més altes d\'Alemanya (163 m en 7 graons al mig de la Selva Negra). A Triberg trobareu botigues de rellotges de cucut, la pastisseria Café Schäfer (famosa pel pastís de la Selva Negra) i el Museu de la Selva Negra.', lat:48.1319, lng:8.2272, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Triberg_Waterfall_top.jpg/280px-Triberg_Waterfall_top.jpg'},
+     {type:'museum',  name:'Vogtsbauernhof (Gutach)', desc:'Museu a l\'aire lliure amb cases de pagès originals de la Selva Negra dels segles XVI-XVIII. Demostra la vida rural tradicional amb molins de fusta, granges i artesans en acció.', lat:48.1619, lng:8.2175, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Freilichtmuseum_Vogtsbauernhof.jpg/280px-Freilichtmuseum_Vogtsbauernhof.jpg'},
+   ]},
   {n:3,from:'2026-08-12',to:'2026-08-13',zone:'Selva Negra',flag:'🇩🇪',drive:'~1-2 h',
    hotel:{name:'Hotel Restaurant Schwörer',addr:'Oberprechtal, 77830 Bühlertal',
      lat:48.218,lng:8.073,platform:'Booking',platformUrl:'https://secure.booking.com/myreservations.html',
@@ -830,7 +985,13 @@ const DAYS = [
    activities:['Dia complet a la Selva Negra','🏊 Llac Titisee (passeig i bany)','Pujada al Feldberg (cim, vistes als Alps)','Sankt Märgen o museu del rellotge (Furtwangen)','Schwarzwaldhochstrasse panoràmica'],
    food:['Dinar en una Gasthaus rural','Maultaschen, Spätzle o truita de riu'],
    leia:['Titisee: bany OK a la ribera sud','Càmping Weiherhof OK per gossos','Vaixells de passatgers admeten gossos','Feldberg amb corretja'],
-   lake:'Titisee'},
+   lake:'Titisee',
+   pois:[
+     {type:'lake',     name:'Titisee', desc:'Llac glacial de 2 km², el més visitat de la Selva Negra. Temperatura ~20°C a l\'agost. Gossos: zona sud i càmping Weiherhof SÍ, zona nord NO. Vaixells admeten gossos. Volta de 6 km al voltant.', lat:47.8986, lng:8.1535, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Titisee.JPG/280px-Titisee.JPG'},
+     {type:'mountain', name:'Feldberg', desc:'El cim més alt de la Selva Negra (1.493 m). Telefèric des de Feldberg-Baar. Panoràmica sobre el Rin, els Alps suïssos i els Vosges. Caminada al voltant del cim fins al llac Feldsee (el més alt de la Selva Negra).', lat:47.8744, lng:8.0044, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Feldberg_Schwarzwald_2016.jpg/280px-Feldberg_Schwarzwald_2016.jpg'},
+     {type:'museum',   name:'Museu del Rellotge (Furtwangen)', desc:'El museu de rellotges de cucut i mecanismes de la Selva Negra més gran del món. Més de 8.000 rellotges dels segles XVII-XXI. Entrada: ~7 € adults. Molt entretenidor i sorprenent.', lat:48.0503, lng:8.2072},
+     {type:'village',  name:'Sankt Märgen', desc:'Poblet alpí típic amb el monestir agustinià (1118). Vistes inigualables als prats de la Selva Negra Alta. Famós pels seus cavalls de la raça "Schwarzwälder Füchse" (rossos i molt grans).', lat:47.9144, lng:8.1100},
+   ]},
   {n:4,from:'2026-08-13',to:'2026-08-14',zone:'Ettal',flag:'🇩🇪',drive:'~4-5 h',
    hotel:{name:'Klosterhotel Ludwig der Bayer',addr:'Kaiser-Ludwig-Platz 10, 82488 Ettal',
      lat:47.5691,lng:11.0953,platform:'Hoteles.com',platformUrl:'https://www.hoteles.com/trips/',
@@ -838,7 +999,13 @@ const DAYS = [
    activities:['🚗 Trajecte cap a Baviera (~4-5 h)','Parada a Lindau (illa al llac de Constança)','O Wieskirche (rococó, UNESCO)','Vespre: monestir d\'Ettal — basílica + tast de licors i formatges'],
    food:['Sopar a la Klosterbrauerei Ettal','Cervesa pròpia + Schweinebraten'],
    leia:['Lindau port OK amb gos','Wieskirche: només exterior','Ettal: jardins/exterior OK; basílica NO','Biergarten d\'Ettal acostuma a admetre gossos'],
-   lake:null},
+   lake:null,
+   pois:[
+     {type:'drive',   name:'Trajecte cap a Baviera', desc:'~4-5 hores. De la Selva Negra per la B31 fins a Freiburg, A5 nord, A98 est cap a Konstanz, rodejant el llac de Constança per l\'est, B308 per l\'Allgäu austríac fins a Baviera.', lat:47.5, lng:9.8},
+     {type:'village', name:'Lindau (illa al Bodensee)', desc:'Illa medieval al llac de Constança (Bodensee). Connectada per pont. El casco antic medieval, les cases amb frescos renaixentistes, el port amb el lleó bàvar i el far fan d\'aquesta illa una de les més fotogèniques d\'Alemanya.', lat:47.5441, lng:9.6826, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Lindau_Hafeneinfahrt_2.jpg/280px-Lindau_Hafeneinfahrt_2.jpg'},
+     {type:'culture', name:'Wieskirche (UNESCO)', desc:'Capella peregrina rococó (1745-1754) inscrita al Patrimoni UNESCO. Considerada una de les obres mestres del rococó bàvar. Interior exuberant en contrast amb l\'exterior senzill al mig d\'un prat alpí.', lat:47.6818, lng:10.8912, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wieskirche.jpg/280px-Wieskirche.jpg'},
+     {type:'culture', name:'Monestir d\'Ettal', desc:'Abadia benedictina fundada el 1330 per l\'emperador Lluís IV. La basílica barroca és espectacular. El monestir produeix licors (Ettaler Klosterliqueur), cervesa i formatge. Tast a la botiga del monestir.', lat:47.5694, lng:11.0944, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Ettal_Kloster_2016.jpg/280px-Ettal_Kloster_2016.jpg'},
+   ]},
   {n:5,from:'2026-08-14',to:'2026-08-15',zone:'Ettal — Castells',flag:'🇩🇪',drive:'~2 h',
    hotel:{name:'Klosterhotel Ludwig der Bayer',addr:'Kaiser-Ludwig-Platz 10, 82488 Ettal',
      lat:47.5691,lng:11.0953,platform:'Hoteles.com',platformUrl:'https://www.hoteles.com/trips/',
@@ -846,7 +1013,13 @@ const DAYS = [
    activities:['Dia dels castells de Lluís II','Matí: Neuschwanstein + Hohenschwangau ⚠️ entrades 1-2 mesos abans!','Vistes des del pont Marienbrücke','Tarda: castell de Linderhof + gruta de Venus'],
    food:['Pícnic o restaurant prop dels castells','Kaiserschmarrn de postres'],
    leia:['⚠️ Castells NO admeten gossos a l\'interior','Torns: un visita, l\'altre passeja la Leia','Pont Marienbrücke exterior i jardins de Linderhof OK','Boscos al voltant ideals per passejar'],
-   lake:null},
+   lake:null,
+   pois:[
+     {type:'castle', name:'Schloss Neuschwanstein', desc:'El castell dels contes de fades construït pel rei Lluís II de Baviera (1869-1886). Va inspirar el castell de La Bella Dorment de Disney. Visita interior obligatòria per taquilla o online (neuschwanstein.de). Pujada a peu (~30 min) o en autobús (3 €).', lat:47.5576, lng:10.7498, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Schloss_Neuschwanstein_2013.jpg/280px-Schloss_Neuschwanstein_2013.jpg', warn:'Entrades obligatòries 1-2 mesos abans'},
+     {type:'castle', name:'Schloss Hohenschwangau', desc:'Residència d\'estiu dels reis de Baviera, on va créixer Lluís II. Construït al s. XII i restaurat en estil neogòtic al XIX. Vistes directes a Neuschwanstein. Entrades a la mateixa taquilla o online.', lat:47.5578, lng:10.7375, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Hohenschwangau-castle.jpg/280px-Hohenschwangau-castle.jpg'},
+     {type:'view',   name:'Pont Marienbrücke', desc:'Pont penjant sobre la gorja de Pöllat, just sobre el castell de Neuschwanstein. La millor perspectiva fotogràfica del castell. 10 min a peu des de Neuschwanstein. ⚠️ Pot estar tancat per obres de reparació.', lat:47.5571, lng:10.7521},
+     {type:'castle', name:'Palau de Linderhof', desc:'L\'únic palau que el rei Lluís II va veure acabat (1878). Estil rococó francès inspirat en Versalles però en miniatura. Jardins espectaculars amb fonts, cascada i la famosa Gruta de Venus artificial.', lat:47.5718, lng:10.9619, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Linderhof_Castle_front.jpg/280px-Linderhof_Castle_front.jpg'},
+   ]},
   {n:6,from:'2026-08-15',to:'2026-08-16',zone:'Ettal — Alps',flag:'🇩🇪',drive:'~1-2 h',
    hotel:{name:'Klosterhotel Ludwig der Bayer',addr:'Kaiser-Ludwig-Platz 10, 82488 Ettal',
      lat:47.5691,lng:11.0953,platform:'Hoteles.com',platformUrl:'https://www.hoteles.com/trips/',
@@ -854,7 +1027,13 @@ const DAYS = [
    activities:['Dia de muntanya a Garmisch','Pujada al Zugspitze (cremallera + telefèric)','🏊 Llac Eibsee al peu de la muntanya','Alternativa: gorja Partnachklamm','Tarda: Oberammergau (frescos Lüftlmalerei)'],
    food:['Käsespätzle a una hütte de muntanya','Weisswurst amb mostassa dolça + bretzel'],
    leia:['Zugspitze: morrió + corretja curta (confirma al moment)','Partnachklamm: estret i sorollos, atenció','Eibsee: bany a cales lliures, corretja obligatòria','Oberammergau passeig OK'],
-   lake:'Eibsee'},
+   lake:'Eibsee',
+   pois:[
+     {type:'mountain', name:'Zugspitze (2.962 m)', desc:'El cim més alt d\'Alemanya. S\'hi arriba en cremallera des de Garmisch (1h10) o per telefèric des de l\'Eibsee (10 min). A dalt: glacera, panoràmica a 4 països (DE, AT, CH, IT), restaurants. Preu ida/tornada: ~70 €/adult.', lat:47.4211, lng:10.9853, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Zugspitze_mit_Gipfelstation.jpg/280px-Zugspitze_mit_Gipfelstation.jpg'},
+     {type:'lake',     name:'Eibsee', desc:'Llac turquesa als peus de la Zugspitze (973 m d\'altitud). Aigüesblanques cristal·lines, cales de grava. Gossos: permesos a les cales lliures fora del Strandbad oficial. Temperatura ~17-20°C. Molt fotogènic.', lat:47.4556, lng:10.9842, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Eibsee_Panorama.jpg/280px-Eibsee_Panorama.jpg'},
+     {type:'view',     name:'Gorja Partnachklamm', desc:'Gorja salvatge de 700 m prop de Garmisch. Camí excavat a la roca, amb cascades i l\'agua de color verd esmeralda. Entrada: ~7 €/adult. Gossos permesos amb corretja. Molt espectacular.', lat:47.4619, lng:11.0789},
+     {type:'village',  name:'Oberammergau', desc:'Poble famós pels frescos (Lüftlmalerei) a les façanes. Seu de la Passió de Crist representada cada 10 anys (pròxima: 2030). Botiguetes d\'artesania en fusta amb figures religioses tallades a mà.', lat:47.5987, lng:11.0656, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Oberammergau_Lueftlmalerei.jpg/280px-Oberammergau_Lueftlmalerei.jpg'},
+   ]},
   {n:7,from:'2026-08-16',to:'2026-08-17',zone:'Allgäu',flag:'🇩🇪',drive:'~1,5-2 h',
    hotel:{name:'Panoramahotel Kühbergalp',addr:'Im Kühboden, 87459 Pfronten, Allgäu',
      lat:47.5797,lng:10.5302,platform:'Booking',platformUrl:'https://secure.booking.com/myreservations.html',
@@ -863,7 +1042,12 @@ const DAYS = [
    activities:['🚗 Trajecte curt cap a l\'Allgäu (~1,5-2 h)','Parada a Füssen (centre, Hohes Schloss)','Arribada al Panoramahotel: vistes als Alps','Passeig per Pfronten o Nesselwang'],
    food:['Sopar a l\'hotel amb vistes al capvespre'],
    leia:['Füssen centre i Hohes Schloss exterior: OK amb corretja','✅ Panoramahotel confirmat: gossos sempre benvinguts!','Passejos per Pfronten i Nesselwang molt aptes'],
-   lake:null},
+   lake:null,
+   pois:[
+     {type:'drive',   name:'Trajecte Ettal → Pfronten', desc:'~1,5-2 hores per carreteres alpines. De Ettal cap a Füssen per la B17 (Romantische Strasse) i cap a Pfronten pujant pel Kühboden fins al Panoramahotel.', lat:47.5, lng:10.6},
+     {type:'village', name:'Füssen', desc:'Antiga residència d\'estiu dels bisbes d\'Augsburg. El "Hohes Schloss" (s. XIV) domina el nucli medieval. Punt de partida de la Ruta Romàntica. El llac Forggensee és just al nord de la ciutat.', lat:47.5710, lng:10.7028, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Hohes_Schloss_Fuessen.jpg/280px-Hohes_Schloss_Fuessen.jpg'},
+     {type:'view',    name:'Panoramahotel Kühbergalp', desc:'Hotel als 1.100 m d\'altitud sobre Pfronten. Vistes espectaculars als Alps de l\'Allgäu i als castells de Neuschwanstein. El camí d\'accés és una carretera de muntanya estreta. Gossos benvinguts.', lat:47.5797, lng:10.5302},
+   ]},
   {n:8,from:'2026-08-17',to:'2026-08-18',zone:'Allgäu',flag:'🇩🇪',drive:'~1-2 h',
    hotel:{name:'Panoramahotel Kühbergalp',addr:'Im Kühboden, 87459 Pfronten, Allgäu',
      lat:47.5797,lng:10.5302,platform:'Booking',platformUrl:'https://secure.booking.com/myreservations.html',
@@ -872,7 +1056,12 @@ const DAYS = [
    activities:['Dia complet a l\'Allgäu','Telefèric a Breitenberg o Tegelberg','🏊⭐ Llac Hopfensee (el més càlid, vistes a Neuschwanstein)','Alternativa: Weissensee (més tranquil)','Tarda: spa de l\'hotel'],
    food:['Allgäuer Bergkäse','Kaiserschmarrn de postres'],
    leia:['Telefèrics: morrió (confirma al moment)','Hopfensee: gossos OK fora del Strandbad','Weissensee: ribera del bosc OK','Spa de l\'hotel: la Leia no hi pot entrar — torns'],
-   lake:'Hopfensee'},
+   lake:'Hopfensee',
+   pois:[
+     {type:'mountain', name:'Breitenberg / Tegelberg', desc:'Dos cims amb telefèric als voltants de Füssen. El Tegelberg (1.720 m) és el que surt a més fotos amb Neuschwanstein al fons. Gossos: normalment admesos al telefèric amb morrió; confirmeu el dia a la taquilla.', lat:47.5667, lng:10.7167},
+     {type:'lake',     name:'Hopfensee', desc:'EL MÉS CÀLID dels llacs prealpins (fins ~25°C a l\'agost). Vistes directes a Neuschwanstein i als Alps. Gossos permesos a totes les zones excepte el Strandbad oficial. Volta plana de 7 km ideal amb gos. Molt recomanat.', lat:47.6333, lng:10.7167, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Hopfensee_mit_Neuschwanstein.jpg/280px-Hopfensee_mit_Neuschwanstein.jpg'},
+     {type:'lake',     name:'Weissensee', desc:'Llac petit i tranquil (2,3 km de perímetre). Aigüesblanques molt clares. La platja oficial NO admet gossos, però la Waldseite (ribera del bosc) sí, accessible a peu pel camí de la ribera. Temperatura ~19-20°C.', lat:47.620, lng:10.740},
+   ]},
   {n:9,from:'2026-08-18',to:'2026-08-19',zone:'Allgäu',flag:'🇩🇪',drive:'~2-3 h',
    hotel:{name:'Panoramahotel Kühbergalp',addr:'Im Kühboden, 87459 Pfronten, Allgäu',
      lat:47.5797,lng:10.5302,platform:'Booking',platformUrl:'https://secure.booking.com/myreservations.html',
@@ -881,7 +1070,12 @@ const DAYS = [
    activities:['Últim dia als Alps','🏊 Forggensee + barca (la Leia per 3€)','🏊 Großer Alpsee a Immenstadt','Poble de Bad Hindelang o Oberstdorf','Compres: records, cervesa, formatge'],
    food:['Comprar formatge, cervesa artesana i licors d\'herbes per emportar'],
    leia:['Forggensee: gossos als vaixells per 3€ (1 jun – 15 oct)','Großer Alpsee: Liegewiese i restaurant Seepromenade OK','Oberstdorf i Bad Hindelang molt dog-friendly'],
-   lake:'Forggensee'},
+   lake:'Forggensee',
+   pois:[
+     {type:'lake', name:'Forggensee', desc:'El llac artificial més gran de Baviera (15,2 km²), creat el 1954 embassant el riu Lech. Barca des de Füssen: la Leia hi puja per 3 € (1 juny – 15 octubre). Banys lliures als trams nord prop del Panoramaweg.', lat:47.6167, lng:10.700, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Forggensee_Panorama.jpg/280px-Forggensee_Panorama.jpg'},
+     {type:'lake', name:'Großer Alpsee (Immenstadt)', desc:'El llac natural MÉS GRAN de l\'Allgäu (2,4 km², 22 m de fondària). Gossos permesos a la Liegewiese, l\'agua i al restaurant Seepromenade. Volta de 11 km. Temperatura ~20°C.', lat:47.5517, lng:10.2139},
+     {type:'village', name:'Oberstdorf', desc:'Estació turística tot l\'any als Alps. Punt de partida per a la vall de Trettachtal. Mercat local amb embotits i formatges de l\'Allgäu. La Leia pot entrar a molts establiments locals. Records: Allgäuer Bergkäse i Schnaps.', lat:47.4100, lng:10.2806},
+   ]},
   {n:10,from:'2026-08-19',to:'2026-08-20',zone:'Chalon-sur-Saône',flag:'🇫🇷',drive:'~7-8 h',
    hotel:{name:'ibis Styles Chalon sur Saône',addr:'Avenue de l\'Europe, 71100 Chalon-sur-Saône',
      lat:46.7833,lng:4.850,platform:'Booking',platformUrl:'https://secure.booking.com/myreservations.html',
@@ -890,13 +1084,21 @@ const DAYS = [
    activities:['🚗 Etapa llarga cap a Borgonya (~7-8 h)','Parada a Beaune (Hospices, ruta del vi) o Dijon','Vespre: Chalon-sur-Saône, passeig pel moll del Saône'],
    food:['Sopar borgonyó: boeuf bourguignon, escargots','Formatges Époisses + copa de Pinot Noir'],
    leia:['Beaune i Dijon: cascs antics OK amb corretja','Hospices interior: gossos NO','Moll del Saône ideal al capvespre'],
-   lake:null},
+   lake:null,
+   pois:[
+     {type:'drive',   name:'Trajecte llarg cap a Borgonya', desc:'~7-8 hores. De Pfronten per la A7 alemanyo-austriaca, Lindau, Bregenz, Feldkirch, A14 fins St. Gallen, A1 fins Zuric, N1 fins Berna, A6/A9 fins Lausana i Ginebra, A40 fins Mâcon, N6 fins Chalon.', lat:47.0, lng:8.0},
+     {type:'village', name:'Beaune', desc:'La capital vinícola de la Borgonya. Famosa pels "Hospices de Beaune" (1443), hospital medieval amb teules policromades. Mercat de vi en caves subterrànies. Centre medieval ben conservat. Gossos benvinguts al carrer.', lat:47.0245, lng:4.8395, photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/H%C3%B4tel-Dieu_de_Beaune_-_Toits.jpg/280px-H%C3%B4tel-Dieu_de_Beaune_-_Toits.jpg'},
+     {type:'food',    name:'Gastronomia borgonya', desc:'Boeuf Bourguignon (vedella guisada amb Pinot Noir), escargots de Borgonya al mantequilla i all, formatge Époisses DOP. Vi: Côte de Nuits (Gevrey-Chambertin) o Côte de Beaune. Una nit per gaudir-ne.', lat:47.0245, lng:4.8395},
+   ]},
   {n:11,from:'2026-08-20',to:'2026-08-21',zone:'La Garriga — Casa',flag:'🏠',drive:'~9 h',
    hotel:null,
    activities:['🚗 Etapa molt llarga cap a casa (~9 h)','Planifica bé les càrregues del Tesla','Possible parada gastronòmica a Lyon o Nîmes','Arribada a casa al vespre 🎉'],
    food:['Última parada llarga per dinar bé','Fi del viatge 🎉'],
    leia:['Parades cada 2-3 h perquè la Leia estiri les potes','Àrees de servei franceses solen tenir zones de gespa'],
-   lake:null}
+   lake:null,
+   pois:[
+     {type:'drive', name:'Etapa llarga de tornada a casa', desc:'~9 hores. De Chalon per la A6 fins Lyon, A7 Vallée du Rhône, AP-7 La Jonquera fins La Garriga. Planifica càrregues: Supercharger a Chalon, Nîmes i Perpignan. Preveu arribar a casa al vespre.', lat:44.0, lng:5.0},
+   ]}
 ];
 
 const LAKES = [
@@ -1149,16 +1351,31 @@ function renderItinerari(){
 }
 
 // ── DAY DETAIL ───────────────────────────────────
+const POI_TYPE_META = {
+  drive:    {emoji:'🚗', label:'Trajecte',    color:'#6E6E73'},
+  castle:   {emoji:'🏰', label:'Castell',     color:'#7B2D8B'},
+  lake:     {emoji:'🏊', label:'Llac',        color:'#1255A8'},
+  mountain: {emoji:'⛰',  label:'Muntanya',   color:'#1B6535'},
+  museum:   {emoji:'🏛',  label:'Museu',      color:'#8B4513'},
+  village:  {emoji:'🏘',  label:'Poble',      color:'#7B6000'},
+  culture:  {emoji:'🎨', label:'Cultura',     color:'#A0001C'},
+  food:     {emoji:'🍽',  label:'Gastronomia',color:'#9B3000'},
+  view:     {emoji:'👁',  label:'Mirador',    color:'#005E7A'},
+};
+
+let detailMap = null;
+let currentDayPois = [];
+
 function openDetail(i){
   const d = DAYS[i];
   const hk = `hotel_${d.n}`;
   const hx = hotelExtra[hk]||{};
   const lake = d.lake ? LAKES.find(l=>l.name===d.lake) : null;
+  currentDayPois = d.pois || [];
 
-  // Header
   document.getElementById('det-lbl').textContent  = `Dia ${d.n} · ${fmtDate(d.from)} – ${fmtDate(d.to)}`;
   document.getElementById('det-zone').textContent = `${d.flag} ${d.zone}`;
-  document.getElementById('det-drive-chip').textContent = `🚗 ${d.drive}`;
+  document.getElementById('det-drive-chip').textContent = `${d.drive} conducció`;
   const mini = document.getElementById('det-hotel-mini');
   if(d.hotel){
     mini.style.display = 'flex';
@@ -1168,91 +1385,113 @@ function openDetail(i){
 
   let html = '';
 
+  // MAP placeholder
+  html += `<div id="det-map"><div class="det-map-offline">Carregant mapa...</div></div>`;
+
   // NAV BUTTONS
   if(d.hotel){
     const {lat,lng,addr} = d.hotel;
-    html += `<div class="sec-div"><div class="sec-icon" style="background:#F3F4F6">🧭</div><span class="sec-title">Navegació</span></div>
-    <div class="navbtns">
+    html += `<div class="navbtns">
       ${svgBtn(ICON_APPLE,'Apple Maps','nb-apple',mapsApple(lat,lng))}
       ${svgBtn(ICON_GOOGLE,'Google Maps','nb-google',mapsGoogle(addr))}
-      ${svgBtn(ICON_ABRP,'ABRP','nb-abrp',mapsABRP(lat,lng))}
+      ${svgBtn(ICON_ABRP,'ABRP','nb-abrp','https://abetterrouteplanner.com/')}
     </div>`;
   }
 
   // HOTEL
   if(d.hotel){
     const h = d.hotel;
-    const dogChip = !h.dog ? `<span class="chip chip-n">🐾 Gos: no informat</span>`
-      : h.dog.includes('Dubte') ? `<span class="chip chip-warn">🐾 Confirmar gossos</span>`
+    const dogChip = !h.dog ? `<span class="chip chip-n">Gos: no informat</span>`
+      : h.dog.includes('Dubte') ? `<span class="chip chip-warn">⚠️ Confirmar gossos</span>`
       : `<span class="chip chip-ok">🐾 ${h.dog}</span>`;
     const evChip = h.ev==='ok' ? `<span class="chip chip-ok">⚡ Càrrega EV</span>`
       : h.ev?.includes('Dubte') ? `<span class="chip chip-warn">⚡ EV: confirmar</span>`
       : `<span class="chip chip-n">⚡ EV: no informat</span>`;
-    html += `<div class="sec-div" style="margin-top:0"><div class="sec-icon" style="background:#FFF3E0">🏨</div><span class="sec-title">Hotel</span></div>
+    html += `<div class="sec-div" style="margin-top:6px"><div class="sec-icon" style="background:#FFF3E0">🏨</div><span class="sec-title">Hotel</span></div>
     <div class="card">
       <div class="h-name">${h.name}</div>
-      <div class="h-addr">📍 <span>${h.addr}</span></div>
+      <div class="h-addr">📍 ${h.addr}</div>
       <div class="chips">
         ${dogChip}${evChip}
         <span class="chip chip-n">🅿️ ${h.parking}</span>
-        ${h.checkin?`<span class="chip chip-n">🔑 Check-in ${h.checkin}</span>`:''}
-        ${h.checkout?`<span class="chip chip-n">🚪 Check-out ${h.checkout}</span>`:''}
-        ${h.pendent?`<span class="chip chip-warn">💳 Pendent: ${h.pendent}</span>`:''}
+        ${h.checkin?`<span class="chip chip-n">Check-in ${h.checkin}</span>`:''}
+        ${h.checkout?`<span class="chip chip-n">Check-out ${h.checkout}</span>`:''}
+        ${h.pendent?`<span class="chip chip-warn">💳 ${h.pendent}</span>`:''}
       </div>
       <div class="h-meta-row">
         <div class="h-meta-item"><span class="lbl">Plataforma</span><span class="val">${h.platform}</span></div>
         <div class="h-meta-item"><span class="lbl">Preu/nit</span><span class="val t-primary">${fmtEur(h.price)}</span></div>
       </div>
-      <div class="h-edit-block">
-        <label class="lbl">Telèfon hotel</label>
+      <div class="h-edit-block"><label class="lbl">Telèfon hotel</label>
         <input class="h-edit-input" type="tel" placeholder="+ Afegir telèfon" value="${hx.phone||h.phone||''}" oninput="saveHX(${d.n},'phone',this.value)">
       </div>
-      <div class="h-edit-block">
-        <label class="lbl">Número de reserva</label>
+      <div class="h-edit-block"><label class="lbl">Número de reserva</label>
         <input class="h-edit-input" type="text" placeholder="+ Afegir nº reserva" value="${hx.resNum||h.resNum||''}" oninput="saveHX(${d.n},'resNum',this.value)">
       </div>
-      <div class="h-edit-block">
-        <label class="lbl">PIN / codi d'accés</label>
+      <div class="h-edit-block"><label class="lbl">PIN / codi d'accés</label>
         <input class="h-edit-input" type="text" placeholder="+ Afegir PIN" value="${hx.pin||h.pin||''}" oninput="saveHX(${d.n},'pin',this.value)">
       </div>
       ${h.platformRef?`<div class="h-edit-block"><label class="lbl">Núm. itinerari (${h.platform})</label><input class="h-edit-input" type="text" readonly value="${h.platformRef}"></div>`:''}
       <div class="h-btns">
         ${(hx.phone||h.phone)?`<a class="h-btn h-btn-call" href="tel:${hx.phone||h.phone}">📞 Trucar</a>`:''}
-        <a class="h-btn h-btn-bk" href="${h.platformUrl}" target="_blank">🔗 Gestió reserva (${h.platform})</a>
+        <a class="h-btn h-btn-bk" href="${h.platformUrl}" target="_blank">Gestió reserva (${h.platform})</a>
       </div>
     </div>`;
   } else {
-    html += `<div class="card" style="text-align:center;padding:24px"><div style="font-size:2rem">🏠</div><div style="font-size:1rem;font-weight:700;margin-top:8px">Tornada a La Garriga</div><div class="t-small t-muted">Etapa molt llarga · ~9 h de conducció</div></div>`;
+    html += `<div class="card" style="text-align:center;padding:28px"><div style="font-size:2.5rem">🏠</div><div style="font-size:1.1rem;font-weight:700;margin-top:10px">Tornada a La Garriga</div><div class="t-small t-muted" style="margin-top:4px">Etapa molt llarga · ~9 h de conducció</div></div>`;
   }
 
   // LLAC DEL DIA
   if(lake){
-    html += `<div class="sec-div"><div class="sec-icon" style="background:${lake.dogStatus==='ok'?'#E3F0FC':'#FFF3E0'}">🏊</div><span class="sec-title">Llac del dia</span></div>
+    const dogCls = lake.dogStatus==='ok'?'ok':lake.dogStatus==='warn'?'warn':'no';
+    html += `<div class="sec-div"><div class="sec-icon" style="background:#E0EDFC">🏊</div><span class="sec-title">Llac del dia</span></div>
     <div class="lake-day-card">
       <div class="ldc-header">
         <div><div class="ldc-name">${lake.name}</div><div class="ldc-zone">${lake.zone}</div></div>
         <div class="ldc-temp">${lake.temp}</div>
       </div>
-      <div class="ldc-dog">🐾 ${lake.dog} ${lake.dogDetail}</div>
-      <div class="ldc-txt">${lake.detail}</div>
+      <div class="ldc-dog"><span class="lk-dog-badge ${dogCls}">🐾 ${lake.dogDetail}</span></div>
+      <div class="ldc-txt" style="margin-top:10px">${lake.detail}</div>
       <div class="ldc-btns">
-        <a class="ldc-btn" href="${mapsApple(lake.lat,lake.lng)}">🍎 Apple Maps</a>
-        <a class="ldc-btn" href="${mapsGoogle(lake.name+', '+lake.zone)}" target="_blank">🗺 Google Maps</a>
+        <a class="ldc-btn" href="${mapsApple(lake.lat,lake.lng)}" style="display:flex;align-items:center;justify-content:center;gap:7px">${ICON_APPLE} Apple Maps</a>
+        <a class="ldc-btn" href="${mapsGoogle(lake.name+', '+lake.zone)}" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:7px">${ICON_GOOGLE} Google Maps</a>
       </div>
     </div>`;
   }
 
-  // ACTIVITATS
-  html += `<div class="sec-div"><div class="sec-icon" style="background:#FFF3E0">🎯</div><span class="sec-title">Activitats del dia</span></div>
-  <div class="card"><ul class="alist">${d.activities.map(a=>`<li>${a}</li>`).join('')}</ul></div>`;
+  // ACTIVITATS / POIS
+  if(currentDayPois.length){
+    html += `<div class="sec-div"><div class="sec-icon" style="background:#FFF3E0">🗺</div><span class="sec-title">Activitats del dia</span></div>
+    <div class="card"><div class="poi-grid">
+    ${currentDayPois.map((p,idx)=>{
+      const m = POI_TYPE_META[p.type]||{emoji:'📍',label:p.type,color:'#888'};
+      return `<div class="poi-card" onclick="openPoi(${idx})">
+        <div class="poi-icon-wrap poi-type-${p.type}">${m.emoji}</div>
+        <div class="poi-info">
+          <div class="poi-name">${p.name}</div>
+          <div class="poi-type-lbl poi-type-${p.type}" style="color:${m.color}">${m.label}</div>
+          ${p.warn?`<div class="poi-warn">⚠️ ${p.warn}</div>`:''}
+        </div>
+        <span class="poi-chevron">›</span>
+      </div>`;
+    }).join('')}
+    </div></div>`;
+  } else if(d.activities){
+    html += `<div class="sec-div"><div class="sec-icon" style="background:#FFF3E0">🎯</div><span class="sec-title">Activitats del dia</span></div>
+    <div class="card"><ul class="alist">${d.activities.map(a=>`<li>${a}</li>`).join('')}</ul></div>`;
+  }
 
   // MENJAR
-  html += `<div class="sec-div"><div class="sec-icon" style="background:#FFF3E0">🍽</div><span class="sec-title">Gastronomia</span></div>
-  <div class="card"><ul class="alist food-list">${d.food.map(f=>`<li>${f}</li>`).join('')}</ul></div>`;
+  if(d.food?.length){
+    html += `<div class="sec-div"><div class="sec-icon" style="background:#FDE8D8">🍽</div><span class="sec-title">Gastronomia</span></div>
+    <div class="card"><ul class="alist food-list">${d.food.map(f=>`<li>${f}</li>`).join('')}</ul></div>`;
+  }
 
   // LEIA
-  html += `<div class="sec-div"><div class="sec-icon" style="background:#F0F9F4">🐾</div><span class="sec-title">Amb la Leia</span></div>
-  <div class="card"><ul class="alist leia-list">${d.leia.map(l=>`<li>${l}</li>`).join('')}</ul></div>`;
+  if(d.leia?.length){
+    html += `<div class="sec-div"><div class="sec-icon" style="background:#F0F9F4">🐾</div><span class="sec-title">Amb la Leia</span></div>
+    <div class="card"><ul class="alist leia-list">${d.leia.map(l=>`<li>${l}</li>`).join('')}</ul></div>`;
+  }
 
   // NOTES
   const nv = notes[`day_${d.n}`]||'';
@@ -1264,6 +1503,61 @@ function openDetail(i){
   document.getElementById('back-btn').style.display = 'block';
   document.getElementById('hdr-title').textContent = `Dia ${d.n} — ${d.zone}`;
   document.getElementById('det').scrollTop = 0;
+
+  // Load map after DOM is ready
+  const mapPins = [];
+  if(d.hotel) mapPins.push({lat:d.hotel.lat, lng:d.hotel.lng, type:'hotel', name:d.hotel.name});
+  if(lake)    mapPins.push({lat:lake.lat, lng:lake.lng, type:'lake', name:lake.name});
+  currentDayPois.filter(p=>p.lat).forEach(p=>mapPins.push({lat:p.lat,lng:p.lng,type:p.type,name:p.name}));
+
+  setTimeout(()=>loadDetMap(mapPins), 50);
+}
+
+function loadDetMap(pins){
+  loadLeaflet(err=>{
+    if(err||!window.L){ document.getElementById('det-map').innerHTML='<div class="det-map-offline">Mapa no disponible offline</div>'; return; }
+    if(detailMap){ detailMap.remove(); detailMap=null; }
+    const el = document.getElementById('det-map'); if(!el)return;
+    el.innerHTML='';
+    detailMap = L.map(el,{zoomControl:false,scrollWheelZoom:false});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OSM'}).addTo(detailMap);
+    const bounds=[];
+    pins.forEach(p=>{
+      const colors={hotel:'#C85200',lake:'#1255A8',drive:'#999',castle:'#7B2D8B',mountain:'#1B6535',museum:'#8B4513',village:'#7B6000',culture:'#A0001C',food:'#9B3000',view:'#005E7A'};
+      const c=colors[p.type]||'#888';
+      const mk=L.circleMarker([p.lat,p.lng],{radius:p.type==='hotel'?10:7,color:c,fillColor:c,fillOpacity:.9,weight:2});
+      mk.addTo(detailMap).bindPopup(p.name);
+      bounds.push([p.lat,p.lng]);
+    });
+    if(bounds.length===1){ detailMap.setView(bounds[0],13); }
+    else if(bounds.length>1){ detailMap.fitBounds(bounds,{padding:[24,24]}); }
+    L.control.zoom({position:'topright'}).addTo(detailMap);
+  });
+}
+
+function openPoi(idx){
+  const p = currentDayPois[idx]; if(!p)return;
+  const m = POI_TYPE_META[p.type]||{emoji:'📍',label:p.type,color:'#888'};
+  const modal=document.getElementById('poi-modal');
+  const img=document.getElementById('poi-sheet-img');
+  if(p.photo){ img.src=p.photo; img.style.display='block'; } else { img.style.display='none'; }
+  document.getElementById('poi-sheet-type').textContent = m.emoji+' '+m.label;
+  document.getElementById('poi-sheet-type').style.color = m.color;
+  document.getElementById('poi-sheet-name').textContent = p.name;
+  const warn=document.getElementById('poi-sheet-warn');
+  if(p.warn){ warn.textContent='⚠️ '+p.warn; warn.style.display='block'; } else { warn.style.display='none'; }
+  document.getElementById('poi-sheet-desc').textContent = p.desc||'';
+  const btns=document.getElementById('poi-sheet-btns');
+  if(p.lat){
+    btns.innerHTML=`<a class="h-btn h-btn-apple" href="${mapsApple(p.lat,p.lng)}" style="flex:1">${ICON_APPLE} Apple</a>
+      <a class="h-btn h-btn-google" href="${mapsGoogle(p.name)}" target="_blank" style="flex:1">${ICON_GOOGLE} Google</a>`;
+  } else { btns.innerHTML=''; }
+  modal.classList.add('open');
+}
+
+function closePoi(e){
+  if(e && e.target!==document.getElementById('poi-modal') && e.target!==document.getElementById('poi-sheet-close'))return;
+  document.getElementById('poi-modal').classList.remove('open');
 }
 
 function closeDetail(){
