@@ -1,5 +1,5 @@
-const CACHE = 'baviera-2026-v8';
-const ASSETS = ['./index.html', './manifest.json', './icon.svg', './sw.js'];
+const CACHE = 'baviera-2026-v9';
+const ASSETS = ['./index.html', './manifest.json', './icon.svg', './sw.js', './hero.jpg'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
