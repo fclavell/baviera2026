@@ -531,13 +531,14 @@ body {
 .avui-stat-val { font-size: 1.3rem; font-weight: 800; letter-spacing: -.02em; }
 .avui-stat-sub { font-size: .72rem; color: var(--c-muted); margin-top: 2px; }
 .avui-countdown {
-  text-align: center; padding: 32px 20px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 11px 18px;
   background: linear-gradient(135deg, #0A2E5A 0%, #1565C0 100%);
   border-radius: var(--r-card); color: white; margin-bottom: 14px;
-  box-shadow: var(--sh-lift);
+  box-shadow: var(--sh-card);
 }
-.avui-countdown-num { font-size: 3.5rem; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
-.avui-countdown-lbl { font-size: .9rem; opacity: .85; margin-top: 6px; }
+.avui-countdown-num { font-size: 1.6rem; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+.avui-countdown-lbl { font-size: .82rem; opacity: .88; }
 
 /* ── EDIT BUTTON ─────────────────────────────────── */
 .logedit { background: none; border: none; color: var(--c-muted); cursor: pointer; font-size: .85rem; padding: 0 4px; flex-shrink: 0; }
@@ -1229,10 +1230,8 @@ function renderAvui(){
     const days = Math.ceil((tripStartDay - now)/(1000*60*60*24));
     el.innerHTML = `
       <div class="avui-countdown">
-        <div style="font-size:.8rem;opacity:.7;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Sortida cap a Baviera</div>
         <div class="avui-countdown-num">${days}</div>
         <div class="avui-countdown-lbl">dies per a l'aventura</div>
-        <div style="margin-top:16px;font-size:.8rem;opacity:.7">10 d'agost · La Garriga → Bayern</div>
       </div>
       <div id="avui-map"></div>
       <div class="avui-stat-row">
