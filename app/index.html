@@ -1411,6 +1411,8 @@ let detailMap = null;
 let currentDayPois = [];
 
 function openDetail(i){
+  const rm = document.getElementById('route-map');
+  if(rm) rm.style.visibility = 'hidden';
   const d = DAYS[i];
   const hk = `hotel_${d.n}`;
   const hx = hotelExtra[hk]||{};
@@ -1619,6 +1621,8 @@ function closeDetail(){
   document.getElementById('det').classList.remove('open');
   document.getElementById('back-btn').style.display = 'none';
   document.getElementById('hdr-title').textContent = 'Baviera 2026';
+  const rm = document.getElementById('route-map');
+  if(rm) rm.style.visibility = 'visible';
 }
 
 function saveHX(dn,f,v){ const k=`hotel_${dn}`; if(!hotelExtra[k])hotelExtra[k]={}; hotelExtra[k][f]=v; ss('hotelExtra',hotelExtra); }
