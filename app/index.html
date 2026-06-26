@@ -496,6 +496,23 @@ body {
   height: 100%; color: var(--c-muted); gap: 8px; font-size: .875rem;
 }
 
+/* ── PORTADA HERO ───────────────────────────────── */
+.portada-hero {
+  width: calc(100% + 32px); margin: -16px -16px 18px;
+  height: 240px;
+  background: url('hero2.jpg') center 40% / cover no-repeat;
+  position: relative;
+}
+.portada-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,.08) 0%, rgba(10,20,30,.68) 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 20px 18px;
+  color: white;
+}
+.portada-title { font-size: 1.8rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+.portada-sub { font-size: .85rem; opacity: .88; margin-top: 4px; font-weight: 500; }
+
 /* ── AVUI CARDS ─────────────────────────────────── */
 .avui-hero {
   background: linear-gradient(135deg, #A83E00 0%, #C85200 40%, #E8720A 100%);
@@ -654,7 +671,7 @@ body {
 <main id="main">
 
   <!-- ── ITINERARI ─────────────────────────── -->
-  <div id="tab-itinerari" class="tab on">
+  <div id="tab-itinerari" class="tab">
     <div class="route-hero">
       <div class="route-hero-overlay">
         <div class="route-hero-title">La Garriga → Baviera 2026</div>
@@ -750,7 +767,13 @@ body {
   </div>
 
   <!-- ── AVUI ──────────────────────────────── -->
-  <div id="tab-avui" class="tab">
+  <div id="tab-avui" class="tab on">
+    <div class="portada-hero">
+      <div class="portada-overlay">
+        <div class="portada-title">Baviera 2026</div>
+        <div class="portada-sub">10 – 21 agost · La Garriga → Bayern</div>
+      </div>
+    </div>
     <div id="avui-body"></div>
   </div>
 
@@ -829,7 +852,7 @@ body {
 
 <!-- ── BOTTOM NAV ───────────────────────────────── -->
 <nav id="nav">
-  <button class="nb" data-tab="avui"        onclick="showTab('avui')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>Avui</button>
+  <button class="nb on" data-tab="avui"        onclick="showTab('avui')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>Avui</button>
   <button class="nb" data-tab="itinerari"   onclick="showTab('itinerari')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 3 20 10 16 17 20 21 16 21 4 17 8 10 4 3 6"/><line x1="10" y1="4" x2="10" y2="16"/><line x1="17" y1="8" x2="17" y2="20"/></svg></span>Viatge</button>
   <button class="nb" data-tab="recarregues" onclick="showTab('recarregues')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>Cotxe</button>
   <button class="nb" data-tab="pressupost"  onclick="showTab('pressupost')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg></span>Despeses</button>
