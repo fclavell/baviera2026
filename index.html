@@ -679,6 +679,7 @@ body {
       </div>
     </div>
     <div class="pbar"><div class="pfill" id="pfill" style="width:0%"></div></div>
+    <div id="route-map" style="height:220px;border-radius:var(--r-card);overflow:hidden;margin-bottom:18px;box-shadow:var(--sh-card)"></div>
     <div id="day-list"></div>
   </div>
 
@@ -1132,9 +1133,53 @@ function showTab(id){
   document.getElementById('tab-'+id).classList.add('on');
   document.querySelector(`[data-tab="${id}"]`).classList.add('on');
   if(id==='avui')        renderAvui();
+  if(id==='itinerari')   initRouteMap();
   if(id==='recarregues') renderRecarregues();
   if(id==='pressupost')  renderBudget();
   if(id==='mes')         renderMes();
+}
+
+let _routeMapInit = false;
+function initRouteMap(){
+  if(_routeMapInit) return;
+  _routeMapInit = true;
+  loadLeaflet(() => {
+    const map = L.map('route-map', {zoomControl:false, attributionControl:false, dragging:false, scrollWheelZoom:false, doubleClickZoom:false, touchZoom:false})
+      .setView([46.5, 7.5], 5);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:18}).addTo(map);
+
+    // Waypoints: La Garriga → Lió → Selva Negra → Ettal → Allgäu → Chalon → La Garriga
+    const WP = [
+      [2.355,41.689],[4.9278,45.7338],[8.073,48.218],
+      [11.0953,47.5691],[10.5302,47.5797],[4.850,46.7833],[2.355,41.689]
+    ];
+    const stops = [
+      {ll:[41.689,2.355],  label:'La Garriga'},
+      {ll:[45.7338,4.9278],label:'Lió'},
+      {ll:[48.218,8.073],  label:'Selva Negra'},
+      {ll:[47.5691,11.0953],label:'Ettal'},
+      {ll:[47.5797,10.5302],label:'Allgäu'},
+      {ll:[46.7833,4.850], label:'Chalon'},
+    ];
+
+    const dot = (color='#C85200') => L.divIcon({
+      html:`<div style="width:10px;height:10px;border-radius:50%;background:${color};border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,.4)"></div>`,
+      iconSize:[10,10], iconAnchor:[5,5], className:''
+    });
+    stops.forEach((s,i) => L.marker(s.ll,{icon:dot(i===0||i===stops.length-1?'#C85200':'#007AFF')}).addTo(map));
+
+    fetch(`https://router.project-osrm.org/route/v1/driving/${WP.map(p=>p.join(',')).join(';')}?overview=full&geometries=geojson`)
+      .then(r=>r.json())
+      .then(d=>{
+        if(!d.routes||!d.routes[0]) return;
+        const line = L.geoJSON(d.routes[0].geometry,{style:{color:'#C85200',weight:3,opacity:.85}}).addTo(map);
+        map.fitBounds(line.getBounds(),{padding:[18,18]});
+      })
+      .catch(()=>{
+        // offline: dibuixar línies rectes entre stops
+        L.polyline(stops.map(s=>s.ll),{color:'#C85200',weight:3,opacity:.7,dashArray:'8,5'}).addTo(map);
+      });
+  });
 }
 
 // ── AVUI ─────────────────────────────────────────
