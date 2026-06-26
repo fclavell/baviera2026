@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Baviera 2026">
-<meta name="theme-color" content="#C85200">
+<meta name="theme-color" content="#2D8BB5">
 <title>Baviera 2026</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon.svg">
@@ -15,8 +15,8 @@
 :root {
   --c-bg:       #F2F2F7;
   --c-surface:  #FFFFFF;
-  --c-primary:  #C85200;
-  --c-primary2: #E8720A;
+  --c-primary:  #2D8BB5;
+  --c-primary2: #4AABCF;
   --c-dark:     #1C1C1E;
   --c-mid:      #3A3A3C;
   --c-muted:    #6E6E73;
@@ -32,7 +32,7 @@
   --c-blue-bg:  #E5F0FF;
   --c-nav:      #1C1C1E;
   --c-nav-t:    rgba(235,235,245,.5);
-  --c-nav-a:    #FF6B00;
+  --c-nav-a:    #4AABCF;
   --sh-card:    0 1px 3px rgba(0,0,0,.06);
   --sh-lift:    0 4px 16px rgba(0,0,0,.12);
   --sh-btn:     0 2px 8px rgba(0,0,0,.18);
@@ -72,11 +72,11 @@ body {
 /* ── APP HEADER ─────────────────────────────────── */
 #hdr {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: linear-gradient(135deg, #A83E00 0%, #C85200 40%, #E8720A 100%);
+  background: linear-gradient(135deg, #1A6E96 0%, #2D8BB5 50%, #4AABCF 100%);
   color: white;
   padding: calc(var(--nt) + 13px) 18px 13px;
   display: flex; align-items: center; gap: 10px;
-  box-shadow: 0 2px 20px rgba(168,62,0,.45);
+  box-shadow: 0 2px 20px rgba(26,110,150,.45);
 }
 #hdr h1 { font-size: 1.15rem; font-weight: 800; flex: 1; letter-spacing: -.02em; }
 #hdr-sub { font-size: .78rem; opacity: .9; white-space: nowrap; font-weight: 500; }
@@ -221,7 +221,7 @@ body {
 }
 #det.open { transform: translateX(0); }
 #det-hdr {
-  background: linear-gradient(135deg, #A83E00 0%, #C85200 40%, #E8720A 80%, #F5A040 100%);
+  background: linear-gradient(135deg, #1A6E96 0%, #2D8BB5 40%, #4AABCF 80%, #5ECFE0 100%);
   color: white;
   padding: calc(var(--nt) + 14px) 16px 24px;
 }
@@ -294,7 +294,7 @@ body {
   align-items: center; justify-content: center; gap: 6px;
 }
 .h-btn-call { color: var(--c-ok); border-color: var(--c-ok); background: var(--c-ok-bg); }
-.h-btn-bk   { color: var(--c-primary); border-color: var(--c-primary); background: #FEF3EB; }
+.h-btn-bk   { color: var(--c-primary); border-color: var(--c-primary); background: #E6F4FA; }
 
 /* ── LAKE CARD (DAY DETAIL) ─────────────────────── */
 .lake-day-card {
@@ -424,7 +424,7 @@ body {
 /* ── BUDGET ─────────────────────────────────────── */
 .b-hero {
   text-align: center; padding: 28px 18px 22px;
-  background: linear-gradient(135deg, #A83E00 0%, #C85200 45%, #E8720A 100%);
+  background: linear-gradient(135deg, #1A6E96 0%, #2D8BB5 45%, #4AABCF 100%);
   border-radius: var(--r-card); margin-bottom: 14px; color: white;
   box-shadow: var(--sh-lift);
 }
@@ -515,7 +515,7 @@ body {
 
 /* ── AVUI CARDS ─────────────────────────────────── */
 .avui-hero {
-  background: linear-gradient(135deg, #A83E00 0%, #C85200 40%, #E8720A 100%);
+  background: linear-gradient(135deg, #1A6E96 0%, #2D8BB5 40%, #4AABCF 100%);
   border-radius: var(--r-card); padding: 18px 20px; color: white;
   margin-bottom: 12px; box-shadow: var(--sh-lift);
 }
@@ -634,7 +634,7 @@ body {
 .h-btn-google { background: white; color: #1A73E8; border-color: #DADCE0; }
 .h-btn-abrp { background: #00B140; color: white; border-color: #00B140; }
 .h-btn-call { color: var(--c-ok); border-color: var(--c-ok); background: var(--c-ok-bg); }
-.h-btn-bk { color: var(--c-primary); border-color: var(--c-primary); background: #FEF3EB; }
+.h-btn-bk { color: var(--c-primary); border-color: var(--c-primary); background: #E6F4FA; }
 
 /* ── KIA E-NIRO BANNER ──────────────────────────── */
 .eniro-banner {
@@ -1163,22 +1163,22 @@ function initRouteMap(){
       {ll:[46.7833,4.850], label:'Chalon'},
     ];
 
-    const dot = (color='#C85200') => L.divIcon({
+    const dot = (color='#2D8BB5') => L.divIcon({
       html:`<div style="width:10px;height:10px;border-radius:50%;background:${color};border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,.4)"></div>`,
       iconSize:[10,10], iconAnchor:[5,5], className:''
     });
-    stops.forEach((s,i) => L.marker(s.ll,{icon:dot(i===0||i===stops.length-1?'#C85200':'#007AFF')}).addTo(map));
+    stops.forEach((s,i) => L.marker(s.ll,{icon:dot(i===0||i===stops.length-1?'#2D8BB5':'#007AFF')}).addTo(map));
 
     fetch(`https://router.project-osrm.org/route/v1/driving/${WP.map(p=>p.join(',')).join(';')}?overview=full&geometries=geojson`)
       .then(r=>r.json())
       .then(d=>{
         if(!d.routes||!d.routes[0]) return;
-        const line = L.geoJSON(d.routes[0].geometry,{style:{color:'#C85200',weight:3,opacity:.85}}).addTo(map);
+        const line = L.geoJSON(d.routes[0].geometry,{style:{color:'#2D8BB5',weight:3,opacity:.85}}).addTo(map);
         map.fitBounds(line.getBounds(),{padding:[18,18]});
       })
       .catch(()=>{
         // offline: dibuixar línies rectes entre stops
-        L.polyline(stops.map(s=>s.ll),{color:'#C85200',weight:3,opacity:.7,dashArray:'8,5'}).addTo(map);
+        L.polyline(stops.map(s=>s.ll),{color:'#2D8BB5',weight:3,opacity:.7,dashArray:'8,5'}).addTo(map);
       });
   });
 }
@@ -1301,11 +1301,11 @@ function renderAvui(){
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
       attribution:'© OpenStreetMap',maxZoom:18
     }).addTo(avuiMap);
-    const mkStart = L.circleMarker(startLL, {radius:9, color:'#C85200', fillColor:'#E8720A', fillOpacity:1, weight:2});
+    const mkStart = L.circleMarker(startLL, {radius:9, color:'#2D8BB5', fillColor:'#E8720A', fillOpacity:1, weight:2});
     const mkEnd   = L.circleMarker(endLL,   {radius:9, color:'#1B6535', fillColor:'#2E9E5C', fillOpacity:1, weight:2});
     mkStart.addTo(avuiMap).bindPopup(n===1?'La Garriga':DAYS[n-2].zone);
     mkEnd.addTo(avuiMap).bindPopup(td.zone);
-    L.polyline([startLL, endLL], {color:'#C85200', weight:3, dashArray:'8,5'}).addTo(avuiMap);
+    L.polyline([startLL, endLL], {color:'#2D8BB5', weight:3, dashArray:'8,5'}).addTo(avuiMap);
     avuiMap.fitBounds([startLL, endLL], {padding:[30,30]});
   });
 }
@@ -1338,11 +1338,11 @@ function renderOverviewMap(){
       .then(r=>r.json())
       .then(d=>{
         if(!d.routes||!d.routes[0]) throw new Error('no route');
-        const line = L.geoJSON(d.routes[0].geometry,{style:{color:'#C85200',weight:3,opacity:.9}}).addTo(avuiMap);
+        const line = L.geoJSON(d.routes[0].geometry,{style:{color:'#2D8BB5',weight:3,opacity:.9}}).addTo(avuiMap);
         avuiMap.fitBounds(line.getBounds(),{padding:[22,22]});
       })
       .catch(()=>{
-        const line = L.polyline(stops.map(s=>s.ll),{color:'#C85200',weight:2.5,opacity:.7,dashArray:'7,5'}).addTo(avuiMap);
+        const line = L.polyline(stops.map(s=>s.ll),{color:'#2D8BB5',weight:2.5,opacity:.7,dashArray:'7,5'}).addTo(avuiMap);
         avuiMap.fitBounds(line.getBounds(),{padding:[22,22]});
       });
   });
@@ -1557,7 +1557,7 @@ function loadDetMap(pins){
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OSM'}).addTo(detailMap);
     const bounds=[];
     pins.forEach(p=>{
-      const colors={hotel:'#C85200',lake:'#1255A8',drive:'#999',castle:'#7B2D8B',mountain:'#1B6535',museum:'#8B4513',village:'#7B6000',culture:'#A0001C',food:'#9B3000',view:'#005E7A'};
+      const colors={hotel:'#2D8BB5',lake:'#1255A8',drive:'#999',castle:'#7B2D8B',mountain:'#1B6535',museum:'#8B4513',village:'#7B6000',culture:'#A0001C',food:'#9B3000',view:'#005E7A'};
       const c=colors[p.type]||'#888';
       const mk=L.circleMarker([p.lat,p.lng],{radius:p.type==='hotel'?10:7,color:c,fillColor:c,fillOpacity:.9,weight:2});
       mk.addTo(detailMap).bindPopup(p.name);
