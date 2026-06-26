@@ -32,7 +32,7 @@
   --c-blue-bg:  #E5F0FF;
   --c-nav:      #1C1C1E;
   --c-nav-t:    rgba(235,235,245,.5);
-  --c-nav-a:    #4AABCF;
+  --c-nav-a:    #FF6B00;
   --sh-card:    0 1px 3px rgba(0,0,0,.06);
   --sh-lift:    0 4px 16px rgba(0,0,0,.12);
   --sh-btn:     0 2px 8px rgba(0,0,0,.18);
@@ -72,11 +72,11 @@ body {
 /* ── APP HEADER ─────────────────────────────────── */
 #hdr {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: linear-gradient(135deg, #1A6E96 0%, #2D8BB5 50%, #4AABCF 100%);
+  background: linear-gradient(135deg, #A83E00 0%, #C85200 45%, #E8720A 100%);
   color: white;
   padding: calc(var(--nt) + 13px) 18px 13px;
   display: flex; align-items: center; gap: 10px;
-  box-shadow: 0 2px 20px rgba(26,110,150,.45);
+  box-shadow: 0 2px 20px rgba(168,62,0,.45);
 }
 #hdr h1 { font-size: 1.15rem; font-weight: 800; flex: 1; letter-spacing: -.02em; }
 #hdr-sub { font-size: .78rem; opacity: .9; white-space: nowrap; font-weight: 500; }
@@ -132,7 +132,7 @@ body {
 }
 .route-hero-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,.08) 0%, rgba(10,20,30,.72) 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,.02) 0%, rgba(10,20,30,.48) 100%);
   display: flex; flex-direction: column; justify-content: flex-end;
   padding: 16px 18px;
   color: white;
@@ -505,7 +505,7 @@ body {
 }
 .portada-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,.08) 0%, rgba(10,20,30,.68) 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,.02) 0%, rgba(10,20,30,.42) 100%);
   display: flex; flex-direction: column; justify-content: flex-end;
   padding: 20px 18px;
   color: white;
@@ -692,22 +692,34 @@ body {
     </div>
 
     <div class="eniro-banner">
-      <svg width="80" height="48" viewBox="0 0 240 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M20,70 L30,40 Q40,22 65,20 L170,20 Q195,20 210,35 L225,70 Z" fill="#2A2A30" opacity=".9"/>
-        <path d="M65,20 Q80,8 100,7 L155,7 Q175,7 185,20" fill="#3A3A40"/>
-        <ellipse cx="60" cy="72" rx="18" ry="18" fill="#222" stroke="#555" stroke-width="3"/>
-        <ellipse cx="60" cy="72" rx="10" ry="10" fill="#333" stroke="#777" stroke-width="2"/>
-        <ellipse cx="60" cy="72" rx="4" ry="4" fill="#888"/>
-        <ellipse cx="183" cy="72" rx="18" ry="18" fill="#222" stroke="#555" stroke-width="3"/>
-        <ellipse cx="183" cy="72" rx="10" ry="10" fill="#333" stroke="#777" stroke-width="2"/>
-        <ellipse cx="183" cy="72" rx="4" ry="4" fill="#888"/>
-        <path d="M68,22 L82,22 L78,40 L62,40 Z" fill="#5588AA" opacity=".7"/>
-        <path d="M85,22 L125,22 L122,40 L84,40 Z" fill="#5588AA" opacity=".7"/>
-        <path d="M128,22 L162,22 L160,40 L127,40 Z" fill="#5588AA" opacity=".7"/>
-        <path d="M210,35 L225,40 L223,50 L208,48 Z" fill="#FFEE88" opacity=".8"/>
-        <rect x="20" y="55" width="8" height="10" rx="2" fill="#FF4444" opacity=".7"/>
-        <rect x="130" y="55" width="40" height="14" rx="4" fill="#00B140"/>
-        <text x="150" y="65" text-anchor="middle" font-size="8" fill="white" font-family="-apple-system,sans-serif" font-weight="bold">e-Niro</text>
+      <svg width="96" height="60" viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- fons nocturn -->
+        <rect width="160" height="100" rx="14" fill="#18181A"/>
+        <!-- carretera -->
+        <rect x="0" y="72" width="160" height="28" rx="0" fill="#222"/>
+        <rect x="74" y="72" width="6" height="28" rx="0" fill="#555" opacity=".4"/>
+        <!-- e-Niro cara a la dreta, estil icona -->
+        <rect x="18" y="60" width="92" height="18" rx="4" fill="#1A1A1A"/>
+        <path d="M24,60 L28,46 L86,46 L100,56 L106,60 Z" fill="#222"/>
+        <!-- finestra posterior petita -->
+        <path d="M32,47 L32,58 L52,58 L52,47 Z" fill="#4AABCF" opacity=".8"/>
+        <!-- pilar B -->
+        <rect x="54" y="46" width="3" height="13" fill="#111"/>
+        <!-- finestra davantera seguint parabrisas -->
+        <path d="M58,47 L72,47 L84,56 L58,56 Z" fill="#4AABCF" opacity=".8"/>
+        <!-- llums cua vermells -->
+        <rect x="18" y="62" width="5" height="10" rx="1" fill="#D32F2F"/>
+        <!-- morro EV + llum -->
+        <rect x="104" y="63" width="6" height="10" rx="2" fill="#222"/>
+        <rect x="105" y="65" width="4" height="3" rx="1" fill="#FFD54F" opacity=".8"/>
+        <!-- llamp verd elèctric -->
+        <polygon points="58,50 54,57 57,57 53,65 62,57 59,57" fill="#4CAF50"/>
+        <!-- rodes -->
+        <circle cx="36" cy="78" r="9" fill="#111"/><circle cx="36" cy="78" r="5" fill="#333"/><circle cx="36" cy="78" r="2" fill="#666"/>
+        <circle cx="90" cy="78" r="9" fill="#111"/><circle cx="90" cy="78" r="5" fill="#333"/><circle cx="90" cy="78" r="2" fill="#666"/>
+        <!-- badge e-Niro -->
+        <rect x="112" y="55" width="38" height="14" rx="4" fill="#00B140"/>
+        <text x="131" y="65" text-anchor="middle" font-size="9" fill="white" font-family="-apple-system,sans-serif" font-weight="bold">e-Niro</text>
       </svg>
       <div class="eniro-info">
         <div class="eniro-model">Kia e-Niro 2020</div>
