@@ -538,7 +538,7 @@ body {
   box-shadow: var(--sh-card);
 }
 .avui-countdown-num { font-size: 1.6rem; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
-.avui-countdown-lbl { font-size: .82rem; opacity: .88; }
+.avui-countdown-lbl { font-size: 1rem; font-weight: 600; opacity: .92; }
 
 /* ── EDIT BUTTON ─────────────────────────────────── */
 .logedit { background: none; border: none; color: var(--c-muted); cursor: pointer; font-size: .85rem; padding: 0 4px; flex-shrink: 0; }
@@ -1231,7 +1231,7 @@ function renderAvui(){
     el.innerHTML = `
       <div class="avui-countdown">
         <div class="avui-countdown-num">${days}</div>
-        <div class="avui-countdown-lbl">dies per a l'aventura</div>
+        <div class="avui-countdown-lbl">dies per a l'aventura!</div>
       </div>
       <div id="avui-map"></div>
       <div class="avui-stat-row">
