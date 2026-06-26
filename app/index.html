@@ -1316,16 +1316,35 @@ function renderOverviewMap(){
     if(avuiMap){ avuiMap.remove(); avuiMap=null; }
     const mapEl = document.getElementById('avui-map');
     if(!mapEl) return;
-    avuiMap = L.map(mapEl, {zoomControl:true, scrollWheelZoom:false});
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-      attribution:'© OpenStreetMap',maxZoom:18
-    }).addTo(avuiMap);
-    const pts = [HOME_LL,...DAY_COORDS.slice(1)];
-    L.polyline(pts, {color:'#C85200', weight:3, dashArray:'8,5'}).addTo(avuiMap);
-    pts.forEach((p,i)=>{
-      L.circleMarker(p,{radius:6,color:'#C85200',fillColor:i===0||i===pts.length-1?'#C85200':'#F5A040',fillOpacity:1,weight:2}).addTo(avuiMap);
-    });
-    avuiMap.fitBounds(pts, {padding:[20,20]});
+    avuiMap = L.map(mapEl, {zoomControl:false, attributionControl:false, dragging:false, scrollWheelZoom:false, doubleClickZoom:false, touchZoom:false});
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:18}).addTo(avuiMap);
+
+    // Parades úniques: La Garriga → Lió → Selva Negra → Ettal → Allgäu → Chalon → La Garriga
+    const stops = [
+      {ll:HOME_LL,            wp:[2.217,41.683]},
+      {ll:[45.7338,4.9278],   wp:[4.9278,45.7338]},
+      {ll:[48.218,8.073],     wp:[8.073,48.218]},
+      {ll:[47.5691,11.0953],  wp:[11.0953,47.5691]},
+      {ll:[47.5797,10.5302],  wp:[10.5302,47.5797]},
+      {ll:[46.7833,4.850],    wp:[4.850,46.7833]},
+      {ll:HOME_LL,            wp:[2.217,41.683]},
+    ];
+
+    const dot = L.divIcon({html:'<div style="width:9px;height:9px;border-radius:50%;background:#C85200;border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,.4)"></div>',iconSize:[9,9],iconAnchor:[4,4],className:''});
+    stops.slice(0,-1).forEach(s => L.marker(s.ll,{icon:dot}).addTo(avuiMap));
+
+    const wpStr = stops.map(s=>s.wp.join(',')).join(';');
+    fetch(`https://router.project-osrm.org/route/v1/driving/${wpStr}?overview=full&geometries=geojson`)
+      .then(r=>r.json())
+      .then(d=>{
+        if(!d.routes||!d.routes[0]) throw new Error('no route');
+        const line = L.geoJSON(d.routes[0].geometry,{style:{color:'#C85200',weight:3,opacity:.9}}).addTo(avuiMap);
+        avuiMap.fitBounds(line.getBounds(),{padding:[22,22]});
+      })
+      .catch(()=>{
+        const line = L.polyline(stops.map(s=>s.ll),{color:'#C85200',weight:2.5,opacity:.7,dashArray:'7,5'}).addTo(avuiMap);
+        avuiMap.fitBounds(line.getBounds(),{padding:[22,22]});
+      });
   });
 }
 
