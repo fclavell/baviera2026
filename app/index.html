@@ -954,6 +954,17 @@ const ICON_ABRP = `<svg width="26" height="26" viewBox="0 0 60 60" xmlns="http:/
   <path d="M35 6L16 32h13l-4 22L56 26H41Z" fill="white"/>
 </svg>`;
 
+// ABRP itineraris per dia (plans desats al compte ABRP)
+const ABRP_PLANS = {
+  0:  'https://abetterrouteplanner.com/?plan_uuid=2-6a3e659a-d7b456886402e5fe08622ac4', // complet
+  1:  'https://abetterrouteplanner.com/?plan_uuid=2-6a3e6659-bd1b3eb67f380f0753c90653', // 10 ag
+  2:  'https://abetterrouteplanner.com/?plan_uuid=2-6a3e66b0-78024b3c42bdf9f0b6a967f8', // 11 ag
+  4:  'https://abetterrouteplanner.com/?plan_uuid=2-6a3e673f-6351d30c6c1639140ff2f53d', // 13 ag
+  7:  'https://abetterrouteplanner.com/?plan_uuid=2-6a3e677f-a49b41f94fc52f1147b1f9d6', // 16 ag
+  10: 'https://abetterrouteplanner.com/?plan_uuid=2-6a3e67c9-cffd6819c3efe1a22acc21dc', // 19 ag
+  11: 'https://abetterrouteplanner.com/?plan_uuid=2-6a3e683a-60c57d081f8257137fb1e43b', // 20 ag
+};
+
 // POI type SVG icons (stroke-based, clean)
 const POI_ICONS = {
   drive:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V9l3-4h14l3 4v6a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg>`,
@@ -1417,10 +1428,11 @@ function openDetail(i){
   // NAV BUTTONS
   if(d.hotel){
     const {lat,lng,addr} = d.hotel;
+    const abrpUrl = ABRP_PLANS[d.n] || mapsABRP(lat,lng);
     html += `<div class="navbtns">
       ${svgBtn(ICON_APPLE,'Apple Maps','nb-apple',mapsApple(lat,lng))}
       ${svgBtn(ICON_GOOGLE,'Google Maps','nb-google',mapsGoogle(addr))}
-      ${svgBtn(ICON_ABRP,'ABRP','nb-abrp',mapsABRP(d.hotel.lat,d.hotel.lng))}
+      ${svgBtn(ICON_ABRP,'ABRP','nb-abrp',abrpUrl)}
     </div>`;
   }
 
