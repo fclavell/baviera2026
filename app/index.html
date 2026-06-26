@@ -17,26 +17,26 @@
   --c-surface:  #FFFFFF;
   --c-primary:  #C85200;
   --c-primary2: #E8720A;
-  --c-dark:     #1A0D00;
-  --c-mid:      #4A3020;
-  --c-muted:    #8A6E56;
-  --c-border:   #E0CDB8;
-  --c-beige:    #EDE4D8;
-  --c-ok:       #1B6535;
-  --c-ok-bg:    #E4F5EB;
-  --c-warn:     #995000;
-  --c-warn-bg:  #FFF3E0;
-  --c-err:      #B01C1C;
-  --c-err-bg:   #FDE8E8;
-  --c-blue:     #1255A8;
-  --c-blue-bg:  #E0EDFC;
-  --c-nav:      #12090A;
-  --c-nav-t:    #B09070;
-  --c-nav-a:    #F5A040;
-  --sh-card:    0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
-  --sh-lift:    0 6px 24px rgba(26,13,0,.14);
-  --sh-btn:     0 3px 10px rgba(0,0,0,.22);
-  --r-card:     16px;
+  --c-dark:     #1C1C1E;
+  --c-mid:      #3A3A3C;
+  --c-muted:    #6E6E73;
+  --c-border:   #E5E5EA;
+  --c-beige:    #F2F2F7;
+  --c-ok:       #34C759;
+  --c-ok-bg:    #E8F9EE;
+  --c-warn:     #FF9F0A;
+  --c-warn-bg:  #FFF4E0;
+  --c-err:      #FF3B30;
+  --c-err-bg:   #FFE5E3;
+  --c-blue:     #007AFF;
+  --c-blue-bg:  #E5F0FF;
+  --c-nav:      #1C1C1E;
+  --c-nav-t:    rgba(235,235,245,.5);
+  --c-nav-a:    #FF6B00;
+  --sh-card:    0 1px 3px rgba(0,0,0,.06);
+  --sh-lift:    0 4px 16px rgba(0,0,0,.12);
+  --sh-btn:     0 2px 8px rgba(0,0,0,.18);
+  --r-card:     12px;
   --r-btn:      12px;
   --r-pill:     99px;
   --nt: env(safe-area-inset-top, 0px);
@@ -101,23 +101,24 @@ body {
 /* ── BOTTOM NAV ─────────────────────────────────── */
 #nav {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-  background: var(--c-nav);
+  background: rgba(28,28,30,.96);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
   display: flex;
-  height: calc(72px + var(--nb));
+  height: calc(60px + var(--nb));
   padding-bottom: var(--nb);
-  box-shadow: 0 -1px 0 rgba(255,255,255,.05), 0 -6px 24px rgba(0,0,0,.4);
+  border-top: 0.5px solid rgba(255,255,255,.08);
 }
 .nb {
   flex: 1; background: none; border: none; color: var(--c-nav-t);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 4px; cursor: pointer;
-  font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  gap: 3px; cursor: pointer;
+  font-size: .6rem; font-weight: 500; letter-spacing: 0;
   padding: 6px 2px 2px; transition: color .15s;
 }
-.nb .ic { width: 28px; height: 28px; display: block; }
-.nb .ic svg { width: 28px; height: 28px; }
+.nb .ic { width: 24px; height: 24px; display: block; }
+.nb .ic svg { width: 24px; height: 24px; }
 .nb.on { color: var(--c-nav-a); }
-.nb.on .ic { filter: drop-shadow(0 0 6px rgba(245,160,64,.55)); }
 
 /* ── ROUTE HERO (itinerari tab) ─────────────────── */
 .route-hero {
@@ -153,64 +154,62 @@ body {
 .card {
   background: var(--c-surface);
   border-radius: var(--r-card);
-  padding: 18px 20px;
+  padding: 16px 18px;
   margin-bottom: 12px;
   box-shadow: var(--sh-card);
-  border: 1px solid rgba(224,205,184,.6);
 }
-.card-tight { padding: 13px 16px; }
+.card-tight { padding: 11px 16px; }
 
-/* ── SECTION DIVIDER ─────────────────────────────── */
+/* ── SECTION HEADER (Apple-style) ────────────────── */
 .sec-div {
-  display: flex; align-items: center; gap: 9px;
-  margin: 22px 0 11px; color: var(--c-mid);
+  display: flex; align-items: center;
+  margin: 24px 2px 8px;
 }
-.sec-div .sec-icon {
-  width: 30px; height: 30px; border-radius: 9px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: .95rem; flex-shrink: 0;
+.sec-div .sec-icon { display: none; }
+.sec-div .sec-title {
+  font-size: .7rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .07em;
+  color: var(--c-muted);
 }
-.sec-div .sec-title { font-size: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
-.sec-div::after { content: ''; flex: 1; height: 1px; background: var(--c-border); }
+.sec-div::after { display: none; }
 
 /* ── DAY CARDS ──────────────────────────────────── */
 .di {
   background: var(--c-surface);
   border-radius: var(--r-card);
-  margin-bottom: 11px;
+  margin-bottom: 10px;
   display: flex; align-items: stretch; gap: 0;
   box-shadow: var(--sh-card);
-  border: 1px solid rgba(224,205,184,.6);
   cursor: pointer; overflow: hidden;
   transition: transform .12s, box-shadow .12s;
   -webkit-user-select: none;
 }
-.di:active { transform: scale(.985); box-shadow: 0 1px 6px rgba(26,13,0,.08); }
+.di:active { transform: scale(.983); }
 .di .di-stripe {
-  width: 6px; flex-shrink: 0;
+  width: 4px; flex-shrink: 0;
   background: var(--c-border);
 }
-.di.today .di-stripe { background: linear-gradient(180deg, var(--c-primary) 0%, var(--c-primary2) 100%); }
-.di.past  .di-stripe { background: #C8B8A0; }
-.di.future .di-stripe { background: linear-gradient(180deg, #1B5EA8 0%, #3080D0 100%); }
-.di.home  .di-stripe { background: linear-gradient(180deg, #1B6535 0%, #2E9A50 100%); }
-.di-inner { display: flex; align-items: center; gap: 14px; flex: 1; padding: 15px 0 15px 14px; }
+.di.today .di-stripe { background: var(--c-primary); }
+.di.past  .di-stripe { background: #C7C7CC; }
+.di.future .di-stripe { background: var(--c-blue); }
+.di.home  .di-stripe { background: var(--c-ok); }
+.di-inner { display: flex; align-items: center; gap: 14px; flex: 1; padding: 14px 0 14px 14px; }
 .di-num {
-  min-width: 42px; height: 42px; border-radius: 13px;
-  background: var(--c-beige); color: var(--c-mid);
+  min-width: 38px; height: 38px; border-radius: 10px;
+  background: #F2F2F7; color: var(--c-mid);
   display: flex; align-items: center; justify-content: center;
-  font-size: 1rem; font-weight: 800; flex-shrink: 0;
+  font-size: .95rem; font-weight: 700; flex-shrink: 0;
 }
-.di.today .di-num { background: var(--c-primary); color: white; box-shadow: 0 3px 10px rgba(200,82,0,.4); }
+.di.today .di-num { background: var(--c-primary); color: white; }
 .di-info { flex: 1; min-width: 0; }
-.di-date { font-size: .8rem; color: var(--c-muted); margin-bottom: 2px; font-weight: 500; }
-.di-zone { font-size: 1.15rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -.01em; }
-.di-hotel { font-size: .875rem; color: var(--c-muted); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.di-right { flex-shrink: 0; text-align: right; padding: 15px 16px 15px 0; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 4px; }
-.di-drive { font-size: .78rem; color: var(--c-muted); font-weight: 500; }
-.di-arrow { color: var(--c-border); font-size: 1.1rem; }
-.di.past { opacity: .52; }
-.di.today { border-color: rgba(200,82,0,.22); box-shadow: 0 3px 18px rgba(200,82,0,.12); }
+.di-date { font-size: .75rem; color: var(--c-muted); margin-bottom: 1px; font-weight: 500; }
+.di-zone { font-size: 1.05rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -.01em; }
+.di-hotel { font-size: .82rem; color: var(--c-muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.di-right { flex-shrink: 0; text-align: right; padding: 14px 14px 14px 0; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 4px; }
+.di-drive { font-size: .75rem; color: var(--c-muted); font-weight: 500; }
+.di-arrow { color: #C7C7CC; font-size: 1rem; }
+.di.past { opacity: .5; }
+.di.today { box-shadow: 0 2px 12px rgba(200,82,0,.1); }
 
 /* ── DAY DETAIL ─────────────────────────────────── */
 #det {
@@ -249,30 +248,30 @@ body {
 #det-body { padding: 18px 15px; padding-bottom: calc(var(--nb) + 44px); }
 
 /* ── NAV BRAND BUTTONS ──────────────────────────── */
-.navbtns { display: flex; gap: 9px; margin-bottom: 4px; }
+.navbtns { display: flex; gap: 8px; margin-bottom: 4px; }
 .navbtn {
-  flex: 1; padding: 13px 6px 11px; border-radius: var(--r-btn); border: none;
-  cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  flex: 1; padding: 11px 6px 10px; border-radius: var(--r-btn); border: none;
+  cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px;
   text-decoration: none; color: white; box-shadow: var(--sh-btn);
-  font-size: .72rem; font-weight: 700; text-align: center; letter-spacing: .02em;
+  font-size: .68rem; font-weight: 600; text-align: center;
   -webkit-user-select: none;
 }
-.navbtn svg { width: 24px; height: 24px; display: block; }
+.navbtn img, .navbtn svg { width: 26px; height: 26px; display: block; border-radius: 6px; }
 .nb-apple  { background: #1C1C1E; }
-.nb-google { background: white; color: #333; border: 1.5px solid #e0e0e0; }
-.nb-abrp   { background: #00B140; }
+.nb-google { background: white; color: #3C3C43; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+.nb-abrp   { background: #00A847; }
 
 /* ── BADGES / CHIPS ─────────────────────────────── */
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
 .chip {
-  font-size: .75rem; font-weight: 600; padding: 5px 12px;
-  border-radius: var(--r-pill); border: 1.5px solid;
+  font-size: .72rem; font-weight: 600; padding: 4px 10px;
+  border-radius: var(--r-pill); border: none;
   white-space: nowrap;
 }
-.chip-ok   { color: var(--c-ok);   border-color: var(--c-ok);   background: var(--c-ok-bg); }
-.chip-warn { color: var(--c-warn); border-color: var(--c-warn); background: var(--c-warn-bg); }
-.chip-err  { color: var(--c-err);  border-color: var(--c-err);  background: var(--c-err-bg); }
-.chip-n    { color: var(--c-muted);border-color: var(--c-border);background: var(--c-beige); }
+.chip-ok   { color: #1A7A3A; background: var(--c-ok-bg); }
+.chip-warn { color: #8A5500; background: var(--c-warn-bg); }
+.chip-err  { color: #C0392B; background: var(--c-err-bg); }
+.chip-n    { color: var(--c-muted); background: #F2F2F7; }
 
 /* ── HOTEL CARD ─────────────────────────────────── */
 .h-name { font-size: 1.12rem; font-weight: 800; margin-bottom: 4px; letter-spacing: -.01em; }
@@ -320,14 +319,14 @@ body {
 /* ── ACTIVITY / LEIA LISTS ──────────────────────── */
 .alist { list-style: none; }
 .alist li {
-  padding: 9px 0; border-bottom: 1px solid var(--c-border);
-  font-size: .97rem; display: flex; gap: 11px; align-items: flex-start; line-height: 1.55;
+  padding: 10px 0; border-bottom: 0.5px solid var(--c-border);
+  font-size: .93rem; display: flex; gap: 10px; align-items: flex-start; line-height: 1.55;
 }
 .alist li:last-child { border-bottom: none; }
-.alist li::before { content: '•'; color: var(--c-primary); font-weight: 900; flex-shrink: 0; margin-top: 2px; }
+.alist li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--c-primary); flex-shrink: 0; margin-top: .55em; }
 .leia-list li { color: var(--c-mid); }
-.leia-list li::before { content: '🐾'; font-size: .82rem; margin-top: 3px; }
-.food-list li::before { content: '🍽'; font-size: .82rem; margin-top: 3px; }
+.leia-list li::before { content: ''; background: #8E5E3C; }
+.food-list li::before { content: ''; background: #9B3000; }
 
 /* ── NOTES ──────────────────────────────────────── */
 .ntarea {
@@ -448,21 +447,22 @@ body {
 
 /* ── CHECKLIST ──────────────────────────────────── */
 .chk {
-  display: flex; align-items: center; gap: 15px;
-  padding: 15px 16px; background: var(--c-surface);
-  border-radius: 14px; margin-bottom: 9px;
-  border: 1.5px solid var(--c-border); cursor: pointer; -webkit-user-select: none;
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px 16px; background: var(--c-surface);
+  border-radius: var(--r-card); margin-bottom: 8px;
+  cursor: pointer; -webkit-user-select: none;
+  box-shadow: var(--sh-card);
   transition: all .15s;
 }
-.chk.done { border-color: var(--c-ok); background: var(--c-ok-bg); }
+.chk.done { background: var(--c-ok-bg); }
 .chk-circle {
-  width: 28px; height: 28px; border-radius: 50%;
-  border: 2px solid var(--c-border); flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center; font-size: .9rem;
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1.5px solid #C7C7CC; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: .8rem;
   transition: all .15s;
 }
-.chk.done .chk-circle { border-color: var(--c-ok); background: var(--c-ok); color: white; }
-.chk-lbl { font-size: .97rem; font-weight: 500; }
+.chk.done .chk-circle { border-color: #34C759; background: #34C759; color: white; }
+.chk-lbl { font-size: .93rem; font-weight: 500; }
 .chk.done .chk-lbl { text-decoration: line-through; color: var(--c-muted); }
 .btn-reset {
   width: 100%; padding: 13px; border-radius: var(--r-btn); border: 1.5px solid var(--c-border);
@@ -555,31 +555,32 @@ body {
 /* ── POI CARDS (activitats) ─────────────────────── */
 .poi-grid { display: flex; flex-direction: column; gap: 0; }
 .poi-card {
-  display: flex; align-items: center; gap: 14px;
-  padding: 14px 0; border-bottom: 1px solid var(--c-border);
+  display: flex; align-items: center; gap: 13px;
+  padding: 12px 0; border-bottom: 0.5px solid var(--c-border);
   cursor: pointer; -webkit-user-select: none;
   transition: opacity .1s;
 }
 .poi-card:last-child { border-bottom: none; }
-.poi-card:active { opacity: .7; }
+.poi-card:active { opacity: .65; }
 .poi-icon-wrap {
-  width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center; font-size: 1.25rem;
+  width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
 }
+.poi-icon-wrap svg { width: 20px; height: 20px; }
 .poi-info { flex: 1; min-width: 0; }
-.poi-name { font-size: 1rem; font-weight: 600; line-height: 1.3; }
-.poi-type-lbl { font-size: .73rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-top: 2px; }
-.poi-warn { font-size: .78rem; color: var(--c-warn); margin-top: 2px; font-weight: 600; }
-.poi-chevron { color: var(--c-border); font-size: 1.1rem; flex-shrink: 0; }
+.poi-name { font-size: .97rem; font-weight: 600; line-height: 1.3; }
+.poi-type-lbl { font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; }
+.poi-warn { font-size: .75rem; color: #8A5500; margin-top: 2px; font-weight: 600; background: #FFF4E0; padding: 2px 7px; border-radius: 4px; display: inline-block; }
+.poi-chevron { color: #C7C7CC; font-size: .85rem; flex-shrink: 0; }
 .poi-type-drive    { background: #F2F2F7; } .poi-type-drive    .poi-type-lbl { color: #6E6E73; }
-.poi-type-castle   { background: #F0E6FF; } .poi-type-castle   .poi-type-lbl { color: #7B2D8B; }
-.poi-type-lake     { background: #E0EDFC; } .poi-type-lake     .poi-type-lbl { color: #1255A8; }
-.poi-type-mountain { background: #E4F5EB; } .poi-type-mountain .poi-type-lbl { color: #1B6535; }
-.poi-type-museum   { background: #FFF3E0; } .poi-type-museum   .poi-type-lbl { color: #8B4513; }
-.poi-type-village  { background: #FFF8E1; } .poi-type-village  .poi-type-lbl { color: #7B6000; }
-.poi-type-culture  { background: #FEE8E8; } .poi-type-culture  .poi-type-lbl { color: #A0001C; }
-.poi-type-food     { background: #FDE8D8; } .poi-type-food     .poi-type-lbl { color: #9B3000; }
-.poi-type-view     { background: #E8F5F8; } .poi-type-view     .poi-type-lbl { color: #005E7A; }
+.poi-type-castle   { background: #F2E6FF; } .poi-type-castle   .poi-type-lbl { color: #7B2D8B; }
+.poi-type-lake     { background: #E5F0FF; } .poi-type-lake     .poi-type-lbl { color: #007AFF; }
+.poi-type-mountain { background: #E8F9EE; } .poi-type-mountain .poi-type-lbl { color: #1A7A3A; }
+.poi-type-museum   { background: #FFF4E0; } .poi-type-museum   .poi-type-lbl { color: #8A5500; }
+.poi-type-village  { background: #FFFBEB; } .poi-type-village  .poi-type-lbl { color: #7B6000; }
+.poi-type-culture  { background: #FFE5E3; } .poi-type-culture  .poi-type-lbl { color: #C0392B; }
+.poi-type-food     { background: #FFE8D8; } .poi-type-food     .poi-type-lbl { color: #9B3000; }
+.poi-type-view     { background: #E5F5FA; } .poi-type-view     .poi-type-lbl { color: #0077A0; }
 
 /* ── POI MODAL ──────────────────────────────────── */
 #poi-modal {
@@ -647,7 +648,7 @@ body {
 
 <header id="hdr">
   <button id="back-btn" onclick="closeDetail()">‹ Enrere</button>
-  <h1 id="hdr-title">Baviera 2026 🏔</h1>
+  <h1 id="hdr-title">Baviera 2026</h1>
   <div id="hdr-sub"></div>
 </header>
 
@@ -728,7 +729,7 @@ body {
   <!-- ── RECÀRREGUES ───────────────────────── -->
   <div id="tab-recarregues" class="tab">
     <div class="page-head">
-      <div class="title">⚡ Recàrregues & Km</div>
+      <div class="title">Recàrregues & Km</div>
       <div class="sub">Registre de càrregues i quilometres</div>
     </div>
 
@@ -757,13 +758,10 @@ body {
       </div>
     </div>
 
-    <div class="sec-div">
-      <div class="sec-icon" style="background:#FFF3E0">⚡</div>
-      <span class="sec-title">Nova recàrrega</span>
-    </div>
+    <div class="sec-div"><span class="sec-title">Nova recàrrega</span></div>
     <div class="editing-banner" id="rec-edit-banner">
-      <span>✏️ Editant recàrrega — modifica els camps i desa</span>
-      <button class="editing-cancel" onclick="cancelEditRec()">✕ Cancelar</button>
+      <span>Editant recàrrega — modifica els camps i desa</span>
+      <button class="editing-cancel" onclick="cancelEditRec()">Cancelar</button>
     </div>
     <div class="card">
       <div class="fgrid mb12">
@@ -783,22 +781,20 @@ body {
       <button class="btnp" id="rec-save-btn" onclick="addRecarrega()">+ Afegir recàrrega</button>
     </div>
 
-    <div class="sec-div"><div class="sec-icon" style="background:#E3F0FC">📊</div><span class="sec-title">Resum per xarxa</span></div>
+    <div class="sec-div"><span class="sec-title">Resum per xarxa</span></div>
     <div class="card card-tight">
       <table class="stbl"><thead><tr><th>Xarxa</th><th class="nr">kWh</th><th class="nr">Total €</th><th class="nr">€/kWh</th></tr></thead>
         <tbody id="rec-summary"></tbody>
       </table>
     </div>
 
-    <div class="sec-div"><div class="sec-icon" style="background:#FEF3EB">📋</div><span class="sec-title">Historial</span></div>
-    <div class="card"><div id="rec-list"><div class="empty"><div class="ei">⚡</div><p>Sense recàrregues registrades.</p></div></div></div>
+    <div class="sec-div"><span class="sec-title">Historial</span></div>
+    <div class="card"><div id="rec-list"><div class="empty"><p>Sense recàrregues registrades.</p></div></div></div>
 
-    <div class="sec-div"><div class="sec-icon" style="background:#E8F5EE">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11l5 9-5 9H5z"/><circle cx="18" cy="17" r="3"/><circle cx="7" cy="17" r="3"/></svg>
-</div><span class="sec-title">Km diaris</span></div>
+    <div class="sec-div"><span class="sec-title">Km diaris</span></div>
     <div class="editing-banner" id="km-edit-banner">
-      <span>✏️ Editant km del dia — modifica i desa</span>
-      <button class="editing-cancel" onclick="cancelEditKm()">✕ Cancelar</button>
+      <span>Editant km del dia — modifica i desa</span>
+      <button class="editing-cancel" onclick="cancelEditKm()">Cancelar</button>
     </div>
     <div class="card">
       <div class="fgrid mb12">
@@ -811,7 +807,7 @@ body {
       <div><div class="km-total-lbl">Total km del viatge</div></div>
       <div class="km-total-num" id="km-total-num">0 km</div>
     </div>
-    <div class="card"><div id="km-list"><div class="empty"><div class="ei">🚗</div><p>Sense km registrats.</p></div></div></div>
+    <div class="card"><div id="km-list"><div class="empty"><p>Sense km registrats.</p></div></div></div>
   </div>
 
   <!-- ── AVUI ──────────────────────────────── -->
@@ -821,22 +817,22 @@ body {
 
   <!-- ── PRESSUPOST ────────────────────────── -->
   <div id="tab-pressupost" class="tab">
-    <div class="page-head"><div class="title">💰 Pressupost</div></div>
+    <div class="page-head"><div class="title">Pressupost</div></div>
     <div class="b-hero">
       <div class="b-lbl">TOTAL ESTIMAT DEL VIATGE</div>
       <div class="b-num" id="b-total">— €</div>
     </div>
     <div class="sec-div"><div class="sec-icon" style="background:#FEF3EB">📝</div><span class="sec-title">Detall de despeses</span></div>
     <div class="card">
-      <div class="brow"><span class="blbl">🏨 Allotjament (fix Excel)</span><span class="bamt">1.434,67 €</span></div>
-      <div class="brow"><span class="blbl">⚡ Recàrregues</span><span class="bamt" id="b-rec">0,00 €</span></div>
-      <div class="brow"><span class="blbl">🛣 Autopistes / Pàrquing</span><span class="bamt"><input class="inl-inp" type="number" id="b-tolls" placeholder="0" oninput="saveBudget();updateBudget()"> €</span></div>
-      <div class="brow"><span class="blbl">🍽 Menjar</span><span class="bamt"><input class="inl-inp" type="number" id="b-food" placeholder="0" oninput="saveBudget();updateBudget()"> €</span></div>
-      <div class="brow"><span class="blbl">🎫 Entrades / Activitats</span><span class="bamt"><input class="inl-inp" type="number" id="b-acts" placeholder="0" oninput="saveBudget();updateBudget()"> €</span></div>
-      <div class="brow"><span class="blbl">🐾 Leia (entrades, etc.)</span><span class="bamt"><input class="inl-inp" type="number" id="b-leia" placeholder="0" oninput="saveBudget();updateBudget()"> €</span></div>
-      <div class="brow"><span class="blbl">📦 Altres</span><span class="bamt"><input class="inl-inp" type="number" id="b-altres" placeholder="0" oninput="saveBudget();updateBudget()"> €</span></div>
+      <div class="brow"><span class="blbl">Allotjament (fix Excel)</span><span class="bamt">1.434,67 €</span></div>
+      <div class="brow"><span class="blbl">Recàrregues</span><span class="bamt" id="b-rec">0,00 €</span></div>
+      <div class="brow"><span class="blbl">Autopistes / Pàrquing</span><span class="bamt"><input class="inl-inp" type="number" id="b-tolls" placeholder="0" oninput="saveBudget();updateBudget()"> €</span></div>
+      <div class="brow"><span class="blbl">Menjar</span><span class="bamt"><input class="inl-inp" type="number" id="b-food" placeholder="0" oninput="saveBudget();updateBudget()"> €</span></div>
+      <div class="brow"><span class="blbl">Entrades / Activitats</span><span class="bamt"><input class="inl-inp" type="number" id="b-acts" placeholder="0" oninput="saveBudget();updateBudget()"> €</span></div>
+      <div class="brow"><span class="blbl">Leia (entrades, etc.)</span><span class="bamt"><input class="inl-inp" type="number" id="b-leia" placeholder="0" oninput="saveBudget();updateBudget()"> €</span></div>
+      <div class="brow"><span class="blbl">Altres</span><span class="bamt"><input class="inl-inp" type="number" id="b-altres" placeholder="0" oninput="saveBudget();updateBudget()"> €</span></div>
     </div>
-    <div class="sec-div"><div class="sec-icon" style="background:#E8F5EE">⚡</div><span class="sec-title">Subscripcions recàrrega</span></div>
+    <div class="sec-div"><span class="sec-title">Subscripcions recàrrega</span></div>
     <div class="card">
       <div class="brow"><span class="blbl">Tesla Supercharger</span><span class="bamt">11,99 €/mes</span></div>
       <div class="brow"><span class="blbl">Ionity Passport Power</span><span class="bamt">11,99 €/mes</span></div>
@@ -849,22 +845,22 @@ body {
   <div id="tab-mes" class="tab">
     <div class="page-head"><div class="title">Més</div></div>
 
-    <div class="sec-div"><div class="sec-icon" style="background:#E0EDFC">🏊</div><span class="sec-title">Llacs i bany</span></div>
+    <div class="sec-div"><span class="sec-title">Llacs i bany</span></div>
     <div id="mes-lake-cards"></div>
 
-    <div class="sec-div" style="margin-top:24px"><div class="sec-icon" style="background:#E8F5EE">☑️</div><span class="sec-title">Checklist de sortida</span></div>
+    <div class="sec-div" style="margin-top:24px"><span class="sec-title">Checklist de sortida</span></div>
     <p class="t-small t-muted mb12">Es reinicia cada dia automàticament.</p>
     <div id="chk-items"></div>
-    <button class="btn-reset" onclick="resetChecklist()">↺ Reiniciar checklist</button>
+    <button class="btn-reset" onclick="resetChecklist()">Reiniciar checklist</button>
 
-    <div class="sec-div" style="margin-top:24px"><div class="sec-icon" style="background:#FEF3EB">📝</div><span class="sec-title">Notes del viatge</span></div>
+    <div class="sec-div" style="margin-top:24px"><span class="sec-title">Notes del viatge</span></div>
     <div class="fg mb12"><label>Dia</label><select id="notes-dia" onchange="loadNote()"></select></div>
     <textarea class="ntarea" id="notes-txt" placeholder="Notes lliures del dia..." oninput="saveNote()"></textarea>
 
-    <div class="sec-div" style="margin-top:24px"><div class="sec-icon" style="background:#E3F0FC">📤</div><span class="sec-title">Exportar dades</span></div>
+    <div class="sec-div" style="margin-top:24px"><span class="sec-title">Exportar dades</span></div>
     <div class="card">
       <p class="t-small t-muted mb12">Descarrega les recàrregues en JSON per sincronitzar amb l'Excel via <strong>sync_excel.py</strong>.</p>
-      <button class="btnp btng" onclick="exportJSON()">⬇ Descarregar recarregues.json</button>
+      <button class="btnp btng" onclick="exportJSON()">Descarregar recarregues.json</button>
     </div>
   </div>
 
@@ -882,7 +878,7 @@ body {
       <div id="det-drive-chip"></div>
     </div>
     <div class="det-hotel-mini" id="det-hotel-mini" style="display:none">
-      <div class="dh-icon">🏨</div>
+      <div class="dh-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
       <div>
         <div class="dh-name" id="det-hotel-name"></div>
         <div class="dh-price" id="det-hotel-price"></div>
@@ -919,27 +915,44 @@ body {
 
 <script>
 // ── BRAND ICON SVGs ─────────────────────────────
-const ICON_APPLE = `<svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+// Apple Maps: iconic map tile with road + pin
+const ICON_APPLE = `<svg width="26" height="26" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
   <rect width="32" height="32" rx="7" fill="#1C1C1E"/>
-  <rect x="4" y="14" width="24" height="14" rx="0 0 4 4" fill="#2E7D32" opacity="0.9"/>
-  <rect x="4" y="4" width="24" height="12" fill="#1565C0" opacity="0.9"/>
-  <rect x="13" y="4" width="6" height="24" fill="#FAFAFA" opacity="0.9" rx="2"/>
-  <circle cx="16" cy="11" r="3.5" fill="#EA4335"/>
-  <circle cx="16" cy="11" r="1.8" fill="white"/>
+  <rect x="4" y="16" width="24" height="12" rx="1" fill="#1E6B35" opacity=".9"/>
+  <rect x="4" y="4"  width="24" height="12" rx="1" fill="#1565C0" opacity=".9"/>
+  <rect x="14.5" y="4" width="3" height="24" fill="rgba(255,255,255,.9)" rx="1"/>
+  <path d="M16 5C13.5 5 11.5 7 11.5 9.5C11.5 13 16 18 16 18S20.5 13 20.5 9.5C20.5 7 18.5 5 16 5Z" fill="#FF3B30"/>
+  <circle cx="16" cy="9.5" r="2" fill="white"/>
 </svg>`;
 
-const ICON_GOOGLE = `<svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+// Google Maps: the iconic colored pin
+const ICON_GOOGLE = `<svg width="26" height="26" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
   <rect width="32" height="32" rx="7" fill="#FFFFFF"/>
-  <path d="M16 5C11.58 5 8 8.58 8 13c0 6.56 8 14 8 14s8-7.44 8-14c0-4.42-3.58-8-8-8z" fill="#EA4335"/>
-  <path d="M23.1 7.9C21.3 6.1 18.8 5 16 5c2.8 0 5.3 1.1 7.1 2.9z" fill="#FBBC04"/>
-  <path d="M8.9 7.9C10.7 6.1 13.2 5 16 5c-2.8 0-5.3 1.1-7.1 2.9z" fill="#4285F4"/>
-  <circle cx="16" cy="13" r="3.5" fill="white"/>
+  <path d="M16 5C11.6 5 8 8.6 8 13C8 19.6 16 27 16 27S24 19.6 24 13C24 8.6 20.4 5 16 5Z" fill="#EA4335"/>
+  <path d="M16 5C18.6 5 21 6.2 22.6 8.2L16 13V5Z" fill="#4285F4"/>
+  <path d="M16 5V13L22.6 8.2C21 6.2 18.6 5 16 5Z" fill="#34A853"/>
+  <path d="M16 5C13.4 5 11 6.2 9.4 8.2L16 13V5Z" fill="#FBBC04"/>
+  <circle cx="16" cy="13" r="4" fill="white"/>
 </svg>`;
 
-const ICON_ABRP = `<svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" rx="7" fill="#00B140"/>
-  <path d="M20 4L13 16h6l-3 12 12-14h-7z" fill="white"/>
+// ABRP: lightning bolt route icon
+const ICON_ABRP = `<svg width="26" height="26" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="7" fill="#00A847"/>
+  <path d="M19 4L10 16h7l-3 12 15-16h-8z" fill="white"/>
 </svg>`;
+
+// POI type SVG icons (stroke-based, clean)
+const POI_ICONS = {
+  drive:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V9l3-4h14l3 4v6a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg>`,
+  castle:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V7l3-4M21 21V7l-3-4M9 21V7M15 21V7M3 7h18M9 7V3h2v4M13 7V3h2v4M9 15h6"/></svg>`,
+  lake:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/><path d="M2 17c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/><path d="M2 7c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/></svg>`,
+  mountain: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20l7-14 4 7 2-3 5 10H3z"/><path d="M13.5 10l1.5-2.5 1 1.5"/></svg>`,
+  museum:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22V9h20v13H2z"/><path d="M12 2L2 9h20L12 2z"/><path d="M8 22V14h3v8M13 22V14h3v8"/></svg>`,
+  village:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>`,
+  culture:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12s1-4 4-4 4 4 4 4-1 4-4 4-4-4-4-4z"/><circle cx="12" cy="12" r="2"/></svg>`,
+  food:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.66 1.34 3 3 3s3-1.34 3-3V2"/><path d="M9 2h0M3 2h0M6 13v9M21 2c0 5-2 10-6 11V2"/></svg>`,
+  view:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`,
+};
 
 function svgBtn(svg, label, cls, href) {
   return `<a class="navbtn ${cls}" href="${href}"${href.startsWith('http')?'target="_blank"':''}>
@@ -1257,7 +1270,7 @@ function renderAvui(){
     <div class="avui-hero">
       <div class="avui-hero-label">Dia ${n} de 11 · ${fmtDate(td.from)}</div>
       <div class="avui-hero-dest">${td.flag} ${td.zone}</div>
-      <div class="avui-hero-sub">📍 ${td.hotel?.name||'—'} &nbsp;·&nbsp; ${td.drive}</div>
+      <div class="avui-hero-sub">${td.hotel?.name||'—'} &nbsp;·&nbsp; ${td.drive}</div>
     </div>
     <div id="avui-map"></div>
     <div class="avui-stat-row">
@@ -1352,15 +1365,15 @@ function renderItinerari(){
 
 // ── DAY DETAIL ───────────────────────────────────
 const POI_TYPE_META = {
-  drive:    {emoji:'🚗', label:'Trajecte',    color:'#6E6E73'},
-  castle:   {emoji:'🏰', label:'Castell',     color:'#7B2D8B'},
-  lake:     {emoji:'🏊', label:'Llac',        color:'#1255A8'},
-  mountain: {emoji:'⛰',  label:'Muntanya',   color:'#1B6535'},
-  museum:   {emoji:'🏛',  label:'Museu',      color:'#8B4513'},
-  village:  {emoji:'🏘',  label:'Poble',      color:'#7B6000'},
-  culture:  {emoji:'🎨', label:'Cultura',     color:'#A0001C'},
-  food:     {emoji:'🍽',  label:'Gastronomia',color:'#9B3000'},
-  view:     {emoji:'👁',  label:'Mirador',    color:'#005E7A'},
+  drive:    {label:'Trajecte',    color:'#6E6E73'},
+  castle:   {label:'Castell',     color:'#7B2D8B'},
+  lake:     {label:'Llac',        color:'#007AFF'},
+  mountain: {label:'Muntanya',    color:'#1A7A3A'},
+  museum:   {label:'Museu',       color:'#8A5500'},
+  village:  {label:'Poble',       color:'#7B6000'},
+  culture:  {label:'Cultura',     color:'#C0392B'},
+  food:     {label:'Gastronomia', color:'#9B3000'},
+  view:     {label:'Mirador',     color:'#0077A0'},
 };
 
 let detailMap = null;
@@ -1402,21 +1415,21 @@ function openDetail(i){
   if(d.hotel){
     const h = d.hotel;
     const dogChip = !h.dog ? `<span class="chip chip-n">Gos: no informat</span>`
-      : h.dog.includes('Dubte') ? `<span class="chip chip-warn">⚠️ Confirmar gossos</span>`
-      : `<span class="chip chip-ok">🐾 ${h.dog}</span>`;
-    const evChip = h.ev==='ok' ? `<span class="chip chip-ok">⚡ Càrrega EV</span>`
-      : h.ev?.includes('Dubte') ? `<span class="chip chip-warn">⚡ EV: confirmar</span>`
-      : `<span class="chip chip-n">⚡ EV: no informat</span>`;
-    html += `<div class="sec-div" style="margin-top:6px"><div class="sec-icon" style="background:#FFF3E0">🏨</div><span class="sec-title">Hotel</span></div>
+      : h.dog.includes('Dubte') ? `<span class="chip chip-warn">Confirmar gossos</span>`
+      : `<span class="chip chip-ok">Gos: ${h.dog}</span>`;
+    const evChip = h.ev==='ok' ? `<span class="chip chip-ok">Càrrega EV disponible</span>`
+      : h.ev?.includes('Dubte') ? `<span class="chip chip-warn">EV: confirmar</span>`
+      : `<span class="chip chip-n">EV: no informat</span>`;
+    html += `<div class="sec-div" style="margin-top:6px"><span class="sec-title">Hotel</span></div>
     <div class="card">
       <div class="h-name">${h.name}</div>
-      <div class="h-addr">📍 ${h.addr}</div>
+      <div class="h-addr">${h.addr}</div>
       <div class="chips">
         ${dogChip}${evChip}
-        <span class="chip chip-n">🅿️ ${h.parking}</span>
+        <span class="chip chip-n">Parking: ${h.parking}</span>
         ${h.checkin?`<span class="chip chip-n">Check-in ${h.checkin}</span>`:''}
         ${h.checkout?`<span class="chip chip-n">Check-out ${h.checkout}</span>`:''}
-        ${h.pendent?`<span class="chip chip-warn">💳 ${h.pendent}</span>`:''}
+        ${h.pendent?`<span class="chip chip-warn">Pendent: ${h.pendent}</span>`:''}
       </div>
       <div class="h-meta-row">
         <div class="h-meta-item"><span class="lbl">Plataforma</span><span class="val">${h.platform}</span></div>
@@ -1433,7 +1446,7 @@ function openDetail(i){
       </div>
       ${h.platformRef?`<div class="h-edit-block"><label class="lbl">Núm. itinerari (${h.platform})</label><input class="h-edit-input" type="text" readonly value="${h.platformRef}"></div>`:''}
       <div class="h-btns">
-        ${(hx.phone||h.phone)?`<a class="h-btn h-btn-call" href="tel:${hx.phone||h.phone}">📞 Trucar</a>`:''}
+        ${(hx.phone||h.phone)?`<a class="h-btn h-btn-call" href="tel:${hx.phone||h.phone}">Trucar</a>`:''}
         <a class="h-btn h-btn-bk" href="${h.platformUrl}" target="_blank">Gestió reserva (${h.platform})</a>
       </div>
     </div>`;
@@ -1444,7 +1457,7 @@ function openDetail(i){
   // LLAC DEL DIA
   if(lake){
     const dogCls = lake.dogStatus==='ok'?'ok':lake.dogStatus==='warn'?'warn':'no';
-    html += `<div class="sec-div"><div class="sec-icon" style="background:#E0EDFC">🏊</div><span class="sec-title">Llac del dia</span></div>
+    html += `<div class="sec-div"><span class="sec-title">Llac del dia</span></div>
     <div class="lake-day-card">
       <div class="ldc-header">
         <div><div class="ldc-name">${lake.name}</div><div class="ldc-zone">${lake.zone}</div></div>
@@ -1461,41 +1474,42 @@ function openDetail(i){
 
   // ACTIVITATS / POIS
   if(currentDayPois.length){
-    html += `<div class="sec-div"><div class="sec-icon" style="background:#FFF3E0">🗺</div><span class="sec-title">Activitats del dia</span></div>
+    html += `<div class="sec-div"><span class="sec-title">Activitats del dia</span></div>
     <div class="card"><div class="poi-grid">
     ${currentDayPois.map((p,idx)=>{
-      const m = POI_TYPE_META[p.type]||{emoji:'📍',label:p.type,color:'#888'};
+      const m = POI_TYPE_META[p.type]||{label:p.type,color:'#888'};
+      const ico = (POI_ICONS[p.type]||POI_ICONS.view).replace('currentColor', m.color);
       return `<div class="poi-card" onclick="openPoi(${idx})">
-        <div class="poi-icon-wrap poi-type-${p.type}">${m.emoji}</div>
+        <div class="poi-icon-wrap poi-type-${p.type}">${ico}</div>
         <div class="poi-info">
           <div class="poi-name">${p.name}</div>
-          <div class="poi-type-lbl poi-type-${p.type}" style="color:${m.color}">${m.label}</div>
-          ${p.warn?`<div class="poi-warn">⚠️ ${p.warn}</div>`:''}
+          <div class="poi-type-lbl poi-type-${p.type}">${m.label}</div>
+          ${p.warn?`<div class="poi-warn">${p.warn}</div>`:''}
         </div>
         <span class="poi-chevron">›</span>
       </div>`;
     }).join('')}
     </div></div>`;
   } else if(d.activities){
-    html += `<div class="sec-div"><div class="sec-icon" style="background:#FFF3E0">🎯</div><span class="sec-title">Activitats del dia</span></div>
+    html += `<div class="sec-div"><span class="sec-title">Activitats del dia</span></div>
     <div class="card"><ul class="alist">${d.activities.map(a=>`<li>${a}</li>`).join('')}</ul></div>`;
   }
 
   // MENJAR
   if(d.food?.length){
-    html += `<div class="sec-div"><div class="sec-icon" style="background:#FDE8D8">🍽</div><span class="sec-title">Gastronomia</span></div>
+    html += `<div class="sec-div"><span class="sec-title">Gastronomia</span></div>
     <div class="card"><ul class="alist food-list">${d.food.map(f=>`<li>${f}</li>`).join('')}</ul></div>`;
   }
 
   // LEIA
   if(d.leia?.length){
-    html += `<div class="sec-div"><div class="sec-icon" style="background:#F0F9F4">🐾</div><span class="sec-title">Amb la Leia</span></div>
+    html += `<div class="sec-div"><span class="sec-title">Amb la Leia</span></div>
     <div class="card"><ul class="alist leia-list">${d.leia.map(l=>`<li>${l}</li>`).join('')}</ul></div>`;
   }
 
   // NOTES
   const nv = notes[`day_${d.n}`]||'';
-  html += `<div class="sec-div"><div class="sec-icon" style="background:#E3F0FC">📝</div><span class="sec-title">Notes del dia</span></div>
+  html += `<div class="sec-div"><span class="sec-title">Notes del dia</span></div>
   <textarea class="ntarea" placeholder="Notes lliures per al dia ${d.n}..." oninput="saveNoteDay(${d.n},this.value)">${nv}</textarea>`;
 
   document.getElementById('det-body').innerHTML = html;
@@ -1537,21 +1551,30 @@ function loadDetMap(pins){
 
 function openPoi(idx){
   const p = currentDayPois[idx]; if(!p)return;
-  const m = POI_TYPE_META[p.type]||{emoji:'📍',label:p.type,color:'#888'};
+  const m = POI_TYPE_META[p.type]||{label:p.type,color:'#888'};
   const modal=document.getElementById('poi-modal');
   const img=document.getElementById('poi-sheet-img');
   if(p.photo){ img.src=p.photo; img.style.display='block'; } else { img.style.display='none'; }
-  document.getElementById('poi-sheet-type').textContent = m.emoji+' '+m.label;
-  document.getElementById('poi-sheet-type').style.color = m.color;
+  const typeEl = document.getElementById('poi-sheet-type');
+  const ico = (POI_ICONS[p.type]||POI_ICONS.view).replace('currentColor', m.color);
+  typeEl.innerHTML = `<span style="display:inline-flex;align-items:center;gap:6px"><span style="display:inline-block;width:16px;height:16px">${ico}</span>${m.label}</span>`;
+  typeEl.style.color = m.color;
   document.getElementById('poi-sheet-name').textContent = p.name;
   const warn=document.getElementById('poi-sheet-warn');
-  if(p.warn){ warn.textContent='⚠️ '+p.warn; warn.style.display='block'; } else { warn.style.display='none'; }
+  if(p.warn){ warn.textContent=p.warn; warn.style.display='block'; } else { warn.style.display='none'; }
   document.getElementById('poi-sheet-desc').textContent = p.desc||'';
   const btns=document.getElementById('poi-sheet-btns');
+  const wikiSlug = encodeURIComponent(p.name.replace(/ /g,'_'));
+  const wikiUrl  = `https://ca.wikipedia.org/wiki/${wikiSlug}`;
+  let btnsHtml = '';
   if(p.lat){
-    btns.innerHTML=`<a class="h-btn h-btn-apple" href="${mapsApple(p.lat,p.lng)}" style="flex:1">${ICON_APPLE} Apple</a>
-      <a class="h-btn h-btn-google" href="${mapsGoogle(p.name)}" target="_blank" style="flex:1">${ICON_GOOGLE} Google</a>`;
-  } else { btns.innerHTML=''; }
+    btnsHtml += `<a class="h-btn h-btn-apple" href="${mapsApple(p.lat,p.lng)}" style="flex:1">${ICON_APPLE} Apple Maps</a>
+      <a class="h-btn h-btn-google" href="${mapsGoogle(p.name)}" target="_blank" style="flex:1">${ICON_GOOGLE} Google Maps</a>`;
+  }
+  btnsHtml += `<a class="h-btn" href="${wikiUrl}" target="_blank" style="flex:1;background:#F2F2F7;color:#3C3C43;border-color:#E5E5EA">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    Wikipedia</a>`;
+  btns.innerHTML = btnsHtml;
   modal.classList.add('open');
 }
 
@@ -1563,7 +1586,7 @@ function closePoi(e){
 function closeDetail(){
   document.getElementById('det').classList.remove('open');
   document.getElementById('back-btn').style.display = 'none';
-  document.getElementById('hdr-title').textContent = 'Baviera 2026 🏔';
+  document.getElementById('hdr-title').textContent = 'Baviera 2026';
 }
 
 function saveHX(dn,f,v){ const k=`hotel_${dn}`; if(!hotelExtra[k])hotelExtra[k]={}; hotelExtra[k][f]=v; ss('hotelExtra',hotelExtra); }
@@ -1606,7 +1629,7 @@ function editRec(id){
   document.getElementById('r-kwh').value=r.kwh||'';
   document.getElementById('r-preu').value=r.preu||'';
   document.getElementById('rec-edit-banner').classList.add('show');
-  document.getElementById('rec-save-btn').textContent='💾 Desar canvis';
+  document.getElementById('rec-save-btn').textContent='Desar canvis';
   document.getElementById('r-lloc').scrollIntoView({behavior:'smooth',block:'center'});
 }
 
@@ -1634,7 +1657,7 @@ function renderRecarregues(){
       <td class="nr">${ak>0?(ap/ak).toFixed(3):'—'}</td></tr>`;
   const el=document.getElementById('rec-list');
   el.innerHTML=!recarregues.length?`<div class="empty"><div class="ei">⚡</div><p>Sense recàrregues registrades.</p></div>`:
-    [...recarregues].reverse().map(r=>`<div class="logitem">
+    [...recarregues].reverse().map(r=>`<div class="logitem" id="rec-${r.id}">
       <div class="loginfo">
         <div class="lgtit">${r.xarxa}${r.lloc?' · '+r.lloc:''}</div>
         <div class="lgmeta">Dia ${r.dia} · ${r.kwh.toFixed(1)} kWh · ${r.eurkwh.toFixed(3)} €/kWh</div>
@@ -1689,7 +1712,7 @@ function delKm(dia){ kmLog=kmLog.filter(k=>k.dia!==dia); ss('km',kmLog); renderK
 
 function renderKm(){
   const el=document.getElementById('km-list'), tw=document.getElementById('km-total-wrap');
-  if(!kmLog.length){ el.innerHTML=`<div class="empty"><div class="ei">🚗</div><p>Sense km registrats.</p></div>`; tw.style.display='none'; return; }
+  if(!kmLog.length){ el.innerHTML=`<div class="empty"><p>Sense km registrats.</p></div>`; tw.style.display='none'; return; }
   const total=kmLog.reduce((a,b)=>a+b.km,0);
   document.getElementById('km-total-num').textContent=total+' km'; tw.style.display='flex';
   el.innerHTML=kmLog.map(k=>`<div class="logitem">
@@ -1766,16 +1789,20 @@ function renderMes(){
   const lc=document.getElementById('mes-lake-cards');
   if(lc) lc.innerHTML=LAKES.map(l=>{
     const cls=l.dogStatus==='ok'?'ok':l.dogStatus==='warn'?'warn':'no';
+    const dogLabel = l.dogStatus==='ok'?'Gossos permesos':l.dogStatus==='warn'?'Consultar':'No admesos';
     return `<div class="lkcard">
       <div class="lkcard-head">
-        <div class="lk-dog-circle ${cls}">${l.dog}</div>
+        <div class="lk-dog-circle ${cls}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2 .324-3.5 1.667-3.5 3 0 .095.007.189.02.281m0 0C2.686 7.315 2 8.335 2 9.5c0 2.21 1.12 4 2.5 4.5m-1.48-5.719A3.5 3.5 0 017 9.5c1.354 0 2.545.758 3.172 1.876M14 5.172C14 3.782 15.577 2.679 17.5 3c2 .324 3.5 1.667 3.5 3 0 .095-.007.189-.02.281m0 0C21.314 7.315 22 8.335 22 9.5c0 2.21-1.12 4-2.5 4.5m-10 0C9.5 14 8 15 8 16.5V20h8v-3.5c0-1.5-1.5-2.5-1.5-2.5"/></svg></div>
         <div><div class="lkcard-name">${l.name}</div><div class="lkcard-zone">${l.zone}</div></div>
-        <div style="margin-left:auto"><div class="chip chip-${cls}">${l.dogStatus==='ok'?'✅ Gossos OK':l.dogStatus==='warn'?'⚠️ Consultar':'❌ No admesos'}</div></div>
+        <div class="lkcard-temp">${l.temp}</div>
       </div>
-      <div class="lkcard-body"><div class="lk-note">${l.note}</div>
-        <div style="display:flex;gap:8px;margin-top:10px">
-          <a class="h-btn h-btn-apple" href="maps://maps.apple.com/?q=${encodeURIComponent(l.name)}">${ICON_APPLE}</a>
-          <a class="h-btn h-btn-google" href="https://maps.google.com/?q=${encodeURIComponent(l.name)}">${ICON_GOOGLE}</a>
+      <div class="lkcard-body">
+        <div class="lkcard-day">${l.day}</div>
+        <div class="lkcard-dog"><span class="chip chip-${cls}">${dogLabel}: ${l.dogDetail}</span></div>
+        <div class="lkcard-txt">${l.detail}</div>
+        <div class="lkcard-btns">
+          <a class="lkcard-btn lkbtn-apple" href="${mapsApple(l.lat,l.lng)}" style="display:flex;align-items:center;justify-content:center;gap:6px">${ICON_APPLE} Apple Maps</a>
+          <a class="lkcard-btn lkbtn-google" href="${mapsGoogle(l.name+', '+l.zone)}" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:6px">${ICON_GOOGLE} Google Maps</a>
         </div>
       </div>
     </div>`;
@@ -1789,6 +1816,26 @@ function exportJSON(){
   a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
   a.download='recarregues.json'; a.click();
 }
+
+// ── SWIPE NAVIGATION ─────────────────────────────
+const TABS_ORDER = ['avui','itinerari','recarregues','pressupost','mes'];
+let _swX = null, _swY = null;
+document.getElementById('main').addEventListener('touchstart', e => {
+  _swX = e.touches[0].clientX;
+  _swY = e.touches[0].clientY;
+}, {passive: true});
+document.getElementById('main').addEventListener('touchend', e => {
+  if(_swX === null) return;
+  const dx = e.changedTouches[0].clientX - _swX;
+  const dy = Math.abs(e.changedTouches[0].clientY - _swY);
+  _swX = _swY = null;
+  if(Math.abs(dx) < 55 || dy > Math.abs(dx)) return; // too short or mostly vertical
+  const cur = document.querySelector('.nb.on');
+  if(!cur) return;
+  const idx = TABS_ORDER.indexOf(cur.dataset.tab);
+  if(dx < 0 && idx < TABS_ORDER.length - 1) showTab(TABS_ORDER[idx + 1]);
+  if(dx > 0 && idx > 0) showTab(TABS_ORDER[idx - 1]);
+}, {passive: true});
 
 // ── INIT ─────────────────────────────────────────
 function init(){
