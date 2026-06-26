@@ -1,4 +1,4 @@
-const CACHE = 'baviera-2026-v5';
+const CACHE = 'baviera-2026-v6';
 const ASSETS = ['./index.html', './manifest.json', './icon.svg', './sw.js'];
 
 self.addEventListener('install', e => {

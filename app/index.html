@@ -250,16 +250,14 @@ body {
 /* ── NAV BRAND BUTTONS ──────────────────────────── */
 .navbtns { display: flex; gap: 8px; margin-bottom: 4px; }
 .navbtn {
-  flex: 1; padding: 11px 6px 10px; border-radius: var(--r-btn); border: none;
-  cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px;
-  text-decoration: none; color: white; box-shadow: var(--sh-btn);
+  flex: 1; padding: 12px 6px 11px; border-radius: var(--r-btn); border: none;
+  cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  text-decoration: none; color: #3C3C43;
+  background: var(--c-surface); box-shadow: var(--sh-card);
   font-size: .68rem; font-weight: 600; text-align: center;
   -webkit-user-select: none;
 }
-.navbtn img, .navbtn svg { width: 26px; height: 26px; display: block; border-radius: 6px; }
-.nb-apple  { background: #1C1C1E; }
-.nb-google { background: white; color: #3C3C43; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
-.nb-abrp   { background: #00A847; }
+.navbtn svg { width: 36px; height: 36px; display: block; border-radius: 9px; flex-shrink: 0; }
 
 /* ── BADGES / CHIPS ─────────────────────────────── */
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
@@ -915,30 +913,45 @@ body {
 
 <script>
 // ── BRAND ICON SVGs ─────────────────────────────
-// Apple Maps: iconic map tile with road + pin
-const ICON_APPLE = `<svg width="26" height="26" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" rx="7" fill="#1C1C1E"/>
-  <rect x="4" y="16" width="24" height="12" rx="1" fill="#1E6B35" opacity=".9"/>
-  <rect x="4" y="4"  width="24" height="12" rx="1" fill="#1565C0" opacity=".9"/>
-  <rect x="14.5" y="4" width="3" height="24" fill="rgba(255,255,255,.9)" rx="1"/>
-  <path d="M16 5C13.5 5 11.5 7 11.5 9.5C11.5 13 16 18 16 18S20.5 13 20.5 9.5C20.5 7 18.5 5 16 5Z" fill="#FF3B30"/>
-  <circle cx="16" cy="9.5" r="2" fill="white"/>
+// Apple Maps – icona oficial iOS (mapa + pin vermell)
+const ICON_APPLE = `<svg width="26" height="26" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <rect width="60" height="60" rx="13" fill="white"/>
+  <!-- Fons verd (terra) -->
+  <rect x="0" y="0" width="60" height="60" rx="13" fill="#4CD964"/>
+  <!-- Franja blava aigua (inferior dreta) -->
+  <path d="M60 38 L60 60 L40 60 Z" fill="#5AC8FA"/>
+  <path d="M60 46 L60 60 L52 60 Z" fill="#4DB8F8"/>
+  <!-- Carretera taronja (principal) -->
+  <rect x="-2" y="27" width="70" height="8" rx="4" fill="#FF9500" transform="rotate(-25 30 31)"/>
+  <!-- Carretera gris (secundaria) -->
+  <rect x="36" y="-2" width="5" height="70" rx="2.5" fill="#C8C8C8" opacity=".7"/>
+  <!-- Pin de localització vermell -->
+  <path d="M22 8C17 8 13 12 13 17C13 24 22 35 22 35S31 24 31 17C31 12 27 8 22 8Z" fill="#FF3B30"/>
+  <circle cx="22" cy="17" r="5" fill="white"/>
+  <circle cx="22" cy="17" r="2.5" fill="#FF3B30"/>
 </svg>`;
 
-// Google Maps: the iconic colored pin
-const ICON_GOOGLE = `<svg width="26" height="26" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" rx="7" fill="#FFFFFF"/>
-  <path d="M16 5C11.6 5 8 8.6 8 13C8 19.6 16 27 16 27S24 19.6 24 13C24 8.6 20.4 5 16 5Z" fill="#EA4335"/>
-  <path d="M16 5C18.6 5 21 6.2 22.6 8.2L16 13V5Z" fill="#4285F4"/>
-  <path d="M16 5V13L22.6 8.2C21 6.2 18.6 5 16 5Z" fill="#34A853"/>
-  <path d="M16 5C13.4 5 11 6.2 9.4 8.2L16 13V5Z" fill="#FBBC04"/>
-  <circle cx="16" cy="13" r="4" fill="white"/>
+// Google Maps – icona oficial (pin multicolor Google)
+const ICON_GOOGLE = `<svg width="26" height="26" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <rect width="60" height="60" rx="13" fill="white"/>
+  <!-- Cos del pin (vermell) -->
+  <path d="M30 6C21.2 6 14 13.2 14 22C14 34.5 30 54 30 54S46 34.5 46 22C46 13.2 38.8 6 30 6Z" fill="#EA4335"/>
+  <!-- Sector blau (dalt esquerra) -->
+  <path d="M30 6C21.2 6 14 13.2 14 22L30 22Z" fill="#4285F4"/>
+  <!-- Sector verd (baix esquerra) -->
+  <path d="M14 22C14 28.4 17.2 34 22.4 37.4L30 22Z" fill="#34A853"/>
+  <!-- Sector groc (baix dreta) -->
+  <path d="M30 22L22.4 37.4C24.8 38.8 27.3 39.6 30 39.6C32.7 39.6 35.2 38.8 37.6 37.4L30 22Z" fill="#FBBC05"/>
+  <!-- Sector taronja/vermell (dalt dreta) -->
+  <path d="M30 6C38.8 6 46 13.2 46 22L30 22Z" fill="#EA4335"/>
+  <!-- Cercle blanc central -->
+  <circle cx="30" cy="22" r="9" fill="white"/>
 </svg>`;
 
-// ABRP: lightning bolt route icon
-const ICON_ABRP = `<svg width="26" height="26" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" rx="7" fill="#00A847"/>
-  <path d="M19 4L10 16h7l-3 12 15-16h-8z" fill="white"/>
+// ABRP – icona oficial (llamp blanc sobre verd)
+const ICON_ABRP = `<svg width="26" height="26" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <rect width="60" height="60" rx="13" fill="#00B140"/>
+  <path d="M35 6L16 32h13l-4 22L56 26H41Z" fill="white"/>
 </svg>`;
 
 // POI type SVG icons (stroke-based, clean)
@@ -1407,7 +1420,7 @@ function openDetail(i){
     html += `<div class="navbtns">
       ${svgBtn(ICON_APPLE,'Apple Maps','nb-apple',mapsApple(lat,lng))}
       ${svgBtn(ICON_GOOGLE,'Google Maps','nb-google',mapsGoogle(addr))}
-      ${svgBtn(ICON_ABRP,'ABRP','nb-abrp','https://abetterrouteplanner.com/')}
+      ${svgBtn(ICON_ABRP,'ABRP','nb-abrp',mapsABRP(d.hotel.lat,d.hotel.lng))}
     </div>`;
   }
 
@@ -1816,6 +1829,18 @@ function exportJSON(){
   a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
   a.download='recarregues.json'; a.click();
 }
+
+// ── SWIPE BACK (detall overlay) ──────────────────
+let _detSwX = null;
+document.getElementById('det').addEventListener('touchstart', e => {
+  _detSwX = e.touches[0].clientX;
+}, {passive: true});
+document.getElementById('det').addEventListener('touchend', e => {
+  if(_detSwX === null) return;
+  const dx = e.changedTouches[0].clientX - _detSwX;
+  _detSwX = null;
+  if(dx > 60) closeDetail();
+}, {passive: true});
 
 // ── SWIPE NAVIGATION ─────────────────────────────
 const TABS_ORDER = ['avui','itinerari','recarregues','pressupost','mes'];
